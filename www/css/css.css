@@ -1,16 +1,15 @@
-/*
-@brand-primary: #001F62; // dark blue
-@brand-secondary: #C7D8FE; // light blue
-@brand-terciary: #FDDA17; // orange
-*/
-
 a {
-  color: #006600;
+  color: royalblue;
   text-decoration: underline;
 }
 a:hover {
   color: #163c54;
   text-decoration: none;
+}
+.form-control:focus {
+  border-color: royalblue;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(65, 105, 225, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(65, 105, 225, 0.6);
 }
 hr.line {
   border: 1px solid #999999;
@@ -248,7 +247,7 @@ table#table_poll td.poll_graph_td {
   width: 120px;
 }
 table#table_poll td.poll_graph_td .poll_graph {
-  background: #0000f0;
+  background: navy;
   font-size: 8px;
   margin: 0 10px;
   position: relative;
