@@ -2,7 +2,9 @@ a {
   color: royalblue;
   text-decoration: underline;
 }
-a:hover {
+a:hover,
+a:active,
+a:focus {
   color: #163c54;
   text-decoration: none;
 }
@@ -10,6 +12,9 @@ a:hover {
   border-color: royalblue;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(65, 105, 225, 0.6);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(65, 105, 225, 0.6);
+}
+input[type=submit] {
+  margin: 12px 0;
 }
 hr.line {
   border: 1px solid #999999;
@@ -139,9 +144,9 @@ body {
   color: black;
   background-color: white;
   border: 1px solid #333333;
-  padding: 1em;
-  margin: 1em;
-  top: 1em;
+  padding: 16px;
+  margin: 0 16px 5px 16px;
+  top: 16px;
   position: relative;
   font-weight: bold;
 }

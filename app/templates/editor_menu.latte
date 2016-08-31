@@ -1,18 +1,15 @@
-<h1>{$big_title}</h1>
-
 {if $user->isLoggedIn()}
-	<a n:href="Sign:out" id="logout">Odhlásit se</a>
 	<ul id="menu">
-		<li><a n:href="Article:default" n:class="$presenter->isLinkCurrent('Article:*') ? aktivni">Články</a></li>
-		<li><a n:href="Poll:default" n:class="$presenter->isLinkCurrent('Poll:*') ? aktivni">Ankety</a></li>
-		<li><a n:href="Tags:default" n:class="$presenter->isLinkCurrent('Tags:*') ? aktivni">Štítky</a></li>
-		<li><a n:href="Profil:name" n:class="$presenter->isLinkCurrent('Profil:*') ? aktivni">Profil</a></li>
-		<li><a n:href="Rank:new" n:class="$presenter->isLinkCurrent('Rank:*') ? aktivni">Žebříčky</a></li>
+		<li><a n:href="Article:default" n:class="$presenter->isLinkCurrent('Article:*') ? active">Články</a></li>
+		<li><a n:href="Poll:default" n:class="$presenter->isLinkCurrent('Poll:*') ? active">Ankety</a></li>
+		<li><a n:href="Tags:default" n:class="$presenter->isLinkCurrent('Tags:*') ? active">Štítky</a></li>
+		<li><a n:href="Profil:name" n:class="$presenter->isLinkCurrent('Profil:*') ? active">Profil</a></li>
+		<li><a n:href="Rank:new" n:class="$presenter->isLinkCurrent('Rank:*') ? active">Žebříčky</a></li>
 		{if $user->roles["Admin"] == "1"}
-			<li><a n:href="Settings:default" n:class="$presenter->isLinkCurrent('Settings:*') ? aktivni">Nastavení</a></li>
-			<li><a n:href="Editor:default" n:class="$presenter->isLinkCurrent('Editor:*') ? aktivni">Uživatelé</a></li>
+			<li><a n:href="Settings:default" n:class="$presenter->isLinkCurrent('Settings:*') ? active">Nastavení</a></li>
+			<li><a n:href="Editor:default" n:class="$presenter->isLinkCurrent('Editor:*') ? active">Uživatelé</a></li>
 		{/if}
 	</ul>
 {/if}
 <div class="clearfix"></div>
-<div id="under-menu"></div>
+<div id="under-header"></div>

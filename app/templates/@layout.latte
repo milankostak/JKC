@@ -41,22 +41,23 @@
 
 <body>
 	<div id="wrapper" class="container">
+		<div class="hidden">
+			<a accesskey="0" href="#under-header" rel="nofollow" title="Přeskočit hlavičku a menu - přejít na obsah stránky">Přeskočit hlavičku a menu - přejít na obsah stránky</a>
+			<br>
+			<a accesskey="1" href="http://www.ippi.cz/klavesove-zkratky/neni-vyhledavani.html" rel="nofollow" title="Nápověda ke klávesovým zkratkám">Nápověda ke klávesovým zkratkám</a>
+			<br>
+			<a accesskey="3" href="{$basePath}/map" title="Mapa stránek - Struktura webu přehledně">Mapa webu</a>
+		</div>
 	{if $presenter->isLinkCurrent("Post:*") || $presenter->isLinkCurrent("Error:*")}
-		<a accesskey="0" href="#under-header" class="hidden" rel="nofollow" title="Přeskočit hlavičku a menu - přejít na obsah stránky">Přeskočit hlavičku a menu - přejít na obsah stránky</a>
-		<br class="hidden">
-		<a accesskey="1" href="http://www.ippi.cz/klavesove-zkratky/neni-vyhledavani.html" class="hidden" rel="nofollow" title="Nápověda ke klávesovým zkratkám">Nápověda ke klávesovým zkratkám</a>
-		<br class="hidden">
-		<a accesskey="3" href="{$basePath}/map" class="hidden" title="Mapa stránek - Struktura webu přehledně">Mapa webu</a>
-
 		<h2 id="header"><a accesskey="2" n:href="Post:default" title="Hlavní strana webu - {$big_title}">{$big_title}</a></h2>
 		<p>{$small_title}</p>
 
 		<a id="under-header"></a>
 
 		{if $presenter->isLinkCurrent("Post:*")}
-			<div id="page">
+		<div id="page">
 		{else}
-			<div id="errorpage">
+		<div id="errorpage">
 		{/if}
 
 		<div n:foreach="$flashes as $flash" class="flash {$flash->type}">
@@ -76,24 +77,19 @@
 		</div> {* <#page> *}
 		{include footer.latte}
 	{else}
-		<div id="topbg"></div>
-			<div class="hidden">
-			<a accesskey="0" href="#under-menu" rel="nofollow" title="Přeskočit hlavičku a menu - přejít na obsah stránky">Přeskočit hlavičku a menu - přejít na obsah stránky</a>
-			<br>
-			<a accesskey="1" href="http://www.ippi.cz/klavesove-zkratky/zakladni.html" rel="nofollow" title="Nápověda ke klávesovým zkratkám">Nápověda ke klávesovým zkratkám</a>
-			<br>
-			<a accesskey="2" n:href="Article:default" title="Úvodní strana webu">Úvodní strana - Články</a>
-		</div>
-
+		<a n:if="$user->isLoggedIn()" n:href="Sign:out" id="logout">Odhlásit se</a>
+		<h2 id="header"><a accesskey="2" n:href="Post:default" title="Hlavní strana webu - {$big_title}">{$big_title}</a></h2>
 		{include "editor_menu.latte"}
 		<div id="page">
 			<div n:foreach="$flashes as $flash" class="flash {$flash->type}">
 				<span class="icons"></span><span class="text">{$flash->message}</span>
 			</div>
-			{include content}
+			<div id="content">
+				{include content}
+			</div>
 		</div>
 	{/if}
-	</div>
+	</div> {* <#wrapper> *}
 	{include js.latte}
 </body>
 </html>

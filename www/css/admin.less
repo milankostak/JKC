@@ -1,0 +1,67 @@
+@import "components/variables.less";
+@import "components/common.less";
+@import "components/layout.less";
+
+@import "components/admin-menu.less";
+@import "components/flash.less";
+@import "components/header.less";
+@import "components/admin-tables.less";
+
+
+form table { /* top box, botttom box */
+	width: 100%;
+}
+a#logout {
+	float: right;
+	display: block;
+	color: #333;
+	margin: 5px;
+	font-size: 1.1em;
+}
+a:hover#logout {
+	color: white;
+}
+
+/* Article/*.ltt */
+#article_content {
+	float: right;
+	min-width: 150px;
+	width: 75%;
+}
+/* article_menu.ltt */
+#article_menu_wrap {
+	font-size: 1.2em;
+	float: left;
+	max-width: 250px;
+	min-width: 100px;
+	width: 24%;
+}
+#article_menu_wrap a#new_article {
+	margin-left: 10px;
+}
+ul#article_menu a.active, ul#article_menu a.active2, #item_menu a.active {
+	color: green;
+}
+#item_menu a {
+	font-size: 1.1em;
+	margin-right: 8px;
+	font-weight: bold;
+}
+h2.bigger {
+	font-size: 1.8em;
+}
+
+ul.error li {
+	color: red;
+	font-weight: bold;
+}
+@media (max-width: 600px) {
+	#article_menu_wrap {
+		float: none;
+		width: 100%;
+	}
+	#article_content {
+		float: none;
+		width: 100%;
+	}
+}
