@@ -1,0 +1,41 @@
+.flash {
+	color: black;
+	background-color: white;
+	border: 1px solid #333333;
+	padding: 1em;
+	margin: 1em;
+	top: 1em;
+	position: relative;
+	font-weight: bold;
+	&.error, &.authentification, &.reload {
+		border-color: red;
+		background-color: #FFC0CB;
+	}
+	&.error span.icons {
+		background-position: -45px 0;
+	}
+	&.authentification span.icons {
+		background-position: -87px 0;
+	}
+	&.reload span.icons {
+		background-position: -129px 0;
+	}
+	&.success {
+		border-color: green;
+		background-color: #98FB98;
+		span.icons {
+			background-position: 0 0;
+		}
+	}
+	span.icons {
+		background-image: url("../../img/icons.png");
+		height: 35px;
+		left: 15px;
+		position: absolute;
+		top: 8px;
+		width: 36px;
+	}
+	span.text {
+		padding-left: 50px;
+	}
+}
