@@ -24,6 +24,7 @@ class ArticlePresenter extends SecuredPresenter {
 
 	private $addTokenName = "add_article";
 	private $editTokenName = "edit_article";
+	private $deleteTokenName = "delete_article";
 	private $publishTokenName = "publish_article";
 
 	public function inject(Article $articles, Comment $comments, Poll $polls, Tag $tags, Blog $blog) {
@@ -313,16 +314,35 @@ class ArticlePresenter extends SecuredPresenter {
 	protected function createComponentDeleteArticleForm() {
 		$form = new Form;
 		$this->createOkCancelForm($form, $this, "formCancelled", "deleteArticle");
+		$this->manageUidToken($form, $this->deleteTokenName);
 		return $form;
 	}
 
 	/**
 	 * Process deleting of an article
 	 */
-	public function deleteArticle() {
-		$this->articles->delete($this->getParameter("id"));
-		$this->flashMessage("Článek byl smazán.", "success");
-		$this->redirect("default");
+	public function deleteArticle($button) {
+		$values = $button->getForm()->getValues();
+		$id = $this->getParameter("id");
+		$uid = $values->uid;
+		$t_name = $this->deleteTokenName;
+
+		// session is ok
+		if ($this->getSession($t_name)[$uid] == $uid) {
+			unset($this->getSession($t_name)[$uid]);
+			$this->articles->delete($id);
+			$this->flashMessage("Článek byl úspěšně smazán.", "success");
+			$this->redirect("default");
+		// problem with session
+		// article is still there
+		} elseif ($this->articles->findById($id) != null) {
+			$this->flashMessage("Při mazání se vyskytla chyba. Zopakujte prosím akci.", "error");
+			$this->redirect("this");
+		// problem with session, but according to id, there is nothing
+		} else {
+			$this->flashMessage("Článek byl úspěšně smazán.", "success");
+			$this->redirect("default");
+		}
 	}
 
 	/**

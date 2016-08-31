@@ -93,7 +93,7 @@ abstract class BasePresenter extends Presenter {
 			->setAttribute("class", "btn-info")
 			->onClick[] = [$_this, $cancelAction];
 
-		$form->addSubmit("save", "OK")
+		$form->addSubmit("delete", "Smazat")
 			->setAttribute("class", "btn-danger")
 			->onClick[] = [$_this, $okAction];
 
