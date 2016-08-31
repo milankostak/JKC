@@ -92,6 +92,7 @@ class TagsPresenter extends SecuredPresenter {
 		$form->onSuccess[] = [$this, "addTag"];
 
 		$this->addFormProtection($form);
+		$this->makeBootstrapForm($form);
 		return $form;
 	}
 
@@ -167,6 +168,7 @@ class TagsPresenter extends SecuredPresenter {
 		$form->onSuccess[] = [$this, "editTag"];
 
 		$this->addFormProtection($form);
+		$this->makeBootstrapForm($form);
 		return $form;
 	}
 

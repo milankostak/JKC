@@ -7,6 +7,12 @@ use Nette\Application\UI\Form;
 
 class ArticlePresenter extends SecuredPresenter {
 
+	const TEXT_TEXTAREA_COLS = 80;
+	const TEXT_TEXTAREA_ROWS = 20;
+
+	const PEREX_TEXTAREA_COLS = 80;
+	const PEREX_TEXTAREA_ROWS = 10;
+
 	private $articles, $comments, $polls, $tags, $blog;
 	// user for "edit", "delete", "show" and "publish" actions
 	private $article;
@@ -254,6 +260,7 @@ class ArticlePresenter extends SecuredPresenter {
 		$form->onSuccess[] = [$this, "publishArticle"];
 
 		$this->addFormProtection($form);
+		$this->makeBootstrapForm($form);
 		return $form;
 	}
 
@@ -341,8 +348,8 @@ class ArticlePresenter extends SecuredPresenter {
 		$form->addTextArea("anotation", "Perex")
 			->setRequired("Vložte prosím perex.")
 			->addRule(Form::MAX_LENGTH, "Perex je příliš dlouhý. Maximální délka je %d znaků.", 500)
-			->setAttribute("cols", 60)
-			->setAttribute("rows", 10)
+			->setAttribute("cols", self::PEREX_TEXTAREA_COLS)
+			->setAttribute("rows", self::PEREX_TEXTAREA_ROWS)
 			->setValue($article->anotation);
 
 		$form->addCheckBox("social", "Zobrazit u tohoto článku tlačítka sociálních sítí")
@@ -358,8 +365,8 @@ class ArticlePresenter extends SecuredPresenter {
 		$form->addTextArea("text")
 			->setRequired(false)
 			->addRule(Form::MAX_LENGTH, "Text je příliš dlouhý. Maximální délka je 20 000 znaků.", 20000)
-			->setAttribute("cols", 100)
-			->setAttribute("rows", 30)
+			->setAttribute("cols", self::TEXT_TEXTAREA_COLS)
+			->setAttribute("rows", self::TEXT_TEXTAREA_ROWS)
 			->setAttribute("class", "tinymce")
 			->setValue($article->text);
 
@@ -387,6 +394,7 @@ class ArticlePresenter extends SecuredPresenter {
 		}
 
 		$this->addFormProtection($form);
+		$this->makeBootstrapForm($form);
 		return $form;
 	}
 
@@ -504,8 +512,8 @@ class ArticlePresenter extends SecuredPresenter {
 		$form->addTextArea("anotation", "Perex")
 			->setRequired("Vložte prosím perex.")
 			->addRule(Form::MAX_LENGTH, "Perex je příliš dlouhý. Maximální délka je %d znaků.", 500)
-			->setAttribute("cols", 60)
-			->setAttribute("rows", 10);
+			->setAttribute("cols", self::PEREX_TEXTAREA_COLS)
+			->setAttribute("rows", self::PEREX_TEXTAREA_ROWS);
 
 		$form->addCheckBox("social", "Zobrazit u tohoto článku tlačítka sociálních sítí");
 
@@ -518,8 +526,8 @@ class ArticlePresenter extends SecuredPresenter {
 		$form->addTextArea("text")
 			->setRequired(false)
 			->addRule(Form::MAX_LENGTH, "Text je příliš dlouhý. Maximální délka je 20 000 znaků.", 20000)
-			->setAttribute("cols", 100)
-			->setAttribute("rows", 30)
+			->setAttribute("cols", self::TEXT_TEXTAREA_COLS)
+			->setAttribute("rows", self::TEXT_TEXTAREA_ROWS)
 			->setAttribute("class", "tinymce");
 
 		$this->recoverData($form);
@@ -538,6 +546,7 @@ class ArticlePresenter extends SecuredPresenter {
 			->onClick[] = [$this, "saveNewAndContinue"];
 
 		$this->addFormProtection($form);
+		$this->makeBootstrapForm($form);
 		return $form;
 	}
 

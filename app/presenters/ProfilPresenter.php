@@ -63,6 +63,7 @@ class ProfilPresenter extends SecuredPresenter {
 		$form->onSuccess[] = [$this, "saveName"];
 
 		$this->addFormProtection($form);
+		$this->makeBootstrapForm($form);
 		return $form;
 	}
 
@@ -131,6 +132,7 @@ class ProfilPresenter extends SecuredPresenter {
 		$form->onSuccess[] = [$this, "savePassword"];
 
 		$this->addFormProtection($form);
+		$this->makeBootstrapForm($form);
 		return $form;
 	}
 

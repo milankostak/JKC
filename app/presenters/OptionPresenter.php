@@ -94,6 +94,7 @@ class OptionPresenter extends SecuredPresenter {
 		$form->onSuccess[] = [$this, "addOption"];
 
 		$this->addFormProtection($form);
+		$this->makeBootstrapForm($form);
 		return $form;
 	}
 
@@ -157,6 +158,7 @@ class OptionPresenter extends SecuredPresenter {
 		$form->onSuccess[] = [$this, "editOption"];
 
 		$this->addFormProtection($form);
+		$this->makeBootstrapForm($form);
 		return $form;
 	}
 

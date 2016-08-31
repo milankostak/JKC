@@ -79,6 +79,7 @@ class PollPresenter extends SecuredPresenter {
 		$form->onSuccess[] = [$this, "addPoll"];
 
 		$this->addFormProtection($form);
+		$this->makeBootstrapForm($form);
 		return $form;
 	}
 
@@ -140,6 +141,7 @@ class PollPresenter extends SecuredPresenter {
 		$form->onSuccess[] = [$this, "editPoll"];
 
 		$this->addFormProtection($form);
+		$this->makeBootstrapForm($form);
 		return $form;
 	}
 

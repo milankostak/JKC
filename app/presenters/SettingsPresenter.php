@@ -7,6 +7,9 @@ use Nette\Application\UI\Form;
 
 class SettingsPresenter extends AdminPresenter {
 
+	const BOX_TEXTAREA_COLS = 80;
+	const BOX_TEXTAREA_ROWS = 15;
+
 	private $blog, $blogs;
 
 	private $generalSettingsTokenName = "general_settings";
@@ -91,7 +94,7 @@ class SettingsPresenter extends AdminPresenter {
 		$form->onSuccess[] = [$this, "saveSettings"];
 
 		$this->addFormProtection($form);
-
+		$this->makeBootstrapForm($form);
 		return $form;
 	}
 
@@ -138,8 +141,8 @@ class SettingsPresenter extends AdminPresenter {
 		$form->addTextArea("top_box")
 			->setRequired(false)
 			->addRule(Form::MAX_LENGTH, "Text je příliš dlouhý. Maximální délka je %d znaků.", 1000)
-			->setAttribute("cols", 125)
-			->setAttribute("rows", 30)
+			->setAttribute("cols", self::BOX_TEXTAREA_COLS)
+			->setAttribute("rows", self::BOX_TEXTAREA_ROWS)
 			->setAttribute("class", "tinymce")
 			->setValue($this->blog->top_box);
 
@@ -150,6 +153,7 @@ class SettingsPresenter extends AdminPresenter {
 		$form->onSuccess[] = [$this, "saveTopBox"];
 
 		$this->addFormProtection($form);
+		$form->getRenderer()->wrappers['control']['.submit'] = 'btn btn-primary';
 		return $form;
 	}
 
@@ -197,8 +201,8 @@ class SettingsPresenter extends AdminPresenter {
 		$form->addTextArea("bottom_box")
 			->setRequired(false)
 			->addRule(Form::MAX_LENGTH, "Text je příliš dlouhý. Maximální délka je %d znaků.", 1000)
-			->setAttribute("cols", 125)// TODO rozměry
-			->setAttribute("rows", 30)
+			->setAttribute("cols", self::BOX_TEXTAREA_COLS)
+			->setAttribute("rows", self::BOX_TEXTAREA_ROWS)
 			->setAttribute("class", "tinymce")
 			->setValue($this->blog->bottom_box);
 
@@ -209,6 +213,7 @@ class SettingsPresenter extends AdminPresenter {
 		$form->onSuccess[] = [$this, "saveBottomBox"];
 
 		$this->addFormProtection($form);
+		$form->getRenderer()->wrappers['control']['.submit'] = 'btn btn-primary';
 		return $form;
 	}
 

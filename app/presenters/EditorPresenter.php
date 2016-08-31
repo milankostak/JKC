@@ -95,6 +95,7 @@ class EditorPresenter extends SecuredPresenter {
 		$form->onSuccess[] = [$this, "addEditor"];
 
 		$this->addFormProtection($form);
+		$this->makeBootstrapForm($form);
 		return $form;
 	}
 
@@ -190,6 +191,7 @@ class EditorPresenter extends SecuredPresenter {
 		$form->onSuccess[] = [$this, "editEditor"];
 
 		$this->addFormProtection($form);
+		$this->makeBootstrapForm($form);
 		return $form;
 	}
 
@@ -270,6 +272,7 @@ class EditorPresenter extends SecuredPresenter {
 		$this->manageUidToken($form, $this->deleteEditorTokenName);
 
 		$this->addFormProtection($form);
+		$this->makeBootstrapForm($form);
 		return $form;
 	}
 
