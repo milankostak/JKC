@@ -6,7 +6,7 @@
 <ul class="em11">
 	<li>Články
 		<ul>
-			<li n:foreach="$articles as $article"><a n:href="$article->url">{$article->title}</a></li>
+			<li n:foreach="$articles as $article"><a n:href="post, $article->url">{$article->title}</a></li>
 		</ul>
 	</li>
 	<li>Štítky
