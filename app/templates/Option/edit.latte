@@ -1,0 +1,9 @@
+{var $title = "Upravit odpověď u ankety: ".$poll->question}
+
+{block content}
+
+<h2>Upravit odpověď u ankety: {$poll->question}</h2>
+
+{include ../Poll/poll_menu.latte}
+
+{control editOptionForm}

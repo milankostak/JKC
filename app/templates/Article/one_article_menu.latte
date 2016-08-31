@@ -1,0 +1,15 @@
+<div id="item_menu">
+	<a n:href="show, $article->id_article" n:class="$presenter->isLinkCurrent('Article:show') ? active">Článek</a>
+	<a n:if="$user->roles['Admin'] == '1' || $presenter->getUser()->id == $article->id_editor"
+		n:href="edit, $article->id_article" n:class="$presenter->isLinkCurrent('Article:edit') ? active">Editovat</a>
+	<a n:if="$article->draft == 0"
+		n:href="comments, $article->id_article" n:class="$presenter->isLinkCurrent('Article:comments') ? active">Komentáře</a>
+	<a n:href="tags, $article->id_article" n:class="$presenter->isLinkCurrent('Article:tags') ? active">Štítky</a>
+	<a n:if="$article->draft == 0"
+		n:href="Post:post, $article->url" onclick="window.open(this.href); return false;">Náhled</a>
+	<a n:if="$article->draft == 1"
+		n:href="publish, $article->id_article" n:class="$presenter->isLinkCurrent('Article:publish') ? active">Zveřejnit</a>
+	<a n:if="$user->roles['Admin'] == '1' || $presenter->getUser()->id == $article->id_editor"
+		n:href="delete, $article->id_article" n:class="$presenter->isLinkCurrent('Article:delete') ? active">Smazat</a>
+</div>
+<hr class="article_line">

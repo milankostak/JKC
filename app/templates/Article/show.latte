@@ -1,0 +1,13 @@
+{var $title = $article->title}
+
+{block content}
+
+{include article_menu.latte}
+<div id="article_content">
+	<h2 class="bigger">{$article->title}</h2>
+
+	{include one_article_menu.latte}
+
+	{$article->text|noescape}
+</div>
+<div class="clear"></div>

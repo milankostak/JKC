@@ -1,0 +1,11 @@
+{var $title = "Smazat štítek: ".$tag->name}
+
+{block content}
+
+<h2>Smazat štítek: {$tag->name}</h2>
+
+{include tag_menu.latte}
+
+<p>Opravdu chcete štítek <strong>{$tag->name}</strong> i jeho přiřazení ke článkům <strong>nenávratně</strong> smazat?</p>
+
+{control deleteTagForm}

@@ -1,0 +1,26 @@
+{var $title = "Štítek: ".$tag->name}
+
+{block content}
+
+<h2>Články označené štítkem: {$tag->name}</h2>
+
+{include tag_menu.latte}
+
+{if $tags->count() > 0}
+<table class="grid">
+	<thead>
+		<tr><th>Článek</th><th>Datum vytvoření článku</th><th>Odstranit štítek od článku</th></tr>
+	</thead>
+	<tbody>
+		{foreach $tags as $tg}
+			<tr>
+				<td><a n:href="Article:show, $tg->id_article">{$tg->article->title}</a></td>
+				<td>{date("d.m.Y", $tg->article->date)}</td>
+				<td><a n:href="deleteTag, $tg->id_article, $tg->id_tag">Smazat</a></td>
+			</tr>
+		{/foreach}
+	</tbody>
+</table>
+{else}
+	<p>Tento štítek nemá přiřazen žádný článek.</p>
+{/if}

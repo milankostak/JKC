@@ -1,0 +1,51 @@
+{var $title = "Obecné nastavení"}
+
+{block content}
+
+<h2>Obecné nastavení</h2>
+
+{include settings_menu.latte}
+
+{form editSettingsForm}
+
+<ul n:if="$form->hasErrors()">
+	<li n:foreach="$form->errors as $error">{$error}</li>
+</ul>
+
+<table id="settings">
+	<tr class="required">
+		<th>{label name /}</th>
+		<td>{input name}</td>
+	</tr>
+	<tr class="required">
+		<th>{label sub_name /}</th>
+		<td>{input sub_name}</td>
+	</tr>
+	<tr class="required">
+		<th class="help" title="Počet článků zobrazených na 1 stránce při zobrazování nových článků a článků, které mají společný štítek.">
+			{label posts_per_page /}</th>
+		<td>{input posts_per_page}</td>
+	</tr>
+	<tr class="required">
+		<th class="help" title="Počet posledních článků zobrazených v pravém boxu. Nula znamená vypnutí zobrazování posledních článků v tomto boxu.">
+			{label number_last_posts /}</th>
+		<td>{input number_last_posts}</td>
+	</tr>
+	<tr class="required">
+		<th>{label number_rss_articles /}</th>
+		<td>{input number_rss_articles}</td>
+	</tr>
+	<tr class="required">
+		<th>{label number_rss_comments /}</th>
+		<td>{input number_rss_comments}</td>
+	</tr>
+	<tr>
+		<th class="help" title="Měřicí kód pro Google Analytics ve tvaru UA-xxxxxx-xx. Nechte pole prázdné, pokud tuto službu využít nechcete.">{label ga /}</th>
+		<td>{input ga}</td>
+	</tr>
+	<tr class="required">
+		<th></th>
+		<td>{input save}</td>
+	</tr>
+</table>
+{/form editSettingsForm}

@@ -1,0 +1,27 @@
+{var $title = "Ankety"}
+
+{block content}
+
+<h2>Ankety</h2>
+<p class="em12"><a n:href="add">Vytvořit novou</a></p>
+{if $polls->getRowCount() > 0}
+<table class="grid">
+	<thead>
+		<tr><th>Anketa</th><th>Počet hlasů</th><th>Počet přiřazení</th><th>Datum vytvoření</th><th>Upravit</th><th>Smazat</th></tr>
+	</thead>
+	<tbody>
+		{foreach $polls as $poll}
+			<tr>
+				<td><a n:href="detail, $poll->id_poll">{$poll->question}</a></td>
+				<td>{($poll->num_votes == NULL) ? 0 : $poll->num_votes}</td>
+				<td><a n:href="articles, $poll->id_poll">{$poll->num_articles}</a></td>
+				<td>{date("d.m.Y", $poll->date)}</td>
+				<td><a n:href="edit, $poll->id_poll">Upravit</a></td>
+				<td><a n:href="delete, $poll->id_poll">Smazat</a></td>
+			</tr>
+		{/foreach}
+	</tbody>
+</table>
+{else}
+	<p>Nebyly nalezeny žádné ankety.</p>
+{/if}

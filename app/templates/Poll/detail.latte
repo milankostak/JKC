@@ -1,0 +1,29 @@
+{var $title = "Anketa: ".$poll->question}
+
+{block content}
+
+<h2>Anketa: {$poll->question}</h2>
+
+{include poll_menu.latte}
+
+<p class="em11"><a n:href="Option:add, $poll->id_poll">Vytvořit novou odpověď</a></p>
+
+{if $options->count() > 0}
+<table class="grid">
+	<thead>
+		<tr><th>Odpověď</th><th>Počet hlasů</th><th>Upravit odpověď</th><th>Smazat odpověď</th></tr>
+	</thead>
+	<tbody>
+		{foreach $options as $option}
+			<tr>
+				<td>{$option->answer}</td>
+				<td>{$option->votes}</td>
+				<td><a n:href="Option:edit, $option->id_option">Upravit</a></td>
+				<td><a n:href="Option:delete, $option->id_option">Smazat</a></td>
+			</tr>
+		{/foreach}
+	</tbody>
+</table>
+{else}
+	<p>Tato anketa nemá přiřazenu žádnou odpověď.</p>
+{/if}

@@ -1,0 +1,28 @@
+{var $title = "Mapa webu"}
+
+{block content}
+
+<h2>Mapa webu</h2>
+<ul class="em11">
+	<li>Články
+		<ul>
+			<li n:foreach="$articles as $article"><a n:href="$article->url">{$article->title}</a></li>
+		</ul>
+	</li>
+	<li>Štítky
+		<ul>
+			<li n:foreach="$tags as $tag"><a n:href="tag, $tag->url">{$tag->name}</a></li>
+		</ul>
+	</li>
+	<li><a n:href="Post:archive">Archiv</a>
+		<ul>
+			{foreach $years as $year=>$months}
+				<li>{$year}<ul>
+				{foreach $months as $month=>$a}
+					<li><a n:href="archive, $year, $month">{$month|numericToStringMonth} ({$a})</a></li>
+				{/foreach}
+				</ul></li>
+			{/foreach}
+		</ul>
+	</li>
+</ul>

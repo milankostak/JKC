@@ -1,0 +1,17 @@
+<div id="article_menu_wrap">
+	<ul id="article_menu">
+		<li><a n:href="add">Nový článek</a></li>
+		<li><a n:href="drafts" n:class="$presenter->isLinkCurrent('Article:drafts') ? 'active'">Rozepsané články</a></li>
+		{var $cat = $presenter->isLinkCurrent("Article:category")}
+		{foreach $years as $year=>$months}
+			{var $pyear = $presenter->getParameter("year")}
+			<li><a href="#" n:class="($cat and $pyear == $year) ? 'active year' : 'year'">{$year}</a><ul>
+			{foreach $months as $month=>$articlesCount}
+				<li><a n:href="category, $year, $month"
+						n:class="($cat and $pyear == $year and $presenter->getParameter('month') == $month) ? 'active2'">
+						{$month|numericToStringMonth} ({$articlesCount})</a></li>
+			{/foreach}
+			</ul></li>
+		{/foreach}
+	</ul>
+</div>

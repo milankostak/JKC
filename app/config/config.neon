@@ -1,0 +1,36 @@
+#
+# WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
+# https://nette.org/security-warning
+#
+parameters:
+
+php:
+	date.timezone: Europe/Prague
+
+database:
+	dsn: "mysql:host=localhost;dbname=d82010_taiwan"
+	user: "root"
+	password: ""
+	options:
+		lazy: yes
+
+application:
+	errorPresenter: Error
+	mapping:
+		*: App\*Module\Presenters\*Presenter
+
+session:
+	expiration: 7 days
+
+services:
+	- App\Model\Authenticator
+	- App\Model\Article
+	- App\Model\Blog
+	- App\Model\Comment
+	- App\Model\Editor
+	- App\Model\Option
+	- App\Model\Poll
+	- App\Model\Post
+	- App\Model\Rank
+	- App\Model\Tag
+	router: App\RouterFactory::createRouter

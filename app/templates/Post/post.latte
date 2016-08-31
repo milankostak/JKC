@@ -1,0 +1,51 @@
+{var $title = $post->title}
+
+{block content}
+
+<h1>{$post->title}</h1>
+<p>Autor: {if $post->name == NULL}<em>smazaný editor</em> {else} {$post->name} {/if}</p>
+<p>Datum: {date("d.m.Y H:i:s", $post->date)}</p>
+<hr class="article_line">
+<div>{$post->text|noescape}</div>
+
+{if $poll}
+	<hr class="article_line">
+	<a id="poll"></a>
+	<p class="em12">Anketa</p>
+	<p class="em12">{$poll->question}</p>
+	{include vote.latte}
+{/if}
+
+<hr class="article_line">
+{if $post->social == 1}
+
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/cs_CZ/all.js#xfbml=1";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+	<div class="fb-like" data-href="https://seznam.cz/" data-layout="button" data-action="like" data-show-faces="false" data-share="true"></div>
+	<g:plusone></g:plusone>
+	<script type="text/javascript">
+		(function() {
+			var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+			po.src = 'https://apis.google.com/js/plusone.js?onload=onLoadCallback';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+		})();
+	</script>
+	<a href="https://twitter.com/share" class="twitter-share-button" data-lang="cs" data-count="none" data-dnt="true">Tweet</a>
+	<script n:syntax="off">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+{/if}
+
+<p n:if="$post->comments == 1"><a id="comments" n:href="comments, $post->url">Komentáře: {$post->comment_count}</a></p>
+<p class="tags">Štítky:
+	{var $tags = explode("=", $post->tags)} 
+	{foreach $tags as $tag}
+		<a n:href="Post:tag, Nette\Utils\Strings::webalize($tag)">{$tag}</a>  
+	{/foreach}
+</p>
+<p>Počet zhlédnutí: {$post->views}</p>

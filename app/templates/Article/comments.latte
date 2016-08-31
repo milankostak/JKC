@@ -1,0 +1,53 @@
+{var $title = "Komentáře: ".$article->title}
+
+{block content}
+
+{include article_menu.latte}
+<div id="article_content">
+	<h2 class="bigger">Komentáře ke článku: {$article->title}</h2>
+
+	{include one_article_menu.latte}
+
+	<p class="em11" n:if="$presenter->getParameter('deleted') != 1"><a n:href="this, deleted => 1">Zobrazit i skryté komentáře</a></p>
+	{if ($comments->count() > 0)}
+	<p class="em11" n:if="$presenter->getParameter('deleted') == 1"><a n:href="this">Zobrazit pouze neskryté komentáře</a></p>
+	<table id="comment" class="grid">
+		{foreach $comments as $comment}
+		<tr n:class="($comment->deleted == 1) ? 'deleted even' : 'even'">
+			<td>
+				{$comment->author}
+			</td>
+			<td>
+				{if $comment->mail == NULL}
+					-
+				{else}
+					{$comment->mail}
+				{/if}
+			</td>
+			<td>
+				{date("d.m.Y H:i:s", $comment->date)}
+			</td>
+			<td>
+				{if $comment->deleted == 0}
+					<a n:href="Comment:unpublish, $comment->id_comment, deleted => $presenter->getParameter('deleted')">Smazat</a>
+				{else}
+					<a n:href="Comment:publish, $comment->id_comment">Zveřejnit</a>
+				{/if}
+			</td>
+			<td>
+				<a n:href="Comment:delete, $comment->id_comment, deleted => $presenter->getParameter('deleted')">Smazat trvale</a>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="5">
+				{$comment->text}
+			</td>
+		</tr>
+		{/foreach}
+	</table>
+	{else}
+		<p n:if="$presenter->getParameter('deleted') != 1">K tomuto článku nebyl nalezen žádný neskrytý komentář.</p>
+		<p n:if="$presenter->getParameter('deleted') == 1">K tomuto článku nebyl nalezen žádný komentář.</p>
+	{/if}
+</div>
+<div class="clear"></div>

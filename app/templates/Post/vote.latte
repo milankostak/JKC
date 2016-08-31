@@ -1,0 +1,21 @@
+{snippet polll}
+	<p n:ifset="$ajaxMessage" class="{$ajaxMessage['status']}">{$ajaxMessage['message']}</p>
+	<div id="ajax_loader"></div>
+	<table id="table_poll">
+	<tbody>
+		{if $voted == "1"}
+			<tr n:foreach="$options as $option">
+				<td>{$option->answer}</td>
+				{var $percent = round($option->votes*100/$sum_votes, 1) }
+				<td class="poll_graph_td"><span class="poll_graph" style="padding-left: {$percent|noescape}px"></span></td>
+				<td class="right">{number_format($option->votes, 0, ',', ' ')}</td>
+				<td class="right">({number_format($percent, 1, ',', ' ')} %)</td>
+			</tr>
+		{else}
+			<tr n:foreach="$options as $option">
+				<td><a n:href="vote, $option->id_option, $option->id_poll, $presenter->getParameter('url')" class="ajax">{$option->answer}</a></td>
+			</tr>
+		{/if}
+	</tbody>
+	</table>
+{/snippet}

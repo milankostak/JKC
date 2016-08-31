@@ -1,0 +1,14 @@
+# Created by https://www.gitignore.io/api/nette
+
+### Nette ###
+# Nette - http://nette.org
+# Ignore /log and /temp directories content but commit .htaccess settings
+/log/*
+!/log/.htaccess
+/temp/*
+!/temp/.htaccess
+
+# custom created
+/--/*
+/libs/Nette/*
+model.xlsx

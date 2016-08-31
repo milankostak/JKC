@@ -1,0 +1,16 @@
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule !\.(pdf|js|ico|gif|jpg|png|css|rar|zip|tar\.gz)$ index.php [L]
+
+	RewriteRule ^js\/(.*)$ www/js/$1
+	RewriteRule ^css\/(.*)$ www/css/$1
+	RewriteRule ^img\/(.*)$ www/img/$1
+	RewriteRule ^galerie\/(.*)$ www/galerie/$1
+
+	SetEnv NETTE_HTACCESS ok
+</IfModule>

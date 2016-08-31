@@ -1,0 +1,47 @@
+{var $title = "Štítky ke článku: ".$article->title}
+
+{block content}
+
+{include article_menu.latte}
+
+<div id="article_content">
+	<h2 class="bigger">Štítky ke článku: {$article->title}</h2>
+
+	{include one_article_menu.latte}
+
+	<table class="grid">
+	<caption>Štítky přiřazené tomuto článku</caption>
+		{foreach $article_tags as $a_tag}
+		<tr>
+			<td>
+				<a n:href="Tags:detail, $a_tag->id_tag">{$a_tag->tag->name}</a>
+			</td>
+			<td>
+				<a n:href="deleteTag, $article->id_article, $a_tag->id_tag">Smazat</a>
+			</td>
+		</tr>
+		{/foreach}
+	</table>
+	{if $article_tags->count() == 0}
+		<p>K tomuto článku není přiřazen žádný štítek.</p>
+	{/if}
+
+	<table class="grid">
+	<caption>Přidat nový štítek</caption>
+		{foreach $nontags as $nontag}
+		<tr>
+			<td>
+				<a n:href="Tags:detail, $nontag->id_tag">{$nontag->name}</a>
+			</td>
+			<td>
+				<a n:href="addTag, $article->id_article, $nontag->id_tag">Přidat</a>
+			</td>
+		</tr>
+		{/foreach}
+	</table>
+	{if $nontags->count() == 0}
+		<p>K tomuto článku jsou již přiřazeny všechny štítky.</p>
+	{/if}
+
+</div>
+<div class="clear"></div>

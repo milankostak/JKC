@@ -1,0 +1,11 @@
+{var $title = "Upravit článek: ".$article->title}
+
+{block content}
+
+<h2 class="bigger">{$article->title}</h2>
+
+{include one_article_menu.latte}
+
+{control editArticleForm}
+
+<div class="clear"></div>

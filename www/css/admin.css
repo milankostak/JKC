@@ -1,0 +1,322 @@
+body{
+	width: 100%;
+	margin: 0;
+	text-align: center;
+	background-color: #70AFE1; /*#BBCFD8;*/
+}
+
+#wrapper {
+	font-family: "Calibri", sans-serif;
+	margin: 0 auto;
+	width: 100%;
+	text-align: left;
+	margin: 0 auto;
+	max-width: 950px;
+	min-width: 240px;
+}
+
+#topbg { 
+	/*background: url("../img/topbg.jpg") repeat-x transparent;*/
+	height: 300px;
+	left: 0px;
+	position: absolute;
+	top: 0px;
+	width: 100%;
+	z-index: -1;
+}
+
+h1 {
+	color: #030309;
+	float: left;
+	font-family: "Trebuchet MS", "Arial", "Helvetica", sans-serif;
+	font-style: italic;
+	padding: 1em;
+	margin: 0;
+}
+
+ul#menu {
+	clear: both;
+	list-style: none outside none;
+	margin: 20px;
+	padding-left: 5px;
+}
+
+ul#menu li { 
+	float: left;
+}
+
+ul#menu a { 
+	background-color: #054560;
+	border: 1px solid black;
+	color: white;
+	display: block;
+	font-size: 1.2em;
+	margin-right: 10px;
+	padding: 10px;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+ul#menu a.aktivni { 
+	background-color: white;
+	border-bottom: none;
+	color: #054560;
+	position: relative;
+	top: 1px;
+}
+
+ul#menu a:hover, ul#menu a:focus { 
+	background-color: #6B81CF !important;
+	color: black !important;
+}
+
+a#logout {
+	float: right;
+	display: block;
+	color: #333;
+	margin: 5px;
+	font-size: 1.1em;
+}
+a:hover#logout {
+	color: white;
+}
+
+#page {
+	background-color: white;
+	margin: 0;
+	padding: 10px;
+	border: 1px #054560 solid;
+	border-top: none;
+}
+
+/* Article/*.ltt */
+#article_content {
+	float: right;
+	min-width: 150px;
+	width: 75%;
+}
+
+/* article_menu.ltt */
+#article_menu_wrap {
+	font-size: 1.2em;
+	float: left;
+	max-width: 250px;
+	min-width: 100px;
+	width: 24%;
+}
+
+#article_menu_wrap a#new_article {
+	margin-left: 10px;
+}
+
+ul#article_menu a.active, ul#article_menu a.active2, #item_menu a.active {
+	color: green;
+}
+
+#item_menu a {
+	font-size: 1.1em;
+	margin-right: 8px;
+	font-weight: bold;
+}
+
+input[type=submit] {
+	font-size: 1.1em;
+	padding: 5px 10px;
+	margin: 12px 0;
+}
+
+h2.bigger {
+	font-size: 1.8em;
+}
+
+hr.article_line {
+	color: #333333;
+	border-style: solid;
+}
+
+a { 
+	color: #286EA0;
+	text-decoration: underline;
+}
+
+a:hover, a:active, a:focus { 
+	color: #FF3333;
+	text-decoration: none;
+}
+
+.hidden {
+	display: none;
+}
+
+th.help label {
+	border-bottom: 1px dotted black;
+	cursor: help;
+}
+
+.em12 {
+	font-size: 1.2em;
+}
+
+.em11 {
+	font-size: 1.1em;
+}
+
+/* editor_menu, sidebar, Article\*.ltt */
+.clear {
+	clear: both;
+}
+
+ul.error li {
+	color: red;
+	font-weight: bold;
+}
+
+.flash {
+	color: black;
+	background-color: white;
+	border: 1px solid #333333;
+	padding: 1em;
+	margin-bottom: 1em;
+	position: relative;
+	font-weight: bold;
+}
+
+.flash.error, .flash.authentification, .flash.reload {
+	border-color: red;
+	background-color: #FFC0CB;
+}
+
+.flash.success {
+	border-color: green;
+	background-color: #98FB98;
+}
+
+span.icons {
+	background-image: url("../img/icons.png");
+	height: 35px;
+	left: 15px;
+	position: absolute;
+	top: 6px;
+	width: 36px;
+}
+
+.flash.success span.icons {
+	background-position: 0 0;
+}
+
+.flash.error span.icons {
+	background-position: -45px 0;
+}
+
+.flash.authentification span.icons {
+	background-position: -87px 0;
+}
+
+.flash.reload span.icons {
+	background-position: -129px 0;
+}
+
+.flash span.text {
+	padding-left: 50px;
+}
+
+table.grid {
+	padding: 0;
+	margin: 0;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+table.grid caption {
+	font-weight: bold;
+	font-size: 1.2em;
+	text-align: left;
+	margin: 0.7em 0;
+}
+/* horní a dolní odsazení inputů od sebe v Settings general */
+table#settings th {
+	padding: 0.4em 0;
+}
+
+table.grid td, table.grid th {
+	background: #fff;
+	border: 1px solid #add4fb;
+	padding: 6px 6px 6px 12px;
+}
+
+table#comment tr.even td, table.grid th {
+	color: #7a7772;
+	background: #E4F1FC;
+	text-align: left;
+	font-weight: normal;
+}
+
+table#comment tr.even td {
+	width: 20%;
+	color: #1B0E03;
+}
+
+/* special - aktivní user */
+table.grid tr.special td {
+	background: #E4E1FC;
+}
+
+table#comment tr.even + tr {
+	border-bottom: 2px solid #555555;
+}
+
+table#comment tr.deleted.even + tr {
+	color: #7A7772;
+}
+
+table#comment tr.deleted.even td, table#comment tr.deleted.even td a {
+	background-color: #777777;
+	color: #dddddd;
+}
+
+table#comment tr.deleted.even td a:hover {
+	color: #FFFFFF;
+}
+
+@media (max-width: 705px) {
+	ul#menu {
+		margin: 0;
+		padding: 0;
+	}
+	ul#menu a {
+		margin-right: 2px;
+	}
+}
+
+@media (max-width: 600px) {
+	ul#menu a {
+		padding: 8px 4px;
+		font-size: 1.15em;
+	}
+	#article_menu_wrap {
+		float: none;
+		width: 100%;
+	}
+	#article_content {
+		float: none;
+		width: 100%;
+	}
+}
+
+@media (max-width: 500px) {
+	ul#menu li {
+		float: none;
+	}
+	ul#menu a {
+		margin-right: 0;
+		padding-left: 10px;
+		border-left: none;
+		border-right: none;
+	}
+	ul#menu a.aktivni { 
+		border-bottom: 1px solid black;
+		position: static;
+		top: 0;
+		padding-left: 20px;
+	}
+}

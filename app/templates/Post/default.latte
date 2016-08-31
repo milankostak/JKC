@@ -1,0 +1,61 @@
+{if $paginator->getPage() > 1}
+	{var $title = $paginator->getPage()}
+{/if}
+
+{block content}
+{foreach $posts as $post}
+	<div class="entry">
+		<h2><a n:href="post, $post->url">{$post->title}</a></h2>
+		<div class="info">
+			<p>Autor: {if $post->name == NULL}<em>smazaný editor</em> {else} {$post->name} {/if}</p>
+			<p>Datum: {date("d.m.Y", $post->date)}</p>
+			<p n:if="$post->comments == 1"><a n:href="comments, $post->url">Komentáře: {$post->comment_count}</a></p>
+			{* - nějaký problém se session, musíš časem vyřešit*}
+		</div>
+		<div class="content">{$post->anotation|noescape|breaklines}</div>
+		<p class="more"><a n:href="post, $post->url">Celý článek</a></p>
+		{var $tags = explode("=", $post->tags)}
+		<p class="tags">Štítky: 
+			{if strlen($post->tags) == 0}
+				—
+			{else}
+				{foreach $tags as $tag}
+					<a n:href="tag, Nette\Utils\Strings::webalize($tag)">{$tag}</a>  
+				{/foreach}
+			{/if}
+		</p>
+		<hr class="clear article_line">
+	</div>
+{/foreach}
+
+<div id="page_listing">
+	{var page = $paginator->getPage()}
+	{if ($paginator->isFirst())}
+		<span>&lt;&lt;</span>
+		<span>&lt;</span>
+	{else}
+		<a n:href="default" title="První stránka">&lt;&lt;</a>
+		{if $page-1 == 1}
+		<a n:href="default, $page" title="Předchozí stránka">&lt;</a>
+		{else}
+		<a n:href="default, $page-1" title="Předchozí stránka">&lt;</a>
+		{/if}
+	{/if}
+		{var max = $paginator->getLastPage()}
+		{var temp = ((int)(($page-3)/10))*10}
+		<a n:if="$temp > 0" n:href="default, $temp">{$temp}</a>
+		<a n:if="($page - 2) > 0" n:href="default, $page-2">{$page-2}</a>
+		<a n:if="($page - 1) > 0" n:href="default, $page-1">{$page-1}</a>
+		<span class="active_page">{$page}</span>
+		<a n:if="($page + 1) <= $max" n:href="default, $page+1">{$page+1}</a>
+		<a n:if="($page + 2) <= $max" n:href="default, $page+2">{$page+2}</a>
+		{var temp = ceil(($page+3)/10)*10}
+		<a n:if="$temp <= $max" n:href="default, $temp">{$temp}</a>
+	{if (!$paginator->isLast())}
+		<a n:href="default, $page+1" title="Další stánka">&gt;</a>
+		<a n:href="default, $paginator->getLastPage()" title="Poslední stránka">&gt;&gt;</a>
+	{else}
+		<span>&gt;</span>
+		<span>&gt;&gt;</span>
+	{/if}
+</div>

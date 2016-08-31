@@ -1,0 +1,11 @@
+{var $title = "Smazat anketu: ".$poll->question}
+
+{block content}
+
+<h2>Smazat anketu: {$poll->question}</h2>
+
+{include poll_menu.latte}
+
+<p>Opravdu chcete anketu <strong>{$poll->question}</strong> i s jejími odpověďmi a přiřazeními ke článkům <strong>nenávratně</strong> smazat?</p>
+
+{control deletePollForm}

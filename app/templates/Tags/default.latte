@@ -1,0 +1,26 @@
+{var $title = "Štítky"}
+
+{block content}
+
+<h2>Štítky</h2>
+<p class="em12"><a n:href="add">Vytvořit nový</a></p>
+{if $tags->count() > 0}
+<table class="grid">
+	<thead>
+		<tr><th>Název</th><th>Počet přiřazených článků</th><th>Upravit</th><th>Náhled</th><th>Smazat</th></tr>
+	</thead>
+	<tbody>
+		{foreach $tags as $tag}
+			<tr>
+				<td><a n:href="detail, $tag->id_tag">{$tag->name}</a></td>
+				<td>{$tag->num_articles}</td>
+				<td><a n:href="edit, $tag->id_tag">Upravit</a></td>
+				<td><a n:href="Post:tag, $tag->url" onclick="window.open(this.href); return false">Náhled</a></td>
+				<td><a n:href="delete, $tag->id_tag">Smazat</a></td>
+			</tr>
+		{/foreach}
+	</tbody>
+</table>
+{else}
+	<p>Nebyly nalezeny žádné štítky.</p>
+{/if}

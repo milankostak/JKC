@@ -1,0 +1,26 @@
+{var $title = "Články s anketou: ".$poll->question}
+
+{block content}
+
+<h2>Články s anketou: {$poll->question}</h2>
+
+{include poll_menu.latte}
+
+{if $articles->count() > 0}
+<table class="grid">
+	<thead>
+		<tr><th>Článek</th><th>Datum vytvoření článku</th><th>Odstranit anketu z článku</th></tr>
+	</thead>
+	<tbody>
+		{foreach $articles as $article}
+			<tr>
+				<td><a n:href="Article:show, $article->id_article">{$article->title}</a></td>
+				<td>{date("d.m.Y", $article->date)}</td>
+				<td><a n:href="deletePoll, $article->id_article, $article->id_poll">Smazat</a></td>
+			</tr>
+		{/foreach}
+	</tbody>
+</table>
+{else}
+	<p>Tato anketa nemá přiřazen žádný článek.</p>
+{/if}

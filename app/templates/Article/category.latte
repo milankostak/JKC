@@ -1,0 +1,30 @@
+{var $month = $presenter->getParameter("month")}
+{var $year = $presenter->getParameter("year")}
+{var $title = "Kategorie $month/$year"}
+
+{block content}
+
+{include article_menu.latte}
+<div id="article_content">
+	<h2>{$month|numericToStringMonth} {$year}</h2>
+	{if $articles->count() > 0}
+		<table class="grid">
+			<thead>
+				<tr><th>Článek</th><th>Datum zveřejnění</th><th>Autor</th><th>Počet zhlédnutí</th></tr>
+			</thead>
+			<tbody>
+				{foreach $articles as $article}
+					<tr>
+						<td><a n:href="show, $article->id_article">{$article->title}</a></td>
+						<td>{date("d.m.Y \v H:i", $article->date)}</td>
+						<td>{if $article->editor == NULL}<em>smazaný editor</em> {else} {$article->editor->name} {/if}</td>
+						<td>{$article->views}</td>
+					</tr>
+				{/foreach}
+			</tbody>
+		</table>
+	{else}
+		<p>Pro tento měsíc nebyly nalezeny žádné články.</p>
+	{/if}
+</div>
+<div class="clear"></div>

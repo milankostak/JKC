@@ -1,0 +1,31 @@
+{if isset($actual_year) && isset($actual_month)}
+	{var $title = "Archiv $actual_year/$actual_month"}
+{else}
+	{var $title = "Archiv"}
+{/if}
+
+{block content}
+
+{if isset($actual_year) && isset($actual_month)}
+	<h1>Archiv - {$actual_month|numericToStringMonth} {$actual_year}</h1>
+	{if $posts->count()  > 0}
+		<ul>
+			{foreach $posts as $post}
+				<li><a n:href="post, $post->url">{$post->title}</a></li>
+			{/foreach}
+		</ul>
+	{else}
+		<p>Pro tento měsíc nebyly nalezeny žádné články.</p>
+	{/if}
+{else}
+	<h1>Archiv</h1>
+	<ul>
+		{foreach $years as $year=>$months}
+			<li>{$year}<ul>
+			{foreach $months as $month=>$a}
+				<li><a n:href="archive, $year, $month">{$month|numericToStringMonth} ({$a})</a></li>
+			{/foreach}
+			</ul></li>
+		{/foreach}
+	</ul>
+{/if}

@@ -1,0 +1,27 @@
+{var $title = "Rozepsané články"}
+
+{block content}
+
+{include article_menu.latte}
+<div id="article_content">
+	<h2>Rozepsané</h2>
+	{if $drafts->count() > 0}
+	<table class="grid">
+		<thead>
+			<tr><th>Článek</th><th>Datum vytvoření</th><th>Autor</th></tr>
+		</thead>
+		<tbody>
+			{foreach $drafts as $draft}
+				<tr>
+					<td><a n:href="show, $draft->id_article">{$draft->title}</a></td>
+					<td>{date("d.m.Y H:i", $draft->date)}</td>
+					<td>{if $draft->editor->name == NULL}<em>smazaný editor</em> {else} {$draft->editor->name} {/if}</td>
+				</tr>
+			{/foreach}
+		</tbody>
+	</table>
+	{else}
+		<p>Nebyly nalezeny žádné rozepsané články.</p>
+	{/if}
+</div>
+<div class="clear"></div>

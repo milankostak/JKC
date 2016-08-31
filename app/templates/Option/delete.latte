@@ -1,0 +1,11 @@
+{var $title = "Smazat odpověď: ".$option->answer}
+
+{block content}
+
+<h2>Smazat odpověď: {$option->answer}</h2>
+
+{include ../Poll/poll_menu.latte}
+
+<p>Opravdu chcete odpověď <strong>{$option->answer}</strong> z ankety {$poll->question} <strong>nenávratně</strong> smazat?</p>
+
+{control deleteOptionForm}

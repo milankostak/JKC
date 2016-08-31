@@ -1,0 +1,22 @@
+{var $robots = "noindex,nofollow"}
+{var $title = "Stránka nebyla nenalezena"}
+{block content}
+
+<h1 id="error">Stránka nebyla nenalezena</h1>
+
+<p>Omluváme se vám za vzniklé potíže.</p>
+<ul>
+<li>Je možné, že informace, které na této adrese byly původně, přestaly platit nebo stránka byla zrušena.</li>
+<li>Pokud jste adresu zadali ručně, ujistěte se, zda v ní nejsou překlepy.</li>
+<li>Jestliže jste se na tuto adresu dostali kliknutím na odkaz, zkuste se vrátit na původní stránku a pokračujte kliknutím na jiný odkaz.
+	<p class="center">
+		<button onclick="history.back()">Návrat o stránku zpět</button>
+	</p></li>
+<li>nebo jej zkuste najít procházením z hlavní stránky.</li>
+</ul>
+
+<p>Pokud si myslíte, že chyba je na naší straně, kontaktujte nás, prosím, na adrese example@example.com</p>
+
+<p>Vámi požadovaná stránka: {$presenter->context->getService("httpRequest")->getUrl()}</p>
+
+<p><small>error 404</small></p>

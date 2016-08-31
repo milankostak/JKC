@@ -1,0 +1,17 @@
+{var $title = "Zveřejnit článek: ".$article->title}
+
+{block content}
+
+{include article_menu.latte}
+<div id="article_content">
+	<h2 class="bigger">Zveřejnit článek: {$article->title}</h2>
+
+	{include one_article_menu.latte}
+	{form publishForm}
+		<p><strong>{label datetime /}</strong></p>
+		<p>{input datetime}</p>
+		<p>{input save}</p>
+	{/form publishForm}
+
+</div>
+<div class="clear"></div>

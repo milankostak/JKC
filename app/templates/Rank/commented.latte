@@ -1,0 +1,23 @@
+{var $title = "Nejdiskutovanější články"}
+
+{block content}
+
+<h2>Nejdiskutovanější články</h2>
+
+{include rank_menu.latte}
+
+<table class="grid">
+	<thead>
+		<tr><th>Článek</th><th>Datum vytvoření</th><th>Autor</th><th>Počet komentářů</th></tr>
+	</thead>
+	<tbody>
+		{foreach $articles as $article}
+			<tr>
+				<td><a n:href="Article:comments, $article->id_article">{$article->title}</a></td>
+				<td>{date("d.m.Y H:i", $article->date)}</td>
+				<td>{if $article->name == NULL}<em>smazaný editor</em> {else} {$article->name} {/if}</td>
+				<td>{$article->num_comments}</td>
+			</tr>
+		{/foreach}
+	</tbody>
+</table>

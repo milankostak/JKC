@@ -1,0 +1,370 @@
+body {
+	width: 100%;
+	margin: 0;
+	text-align: center;
+	font-size: 1em;
+	font-family: "Calibri", sans-serif;
+	background:
+		linear-gradient(27deg, #EAEAEA 5px, transparent 5px) 0px 5px,
+		linear-gradient(207deg, #EAEAEA 5px, transparent 5px) 10px 0px,
+		linear-gradient(27deg, #DDDDDD 5px, transparent 5px) 0px 10px,
+		linear-gradient(207deg, #DDDDDD 5px, transparent 5px) 10px 5px,
+		linear-gradient(90deg, #E4E4E4 10px, transparent 10px),
+		linear-gradient(#E2E2E2 25%, #E5E5E5 25%, #E5E5E5 50%, transparent 50%, transparent 75%, #DBDBDB 75%, #DBDBDB);
+	background-color: #ECECEC;
+	background-size: 20px 20px;
+/**
+ *	by Atle Mo (design), Sébastien Grosjean (code)
+ *	http://lea.verou.me/css3patterns/#carbon
+ */
+}
+
+a {
+	color: #006600;
+	text-decoration: underline;
+}
+
+a:hover {
+	color: #163C54;
+	text-decoration: none;
+}
+
+#wrapper {
+	margin: 0 auto;
+	max-width: 950px;
+	min-width: 240px;
+	padding: 0;
+	text-align: left;
+}
+
+h2#header {
+	font-size: 2em;
+	font-weight: bold;
+	text-align: left;
+	text-shadow: 10px 10px 10px #666;
+}                                 
+
+h2#header a {
+	color: #000080;
+	font-family: "Trebuchet MS", "Arial", "Helvetica", sans-serif;
+	font-style: italic;
+	padding: 1em;
+	margin: 0;
+	margin-left: 50px;
+}
+
+h2#header a:hover {
+	color: #030309;
+	text-decoration: none;
+}
+
+h2#header + p {
+	position: relative;
+	top: -20px;
+	margin-left: 65px;
+	padding-left: 1em;
+	font-family: "Trebuchet MS", "Arial", "Helvetica", sans-serif;
+	font-style: italic;
+}
+
+#page, #errorpage {
+	box-shadow: 0 0 60px 10px #A8A8A8;
+	border-radius: 5px;
+	background-color: #FFFFFF;
+}
+
+#article {
+	padding: 20px 10px;
+	color: #111111;
+	float: left;
+	max-width: 700px;
+	width: 75%;
+}
+
+#article h1 {
+	margin-top: 0;
+	font-variant: small-caps;
+	font-family: "Calibri", sans-serif;
+	color: #000080;
+}
+
+#article a#comments {
+	font-size: 1.2em;
+}
+
+.entry h2, .entry .content {
+	padding-left: 20%;
+}
+
+.entry .info {
+	width: 20%;
+	float: left;
+}
+
+.entry .info p {
+	margin-top: 0;
+}
+
+.entry .more {
+	margin-left: 20%;
+	margin-bottom: 0.7em;
+	padding-bottom: 5px;
+	width: 79%;
+	text-align: right;
+	border-bottom: 1px dotted #333333;
+}
+
+.entry .tags {
+	margin-left: 20%;
+	margin-bottom: 0.7em;
+	margin-top: 0.7em;
+	width: 79%;
+}
+
+hr.article_line {
+	color: #999999;
+	border-style: solid;
+}
+
+.em12 {
+	font-size: 1.2em;
+}
+
+.em11 {
+	font-size: 1.1em;
+}
+
+.em15 {
+	font-size: 1.5em;
+}
+
+#sidebar {
+	width: 22%;
+	float: right;
+	padding-top: 10px; 
+	color: #555555;
+}
+
+#sidebar #last_posts p {
+	margin-bottom: 0.5em;
+	margin-top: 0.5em;
+}
+
+#page_listing {
+	text-align: center;
+	font-size: 1.3em;
+}
+
+#page_listing a {
+	padding: 5px 7px;
+	margin: 0 2px;
+}
+
+#page_listing span {
+	padding: 2px 4px;
+	margin: 0 2px;
+}
+
+#page_listing span.active_page {
+	color: #222222;
+	font-weight: bold;
+	border: 1px solid #222222;
+	border-radius: 5px;
+}
+
+#footer {
+	color: #222222;
+	font-size: 0.9em;
+	text-align: center;
+	width: 100%;
+	padding: 20px 0;
+}
+
+h3 {
+	font-size: 1.17em;
+	font-weight: bold;
+	margin-bottom: 1em;
+	margin-top: 1em;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+.clear {
+	clear: both;
+}
+
+.left {
+	text-align: left;
+}
+
+.right {
+	text-align: right;
+}
+
+.hidden {
+	display: none;
+}
+
+input[type=submit] {
+	font-size: 1.1em;
+	padding: 5px 10px;
+	margin: 20px 0;
+}
+
+.editor_badge {
+	background: #cccccc;
+	border-radius: 3px;
+	color: black;
+	display: inline-block;
+	font-size: 10px;
+	font-weight: bold;
+	line-height: 1.1;
+	padding: 1px 3px;
+	margin: 0 2px;
+}
+
+ul.error li {
+	color: #FFA0A0;
+	font-weight: bold;
+}
+
+.flash {
+	color: black;
+	background-color: white;
+	border: 1px solid #333333;
+	padding: 1em;
+	margin: 1em;
+	top: 1em;
+	position: relative;
+	font-weight: bold;
+}
+
+.flash.error, .flash.authentification, .flash.reload {
+	border-color: red;
+	background-color: #FFC0CB;
+}
+
+.flash.success {
+	border-color: green;
+	background-color: #98FB98;
+}
+
+span.icons {
+	background-image: url("../img/icons.png");
+	height: 35px;
+	left: 15px;
+	position: absolute;
+	top: 6px;
+	width: 36px;
+}
+
+.flash.success span.icons {
+	background-position: 0 0;
+}
+
+.flash.error span.icons {
+	background-position: -45px 0;
+}
+
+.flash.authentification span.icons {
+	background-position: -87px 0;
+}
+
+.flash.reload span.icons {
+	background-position: -129px 0;
+}
+
+/*
+a#rss span.icons {
+	background-position: -113px 0px;
+	background-size: 550%;
+	height: 25px;
+	left: 22px;
+	top: -5px;
+	width: 25px;
+}*/
+
+.flash span.text {
+	padding-left: 50px;
+}
+
+#rss, #print {
+	display: inline-block;
+	left: 1px;
+	position: relative;
+	top: 3px;
+	border: none;
+}
+
+.ajaxsuccess {
+	color: #008000;
+	font-weight: bold;
+}
+
+.ajaxerror {
+	color: #800000;
+	font-weight: bold;
+}
+
+table#table_poll {
+	margin-left: 30px;
+}
+
+td.poll_graph_td {
+	width: 120px;
+}
+
+.poll_graph {
+	background: #0000F0;
+	font-size: 8px;
+	margin: 0 10px;
+}
+
+#ajax_loader {
+	background-image: url('../img/ajax-load.gif');
+	background-repeat: no-repeat;
+	width: 24px;
+	height: 24px;
+	position: relative;
+	float: left;
+	display: none;
+}
+
+@media (max-width: 700px) {
+	#article {
+		float: none;
+		width: 96%;
+		padding: 20px 2%;
+	}
+	#sidebar {
+		border-top: 2px solid #999999;
+		width: 96%;
+		padding: 20px 2%;
+	}
+}
+
+@media (max-width: 500px) {
+	#page {
+		border: none;
+	}
+	.entry h2, .entry .content {
+		padding-left: 0;
+	}
+	.entry .content {
+		padding-top: 0.5em;
+	}
+	.entry .info {
+		float: none;
+		width: 100%;
+		padding-top: 0.5em;
+		border-top: 1px dotted #333333;
+		border-bottom: 1px dotted #333333;
+	}
+	.entry .more, .entry .tags {
+		margin-left: 0;
+		width: 100%;
+	}
+}

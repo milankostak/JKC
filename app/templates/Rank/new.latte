@@ -1,0 +1,23 @@
+{var $title = "Nejnovější články"}
+
+{block content}
+
+<h2>Nejnovější články</h2>
+
+{include rank_menu.latte}
+
+<table class="grid">
+	<thead>
+		<tr><th>Článek</th><th>Datum vytvoření</th><th>Autor</th><th>Počet zhlédnutí</th></tr>
+	</thead>
+	<tbody>
+		{foreach $articles as $article}
+			<tr>
+				<td><a n:href="Article:show, $article->id_article">{$article->title}</a></td>
+				<td>{date("d.m.Y H:i", $article->date)}</td>
+				<td>{if isset($article->id_editor)} {$article->editor->name} {else} <em>smazaný editor</em> {/if}</td>
+				<td>{$article->views}</td>
+			</tr>
+		{/foreach}
+	</tbody>
+</table>

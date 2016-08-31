@@ -1,0 +1,29 @@
+{if $presenter->isLinkCurrent("Post:comments") || !$presenter->isLinkCurrent("Post:*")}
+	<script type="text/javascript" src="{$basePath}/js/netteForms.js"></script>
+{elseif $presenter->isLinkCurrent("Post:post") && (!isset($voted) || $voted != "1")}
+	<script type="text/javascript" src="{$basePath}/js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="{$basePath}/js/nette.ajax.js"></script>
+	<script type="text/javascript" src="{$basePath}/js/pollAjax.js"></script>
+{/if}
+{if $presenter->isLinkCurrent("Article:*") && !$presenter->isLinkCurrent("Article:add") && !$presenter->isLinkCurrent("Article:edit")}
+	<script type="text/javascript" src="{$basePath}/js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="{$basePath}/js/article_menu.js"></script>
+	<script n:if="$presenter->isLinkCurrent('Article:category')" type="text/javascript">
+		$(document).ready(function() {
+			setActive();
+		});
+	</script>
+{/if}
+{if $presenter->isLinkCurrent("Article:add") || $presenter->isLinkCurrent("Article:edit")
+|| $presenter->isLinkCurrent("Settings:bottomBox") || $presenter->isLinkCurrent("Settings:topBox") }
+	<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+	<script>tinymce.init({
+		selector: "textarea.tinymce",
+		plugins: "code fullscreen hr charmap image imagetools insertdatetime media preview textcolor visualblocks wordcount",
+		// https://www.tinymce.com/docs/advanced/editor-control-identifiers/#toolbarcontrols
+  		toolbar: "undo redo bold italic alignleft aligncenter alignright alignjustify alignnone image styleselect fontsizeselect bullist removeformat code fullscreen",
+		browser_spellcheck: true,
+		language: "cs",
+		language_url: "/js/langs/cs.js"
+	});</script>
+{/if}

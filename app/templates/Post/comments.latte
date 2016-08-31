@@ -1,0 +1,22 @@
+{var $title = "Komentáře: ".$post->title}
+
+{block content}
+<h1>Komentáře ke článku: <a n:href="post, $post->url">{$post->title}</a></h1>
+{if ($comments->count() > 0)}
+	{foreach $comments as $comment}
+		<a id="{$comment->id_comment}"></a>
+		<p>
+			<strong>{$comment->author}</strong> <span n:if="$comment->editor == 1" class="editor_badge">Editor</span> | 
+			{if $comment->mail !== null} <a href="mailto:{$comment->mail}">E-mail</a> {else} — {/if} | 
+			{date("d.m.Y H:i:s", $comment->date)}
+		</p>
+		<p n:if="$comment->subject !== null"><strong>{$comment->subject}</strong></p>
+		<p>{$comment->text|noescape|breaklines}</p>
+		<hr class="article_line">
+	{/foreach}
+{else}
+	<p>Prozatím zde není žádný komentář. Buďte první, kdo tento článek okomentuje!</p>
+{/if}
+<p class="em15">Přidat komentář</p>
+
+{control addCommentForm}
