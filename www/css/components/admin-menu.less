@@ -1,64 +1,76 @@
-ul#menu {
+ul.editor-menu {
 	clear: both;
-	list-style: none outside none;
+	list-style: none;
 	margin: 20px;
 	padding-left: 5px;
+	li {
+		float: left;
+		a {
+			background-color: #054560;
+			border: 1px solid black;
+			color: white;
+			display: block;
+			font-size: 1.2em;
+			margin-right: 10px;
+			padding: 10px;
+			text-decoration: none;
+			&.active {
+				background-color: white;
+				border-bottom: none;
+				color: @brand-primary;
+				position: relative;
+				top: 1px;
+			}
+			&:hover, &:focus {
+				background-color: #6B81CF !important;
+				color: black !important;
+			}
+		}
+	}
 }
-ul#menu li {
-	float: left;
+@media (min-width: 701px) {
+	.navbar-toggle {
+		display: none;
+	}
+	ul.editor-menu {
+		display: block;
+	}
 }
-ul#menu a {
-	background-color: #054560;
-	border: 1px solid black;
-	color: white;
-	display: block;
-	font-size: 1.2em;
-	margin-right: 10px;
-	padding: 10px;
-	text-decoration: none;
-	font-weight: bold;
-}
-ul#menu a.active {
-	background-color: white;
-	border-bottom: none;
-	color: #054560;
-	position: relative;
-	top: 1px;
-}
-ul#menu a:hover, ul#menu a:focus {
-	background-color: #6B81CF !important;
-	color: black !important;
-}
-@media (max-width: 705px) {
-	ul#menu {
+@media (max-width: 700px) {
+	.navbar-toggle {
+		background-color: white;
+		border: 1px solid grey;
+		position: relative;
+		float: right;
+		clear: right;
+		& > .icon-bar {
+			background-color: @brand-primary;
+		}
+		&:hover > .icon-bar {
+			background-color: @brand-secondary;
+		}
+	}
+	ul.editor-menu {
+		display: none;
 		margin: 0;
 		padding: 0;
+		li {
+			float: none;
+			a {
+				margin-right: 0;
+				padding-left: 10px;
+				border-left: none;
+				border-right: none;
+				&.active {
+					border-bottom: 1px solid black;
+					position: static;
+					top: 0;
+					padding-left: 20px;
+				}
+			}
+		}
 	}
-	ul#menu a {
-		margin-right: 2px;
-	}
-}
-
-@media (max-width: 600px) {
-	ul#menu a {
-		padding: 8px 4px;
-		font-size: 1.15em;
-	}
-}
-@media (max-width: 500px) {
-	ul#menu li {
-		float: none;
-	}
-	ul#menu a {
-		margin-right: 0;
-		padding-left: 10px;
-		border-left: none;
-		border-right: none;
-	}
-	ul#menu a.aktivni {
-		border-bottom: 1px solid black;
-		position: static;
-		top: 0;
-		padding-left: 20px;
+	ul.editor-menu.collapsing {
+		display: block;
 	}
 }

@@ -74,16 +74,16 @@ body {
   padding: 20px 10px;
   color: #111111;
 }
-ul#menu {
+ul.editor-menu {
   clear: both;
-  list-style: none outside none;
+  list-style: none;
   margin: 20px;
   padding-left: 5px;
 }
-ul#menu li {
+ul.editor-menu li {
   float: left;
 }
-ul#menu a {
+ul.editor-menu li a {
   background-color: #054560;
   border: 1px solid black;
   color: white;
@@ -92,50 +92,63 @@ ul#menu a {
   margin-right: 10px;
   padding: 10px;
   text-decoration: none;
-  font-weight: bold;
 }
-ul#menu a.active {
+ul.editor-menu li a.active {
   background-color: white;
   border-bottom: none;
-  color: #054560;
+  color: royalblue;
   position: relative;
   top: 1px;
 }
-ul#menu a:hover,
-ul#menu a:focus {
+ul.editor-menu li a:hover,
+ul.editor-menu li a:focus {
   background-color: #6b81cf !important;
   color: black !important;
 }
-@media (max-width: 705px) {
-  ul#menu {
+@media (min-width: 701px) {
+  .navbar-toggle {
+    display: none;
+  }
+  ul.editor-menu {
+    display: block;
+  }
+}
+@media (max-width: 700px) {
+  .navbar-toggle {
+    background-color: white;
+    border: 1px solid grey;
+    position: relative;
+    float: right;
+    clear: right;
+  }
+  .navbar-toggle > .icon-bar {
+    background-color: royalblue;
+  }
+  .navbar-toggle:hover > .icon-bar {
+    background-color: navy;
+  }
+  ul.editor-menu {
+    display: none;
     margin: 0;
     padding: 0;
   }
-  ul#menu a {
-    margin-right: 2px;
-  }
-}
-@media (max-width: 600px) {
-  ul#menu a {
-    padding: 8px 4px;
-    font-size: 1.15em;
-  }
-}
-@media (max-width: 500px) {
-  ul#menu li {
+  ul.editor-menu li {
     float: none;
   }
-  ul#menu a {
+  ul.editor-menu li a {
     margin-right: 0;
     padding-left: 10px;
     border-left: none;
     border-right: none;
   }
-  ul#menu a.aktivni {
+  ul.editor-menu li a.active {
     border-bottom: 1px solid black;
     position: static;
     top: 0;
     padding-left: 20px;
+  }
+  ul.editor-menu.collapsing {
+    display: block;
   }
 }
 .flash {
@@ -271,12 +284,8 @@ form table {
 a#logout {
   float: right;
   display: block;
-  color: #333333;
   margin: 5px;
   font-size: 1.1em;
-}
-a:hover#logout {
-  color: white;
 }
 /* Article/*.ltt */
 
