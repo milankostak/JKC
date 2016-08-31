@@ -223,11 +223,13 @@ class PostPresenter extends BasePresenter {
 		$form->addTextArea("text", "Komentář: ")
 			->setRequired("Vložte prosím text Vašeho komentáře.")
 			->addRule(Form::MAX_LENGTH, "Text je příliš dlouhý. Maximální délka je %d znaků.", 1000)
+			->setAttribute("class", "form-control")
 			->setAttribute("cols", 60)
 			->setAttribute("rows", 15);
 
 		$this->recoverData($form);
 		$this->manageUidToken($form, $this->addCommentTokenName);
+		$this->makeBootstrapForm($form);
 
 		$form->addSubmit("save", "Uložit komentář");
 		$form->onSuccess[] = [$this, "saveComment"];

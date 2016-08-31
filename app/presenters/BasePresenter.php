@@ -46,11 +46,25 @@ abstract class BasePresenter extends Presenter {
 	 * Show saving error flash message
 	 */
 	protected function savingErrorFlashMessage() {
-		$this->flashMessage("Při zpracování se vyskytla chyba. Zopakujte prosím akci.", "reload");
-		//Při ukládání   se vyskytla chyba. Zopakujte prosím akci.
-		//Při zpracování se vyskytla chyba. Odešlete  prosím formulář znovu.
-		//Při mazání     se vyskytla chyba. Zopakujte prosím akci.
-		//Při mazání     se vyskytla chyba. Potvrďte  prosím formulář znovu.
+		$this->flashMessage("Při zpracování se vyskytla chyba. Odešlete prosím formulář znovu.", "reload");
+	}
+
+	/**
+	 * Add classes for form to make it use bootstrap
+	 * @param  Form $form
+	 */
+	protected function makeBootstrapForm($form) {
+		$renderer = $form->getRenderer();
+		$renderer->wrappers['controls']['container'] = null;
+		$renderer->wrappers['pair']['container'] = 'div class="row form-group"';
+		$renderer->wrappers['pair']['.error'] = 'has-error';
+		$renderer->wrappers['label']['container'] = 'div class="col-sm-2 control-label"';
+		$renderer->wrappers['control']['container'] = 'div class=col-sm-9';
+		$renderer->wrappers['control']['description'] = 'span class=help-block';
+		$renderer->wrappers['control']['errorcontainer'] = 'span class=help-block';
+		$renderer->wrappers['control']['.text'] = 'text form-control';
+		$renderer->wrappers['control']['.password'] = 'text form-control';
+		$renderer->wrappers['control']['.submit'] = 'btn btn-primary';
 	}
 
 	/**
