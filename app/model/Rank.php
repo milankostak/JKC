@@ -6,6 +6,7 @@ use Nette;
 
 class Rank extends Nette\Object {
 
+	/** @var Nette\Database\Context */
 	private $database;
 
 	public function __construct(Nette\Database\Context $database) {

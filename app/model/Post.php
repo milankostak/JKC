@@ -6,6 +6,7 @@ use Nette;
 
 class Post extends Nette\Object {
 
+	/** @var Nette\Database\Context */
 	private $database;
 
 	public function __construct(Nette\Database\Context $database) {
@@ -23,7 +24,7 @@ class Post extends Nette\Object {
 
 	/**
 	 * Find only one basic post
-	 * @param  string $url url of post
+	 * @param  string $url url of a post
 	 * @return Nette\Database\Table\ActiveRow
 	 */
 	public function findById($url) {
@@ -59,7 +60,7 @@ class Post extends Nette\Object {
 
 	/**
 	 * Find poll in a post
-	 * @param  string $url url of post
+	 * @param  string $url url of a post
 	 * @return Nette\Database\Table\ActiveRow
 	 */
 	public function findPostPoll($url) {
@@ -68,7 +69,7 @@ class Post extends Nette\Object {
 
 	/**
 	 * Call inner procedure to increase number of views of a post
-	 * @param  string $url url of post
+	 * @param  string $url url of a post
 	 * @return number      current number of views
 	 */
 	public function increaseViews($url) {
@@ -77,7 +78,7 @@ class Post extends Nette\Object {
 
 	/**
 	 * Get count of posts for a tag for pagination
-	 * @param  string $url url of tag
+	 * @param  string $url url of a tag
 	 * @return number      number of posts
 	 */
 	public function getArticleCountPerTag($url) {

@@ -12,6 +12,7 @@ class Editor extends Nette\Object {
 	const NAME_COLUMN = "name";
 	const ADMIN_COLUMN = "admin";
 
+	/** @var Nette\Database\Context */
 	private $database;
 
 	public function __construct(Nette\Database\Context $database) {

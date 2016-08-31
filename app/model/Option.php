@@ -11,6 +11,7 @@ class Option extends Nette\Object {
 	const VOTES_COLUMN = "votes";
 	const ID_POLL_COLUMN = "id_poll";
 
+	/** @var Nette\Database\Context */
 	private $database;
 
 	public function __construct(Nette\Database\Context $database) {

@@ -20,6 +20,7 @@ class Article extends Nette\Object {
 	const URL_COLUMN = "url";
 	const ID_POLL_COLUMN = "id_poll";
 
+	/** @var Nette\Database\Context */
 	private $database;
 
 	public function __construct(Nette\Database\Context $database) {

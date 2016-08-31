@@ -10,6 +10,7 @@ class Poll extends Nette\Object {
 	const QUESTION_COLUMN = "question";
 	const DATE_COLUMN = "date";
 
+	/** @var Nette\Database\Context */
 	private $database;
 
 	public function __construct(Nette\Database\Context $database) {

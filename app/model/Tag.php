@@ -14,6 +14,7 @@ class Tag extends Nette\Object {
 	const AT_ARTICLE_COLUMN = "id_article";
 	const AT_TAG_COLUMN = "id_tag";
 
+	/** @var Nette\Database\Context */
 	private $database;
 
 	public function __construct(Nette\Database\Context $database) {

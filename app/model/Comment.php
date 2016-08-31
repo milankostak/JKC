@@ -22,6 +22,7 @@ class Comment extends Nette\Object {
 	const DELETED_COLUMN = "deleted";
 	const ID_ARTICLE_COLUMN = "id_article";
 
+	/** @var Nette\Database\Context */
 	private $database;
 
 	public function __construct(Nette\Database\Context $database) {
