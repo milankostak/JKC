@@ -68,7 +68,7 @@ class PollPresenter extends SecuredPresenter {
 	protected function createComponentAddPollForm() {
 		$form = new Form;
 
-		$form->addText("question", "Otázka: ", 40)
+		$form->addText("question", "Otázka", 40)
 			->setRequired("Vložte prosím otázku pro novou anketu.")
 			->addRule(Form::MAX_LENGTH, "Vložená otázka je příliš dlouhá. Maximální délka je %d znaků.", 50);
 
@@ -128,7 +128,7 @@ class PollPresenter extends SecuredPresenter {
 	protected function createComponentEditPollForm() {
 		$form = new Form;
 
-		$form->addText("question", "Otázka: ", 40)
+		$form->addText("question", "Otázka", 40)
 			->setRequired("Vložte prosím otázku pro novou anketu.")
 			->addRule(Form::MAX_LENGTH, "Vložená otázka je příliš dlouhá. Maximální délka je %d znaků.", 50)
 			->setValue($this->poll->question);

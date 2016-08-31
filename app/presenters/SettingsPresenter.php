@@ -41,45 +41,45 @@ class SettingsPresenter extends AdminPresenter {
 		$bl = $this->blog;
 		$form = new Form;
 
-		$form->addText("name", "Název blogu:", 50)
+		$form->addText("name", "Název blogu", 50)
 			->setRequired("Vložte prosím název blogu.")
 			->addRule(Form::MAX_LENGTH, "Název blogu je příliš dlouhý. Maximální délka je %d znaků.", 50)
 			->setValue($bl->name);
 
-		$form->addText("sub_name", "Podtitul blogu:", 70)
+		$form->addText("sub_name", "Podtitul blogu", 70)
 			->setRequired("Vložte prosím podtitul blogu.")
 			->addRule(Form::MAX_LENGTH, "Podtitul blogu je příliš dlouhý. Maximální délka je %d znaků.", 70)
 			->setValue($bl->sub_name);
 
-		$form->addText("posts_per_page", "Počet článků / 1 stránka:", 7)
+		$form->addText("posts_per_page", "Počet článků / 1 stránka", 7)
 			->setType("number")
 			->addRule(Form::INTEGER, "Počet článků na 1 stránku musí být číslo.")
 			->addRule(Form::RANGE, "Počet článků na 1 stránku musí být v rozsahu od %d do %d.", [2, 99])
 			->setRequired("Vložte prosím počet článků na 1 stránku.")
 			->setValue($bl->posts_per_page);
 
-		$form->addText("number_last_posts", "Počet posledních článků:", 7)
+		$form->addText("number_last_posts", "Počet posledních článků", 7)
 			->setType("number")
 			->addRule(Form::INTEGER, "Počet článků na 1 stránku musí být číslo.")
 			->addRule(Form::RANGE, "Počet článků na 1 stránku musí být v rozsahu od %d do %d.", [0, 50])
 			->setRequired("Vložte prosím počet článků na 1 stránku.")
 			->setValue($bl->number_last_posts);
 
-		$form->addText("number_rss_articles", "Počet posledních článků v RSS:", 7)
+		$form->addText("number_rss_articles", "Počet posledních článků v RSS", 7)
 			->setType("number")
 			->addRule(Form::INTEGER, "Počet článků v RSS musí být číslo.")
 			->addRule(Form::RANGE, "Počet článků v RSS musí být v rozsahu od %d do %d.", [3, 20])
 			->setRequired("Vložte prosím počet článků v RSS.")
 			->setValue($bl->number_rss_articles);
 
-		$form->addText("number_rss_comments", "Počet posledních komentářů v RSS:", 7)
+		$form->addText("number_rss_comments", "Počet posledních komentářů v RSS", 7)
 			->setType("number")
 			->addRule(Form::INTEGER, "Počet komentářů v RSS musí být číslo.")
 			->addRule(Form::RANGE, "Počet komentářů v RSS musí být v rozsahu od %d do %d.", [3, 20])
 			->setRequired("Vložte prosím počet komentářů v RSS.")
 			->setValue($bl->number_rss_comments);
 
-		$form->addText("ga", "Google Analytics:", 17)
+		$form->addText("ga", "Google Analytics", 17)
 			->setRequired(false)
 			->addRule(Form::PATTERN, "Neplatný Google Analytics kód.", "^(UA-\d{3,10}-\d{1,4}|)$")
 			->setValue($bl->ga);

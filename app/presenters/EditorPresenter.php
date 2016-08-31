@@ -70,19 +70,19 @@ class EditorPresenter extends SecuredPresenter {
 	protected function createComponentAddEditorForm() {
 		$form = new Form;
 
-		$form->addText("name", "Jméno: ", 30)
+		$form->addText("name", "Jméno", 30)
 			->setRequired("Vložte prosím jméno nového editora.")
 			->addRule(Form::MAX_LENGTH, "Jméno je příliš dlouhé. Maximální délka je %d znaků.", 20);
 
-		$form->addText("login", "Login: ", 30)
+		$form->addText("login", "Login", 30)
 			->setRequired("Vložte prosím login nového editora.")
 			->addRule(Form::MAX_LENGTH, "Login je příliš dlouhý. Maximální délka je %d znaků.", 20);
 
-		$form->addPassword("password1", "Heslo: ")
+		$form->addPassword("password1", "Heslo")
 			->setRequired("Zadejte nové heslo.")
 			->addRule(Form::MIN_LENGTH, "Heslo je příliš krátké. Minimální délka je %d znaků.", 5);
 
-		$form->addPassword("password2", "Heslo znovu: ")
+		$form->addPassword("password2", "Heslo znovu")
 			->setRequired("Zadejte nové heslo.")
 			->addRule(Form::EQUAL, "Hesla se musí shodovat.", $form["password1"]);
 
@@ -158,25 +158,25 @@ class EditorPresenter extends SecuredPresenter {
 		$editor = $this->editor;
 		$form = new Form;
 
-		$form->addPassword("old", "Vložte své heslo: ")
+		$form->addPassword("old", "Vložte své heslo")
 			->setRequired("Zadejte své heslo.");
 
-		$form->addText("name", "Jméno: ", 30)
+		$form->addText("name", "Jméno", 30)
 			->setRequired("Vložte prosím jméno editora.")
 			->addRule(Form::MAX_LENGTH, "Jméno je příliš dlouhé. Maximální délka je %d znaků.", 20)
 			->setValue($editor->name);
 
-		$form->addText("login", "Login: ", 30)
+		$form->addText("login", "Login", 30)
 			->setRequired("Vložte prosím login editora.")
 			->addRule(Form::MAX_LENGTH, "Login je příliš dlouhý. Maximální délka je %d znaků.", 20)
 			->setValue($editor->login);
 
-		$form->addPassword("password1", "Heslo: ")
+		$form->addPassword("password1", "Heslo")
 			->setRequired(false)
 			// min_length is not used, because then it would require filling the input everytime
 			->addRule(Form::PATTERN, "Heslo je příliš krátké. Minimální délka je 5 znaků.", "^(.{5,}|)$");
 
-		$form->addPassword("password2", "Heslo znovu: ")
+		$form->addPassword("password2", "Heslo znovu")
 			->setRequired(false)
 			->addRule(Form::EQUAL, "Hesla se musí shodovat.", $form["password1"]);
 
@@ -261,7 +261,7 @@ class EditorPresenter extends SecuredPresenter {
 	protected function createComponentDeleteEditorForm() {
 		$form = new Form;
 
-		$form->addPassword("password", "Vložte své heslo: ")
+		$form->addPassword("password", "Vložte své heslo")
 			->setRequired("Zadejte své heslo.");
 
 		$form->addSubmit("save", "Smazat");

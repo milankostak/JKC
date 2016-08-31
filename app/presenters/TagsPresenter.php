@@ -81,7 +81,7 @@ class TagsPresenter extends SecuredPresenter {
 	protected function createComponentAddTagForm() {
 		$form = new Form;
 
-		$author = $form->addText("name", "Název: ", 20)
+		$author = $form->addText("name", "Název", 20)
 			->setRequired("Vložte prosím název pro nový štítek.")
 			->addRule(Form::MAX_LENGTH, "Vložený název je příliš dlouhý. Maximální délka je %d znaků.", 10);
 
@@ -155,7 +155,7 @@ class TagsPresenter extends SecuredPresenter {
 
 		$form = new Form;
 
-		$author = $form->addText("name", "Název: ", 20)
+		$author = $form->addText("name", "Název", 20)
 			->setRequired("Vložte prosím název pro štítek.")
 			->addRule(Form::MAX_LENGTH, "Vložený název je příliš dlouhý. Maximální délka je %d znaků.", 10)
 			->setValue($tag->name);

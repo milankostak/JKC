@@ -46,12 +46,12 @@ class ProfilPresenter extends SecuredPresenter {
 
 		$editor = $this->editors->findById($this->getUser()->id);
 
-		$form->addText("name", "Jméno: ", 20)
+		$form->addText("name", "Jméno", 20)
 			->setRequired("Vložte prosím jméno.")
 			->addRule(Form::MAX_LENGTH, "Jméno je příliš dlouhé. Maximální délka je %d znaků.", 20)
 			->setValue($editor->name);
 
-		$form->addText("login", "Login: ", 20)
+		$form->addText("login", "Login", 20)
 			->setRequired("Vložte prosím login.")
 			->addRule(Form::MAX_LENGTH, "Login je příliš dlouhý. Maximální délka je %d znaků.", 20)
 			->setValue($editor->login);
@@ -114,14 +114,14 @@ class ProfilPresenter extends SecuredPresenter {
 	 */
 	public function createComponentEditPasswordForm() {
 		$form = new Form;
-		$form->addPassword("old", "Stávající heslo: ")
+		$form->addPassword("old", "Stávající heslo")
 			->setRequired("Zadejte stávající heslo.");
 
-		$form->addPassword("new1", "Nové heslo: ")
+		$form->addPassword("new1", "Nové heslo")
 			->setRequired("Zadejte nové heslo.")
 			->addRule(Form::MIN_LENGTH, "Heslo je příliš krátké. Minimální délka je %d znaků.", 5);
 
-		$form->addPassword("new2", "Nové heslo znovu: ")
+		$form->addPassword("new2", "Nové heslo znovu")
 			->setRequired("Zadejte nové heslo.")
 			->addRule(Form::EQUAL, "Hesla se musí shodovat.", $form["new1"]);
 

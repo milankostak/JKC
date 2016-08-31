@@ -203,7 +203,7 @@ class PostPresenter extends BasePresenter {
 	protected function createComponentAddCommentForm() {
 		$form = new Form;
 
-		$author = $form->addText("author", "Jméno: ", 35)
+		$author = $form->addText("author", "Jméno", 35)
 			->setRequired("Vložte prosím své jméno nebo alespoň přezdívku.")
 			->addRule(Form::MAX_LENGTH, "Vložené jméno je příliš dlouhé. Maximální délka je %d znaků.", 30);
 
@@ -211,16 +211,16 @@ class PostPresenter extends BasePresenter {
 			$author->setValue($this->getUser()->identity->data[Editor::NAME_COLUMN]);
 		}
 
-		$form->addText("subject", "Předmět:", 35)
+		$form->addText("subject", "Předmět", 35)
 			->setRequired(false)
 			->addRule(Form::MAX_LENGTH, "Vložený předmět je příliš dlouhý. Maximální délka je %d znaků.", 30);
 
-		$form->addText("mail", "E-mail:", 35)
+		$form->addText("mail", "E-mail", 35)
 			->setRequired(false)
 			->addRule(Form::MAX_LENGTH, "Vložený e-mail je příliš dlouhý. Maximální délka je %d znaků.", 40)
 			->addRule(Form::PATTERN, "Neplatný e-mail", "^([_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})|)$");
 
-		$form->addTextArea("text", "Komentář: ")
+		$form->addTextArea("text", "Komentář")
 			->setRequired("Vložte prosím text Vašeho komentáře.")
 			->addRule(Form::MAX_LENGTH, "Text je příliš dlouhý. Maximální délka je %d znaků.", 1000)
 			->setAttribute("class", "form-control")

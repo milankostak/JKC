@@ -83,7 +83,7 @@ class OptionPresenter extends SecuredPresenter {
 	protected function createComponentAddOptionForm() {
 		$form = new Form;
 
-		$form->addText("answer", "Odpověď: ", 20)
+		$form->addText("answer", "Odpověď", 20)
 			->setRequired("Vložte prosím novou odpověď pro anketu.")
 			->addRule(Form::MAX_LENGTH, "Vložená odpověď je příliš dlouhá. Maximální délka je %d znaků.", 20);
 
@@ -145,7 +145,7 @@ class OptionPresenter extends SecuredPresenter {
 	protected function createComponentEditOptionForm() {
 		$form = new Form;
 
-		$form->addText("answer", "Odpověď: ", 20)
+		$form->addText("answer", "Odpověď", 20)
 			->setRequired("Vložte prosím novou odpověď pro anketu.")
 			->addRule(Form::MAX_LENGTH, "Vložená odpověď je příliš dlouhá. Maximální délka je %d znaků.", 20)
 			->setValue($this->option->answer);
