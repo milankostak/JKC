@@ -12,7 +12,7 @@
 		</p>
 		<p n:if="$comment->subject !== null"><strong>{$comment->subject}</strong></p>
 		<p>{$comment->text|noescape|breaklines}</p>
-		<hr class="article_line">
+		<hr class="line">
 	{/foreach}
 {else}
 	<p>Prozatím zde není žádný komentář. Buďte první, kdo tento článek okomentuje!</p>

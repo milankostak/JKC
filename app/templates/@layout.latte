@@ -16,9 +16,8 @@
 		{/ifCurrent}
 	{/if}
 
-	{if $presenter->isLinkCurrent("Post:*") || $presenter->isLinkCurrent("Error:*")}
 		<link rel="stylesheet" type="text/css" href="{$basePath}/css/bootstrap.min.css" media="screen, projection">
-		<link rel="stylesheet" type="text/css" href="{$basePath}/css/bootstrap-theme.min.css" media="screen, projection">
+	{if $presenter->isLinkCurrent("Post:*") || $presenter->isLinkCurrent("Error:*")}
 		<link rel="stylesheet" type="text/css" href="{$basePath}/css/css.css" media="screen, projection">
 		<link rel="stylesheet" type="text/css" href="{$basePath}/css/print.css" media="print">
 		<link rel="alternate" type="application/rss+xml" href="{$basePath}/rss/articles" title="{$big_title} - články">
@@ -41,7 +40,7 @@
 </head>
 
 <body>
-	<div id="wrapper">
+	<div id="wrapper" class="container">
 	{if $presenter->isLinkCurrent("Post:*") || $presenter->isLinkCurrent("Error:*")}
 		<a accesskey="0" href="#under-header" class="hidden" rel="nofollow" title="Přeskočit hlavičku a menu - přejít na obsah stránky">Přeskočit hlavičku a menu - přejít na obsah stránky</a>
 		<br class="hidden">
@@ -64,12 +63,17 @@
 			<span class="icons"></span><span class="text">{$flash->message}</span>
 		</div>
 
-		<div id="article">
-			{include content}
-		</div>
-		{include sidebar.latte}
-		{* </page> *}
-		</div>
+		<div class="row">
+			<div class="col-sm-9">
+				<div id="content">
+					{include content}
+				</div>
+			</div>
+			<div class="col-sm-3">
+				{include sidebar.latte}
+			</div>
+		</div> {* <.row> *}
+		</div> {* <#page> *}
 		{include footer.latte}
 	{else}
 		<div id="topbg"></div>

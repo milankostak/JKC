@@ -14,21 +14,22 @@
 		</div>
 		<div class="content">{$post->anotation|noescape|breaklines}</div>
 		<p class="more"><a n:href="post, $post->url">Celý článek</a></p>
-		{var $tags = explode("=", $post->tags)}
 		<p class="tags">Štítky: 
 			{if strlen($post->tags) == 0}
 				—
 			{else}
+				{var $tags = explode("=", $post->tags)}
 				{foreach $tags as $tag}
 					<a n:href="tag, Nette\Utils\Strings::webalize($tag)">{$tag}</a>  
 				{/foreach}
 			{/if}
 		</p>
-		<hr class="clear article_line">
+		<div class="clearfix"></div>
+		<hr class="line">
 	</div>
 {/foreach}
 
-<div id="page_listing">
+<div class="page_listing">
 	{var page = $paginator->getPage()}
 	{if ($paginator->isFirst())}
 		<span>&lt;&lt;</span>

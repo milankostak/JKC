@@ -12,4 +12,4 @@
 	<a n:if="$user->roles['Admin'] == '1' || $presenter->getUser()->id == $article->id_editor"
 		n:href="delete, $article->id_article" n:class="$presenter->isLinkCurrent('Article:delete') ? active">Smazat</a>
 </div>
-<hr class="article_line">
+<hr class="line">

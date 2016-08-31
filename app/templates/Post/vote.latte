@@ -8,8 +8,8 @@
 				<td>{$option->answer}</td>
 				{var $percent = round($option->votes*100/$sum_votes, 1) }
 				<td class="poll_graph_td"><span class="poll_graph" style="padding-left: {$percent|noescape}px"></span></td>
-				<td class="right">{number_format($option->votes, 0, ',', ' ')}</td>
-				<td class="right">({number_format($percent, 1, ',', ' ')} %)</td>
+				<td class="text-right">{number_format($option->votes, 0, ',', ' ')}</td>
+				<td class="text-right">({number_format($percent, 1, ',', ' ')} %)</td>
 			</tr>
 		{else}
 			<tr n:foreach="$options as $option">

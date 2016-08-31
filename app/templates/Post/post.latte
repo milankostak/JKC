@@ -5,18 +5,18 @@
 <h1>{$post->title}</h1>
 <p>Autor: {if $post->name == NULL}<em>smazaný editor</em> {else} {$post->name} {/if}</p>
 <p>Datum: {date("d.m.Y H:i:s", $post->date)}</p>
-<hr class="article_line">
+<hr class="line">
 <div>{$post->text|noescape}</div>
 
-{if $poll}
-	<hr class="article_line">
+{if $poll->question}
+	<hr class="line">
 	<a id="poll"></a>
 	<p class="em12">Anketa</p>
 	<p class="em12">{$poll->question}</p>
 	{include vote.latte}
 {/if}
 
-<hr class="article_line">
+<hr class="line">
 {if $post->social == 1}
 
 	<div id="fb-root"></div>
@@ -41,11 +41,15 @@
 
 {/if}
 
-<p n:if="$post->comments == 1"><a id="comments" n:href="comments, $post->url">Komentáře: {$post->comment_count}</a></p>
+<p n:if="$post->comments == 1"><a class="em12" n:href="comments, $post->url">Komentáře: {$post->comment_count}</a></p>
 <p class="tags">Štítky:
-	{var $tags = explode("=", $post->tags)} 
-	{foreach $tags as $tag}
-		<a n:href="Post:tag, Nette\Utils\Strings::webalize($tag)">{$tag}</a>  
-	{/foreach}
+	{if strlen($post->tags) == 0}
+		—
+	{else}
+		{var $tags = explode("=", $post->tags)}
+		{foreach $tags as $tag}
+			<a n:href="Post:tag, Nette\Utils\Strings::webalize($tag)">{$tag}</a>  
+		{/foreach}
+	{/if}
 </p>
 <p>Počet zhlédnutí: {$post->views}</p>

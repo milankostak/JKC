@@ -1,4 +1,4 @@
-<div id="sidebar">
+<div class="sidebar">
  	{$top_box|noescape}
 	<h3>Štítky</h3>
 	<p>
@@ -10,7 +10,7 @@
 	</p>
 	{if $lastPosts->count() > 0}
 		<h3>Poslední články</h3>
-		<div id="last_posts">
+		<div class="last_posts">
 			{foreach $lastPosts as $lastPost}
 				<p><a n:href="Post:post, $lastPost->url">{$lastPost->title}</a></p>
 			{/foreach}
@@ -18,4 +18,4 @@
 	{/if}
 	<h3><a n:href="archive">Archiv</a></h3>
 </div>
-<div class="clear"></div>
+<div class="clearfix"></div>
