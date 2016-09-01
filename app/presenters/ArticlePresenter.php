@@ -14,7 +14,8 @@ class ArticlePresenter extends SecuredPresenter {
 	const PEREX_TEXTAREA_ROWS = 10;
 
 	private $articles, $comments, $polls, $tags, $blog;
-	// user for "edit", "delete", "show" and "publish" actions
+
+	// used for "edit", "delete", "show" and "publish" actions
 	private $article;
 
 	private $notFoundError = "Článek nebyl nalezen.";

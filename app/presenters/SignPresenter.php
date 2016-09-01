@@ -59,7 +59,7 @@ class SignPresenter extends BasePresenter {
 		try {
 			$user = $this->getUser();
 			$user->login($values->login, $values->password);
-			$this->flashMessages->flashMessageSuccess("Přihlášení bylo úspěšné.");
+			$this->flashMessages->flashMessageSuccess("Přihlášení proběhlo úspěšně.");
 			$this->redirect("Article:default");
 		} catch (AuthenticationException $e) {
 			//$form->addError("Neplatné uživatelské jméno nebo heslo.");

@@ -2,6 +2,8 @@
 
 namespace App\Presenters\Utils;
 
+use Nette\Forms\Controls;
+
 class FormUtils implements IFormUtils {
 
 	const RECOVER_DATA_SESSION = "recover_data";
@@ -83,7 +85,7 @@ class FormUtils implements IFormUtils {
 	}
 
 	/**
-	 * Add cancel ad ok buttons into form
+	 * Add cancel and ok buttons into form
 	 * @param  Form $form           form object
 	 * @param  Presenter $_this     presenter reference
 	 * @param  string $cancelAction name of cancel action
