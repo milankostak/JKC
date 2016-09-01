@@ -88,14 +88,14 @@ class EditorPresenter extends SecuredPresenter {
 
 		$form->addCheckBox("admin", "Přiřadit editorovi administrátorská práva");
 
-		$this->recoverData($form);
-		$this->manageUidToken($form, $this->addEditorTokenName);
+		$this->formUtils->recoverData($form);
+		$this->formUtils->manageUidToken($form, $this->addEditorTokenName);
 
 		$form->addSubmit("save", "Vytvořit editora");
 		$form->onSuccess[] = [$this, "addEditor"];
 
-		$this->addFormProtection($form);
-		$this->makeBootstrapForm($form);
+		$this->formUtils->addFormProtection($form);
+		$this->formUtils->makeBootstrapForm($form);
 		return $form;
 	}
 
@@ -119,7 +119,7 @@ class EditorPresenter extends SecuredPresenter {
 				$this->redirect("default");
 			} else {
 				$this->flashMessages->flashMessageError($this->badNameError);
-				$this->recoverInputs($values);
+				$this->formUtils->recoverInputs($values);
 			}
 		// problem with session
 		} else {
@@ -127,7 +127,7 @@ class EditorPresenter extends SecuredPresenter {
 			// action wasn't performed, session is gone
 			if (!$editor) {
 				$this->flashMessages->savingErrorFlashMessage();
-				$this->recoverInputs($values);
+				$this->formUtils->recoverInputs($values);
 			}
 			$editor = $this->editors->findLast();
 			// action was performed, session is gone, but the data fits
@@ -138,7 +138,7 @@ class EditorPresenter extends SecuredPresenter {
 			// action was performed, session is gone and something is wrong
 			} else {
 				$this->flashMessages->flashMessageError($this->badNameError);
-				$this->recoverInputs($values);
+				$this->formUtils->recoverInputs($values);
 			}
 		}
 	}
@@ -184,14 +184,14 @@ class EditorPresenter extends SecuredPresenter {
 		$form->addCheckBox("admin", "Přiřadit editorovi administrátorská práva")
 			->setValue($editor->admin);
 
-		$this->recoverData($form);
-		$this->manageUidToken($form, $this->editEditorTokenName);
+		$this->formUtils->recoverData($form);
+		$this->formUtils->manageUidToken($form, $this->editEditorTokenName);
 
 		$form->addSubmit("save", "Uložit editora");
 		$form->onSuccess[] = [$this, "editEditor"];
 
-		$this->addFormProtection($form);
-		$this->makeBootstrapForm($form);
+		$this->formUtils->addFormProtection($form);
+		$this->formUtils->makeBootstrapForm($form);
 		return $form;
 	}
 
@@ -221,7 +221,7 @@ class EditorPresenter extends SecuredPresenter {
 					$this->redirect("default");
 				} else {
 					$this->flashMessages->flashMessageError($this->badNameError);
-					$this->recoverInputs($values);
+					$this->formUtils->recoverInputs($values);
 				}
 			// problem with session
 			} else {
@@ -233,7 +233,7 @@ class EditorPresenter extends SecuredPresenter {
 				// action was performed, session is gone and something is wrong
 				} else {
 					$this->flashMessages->savingErrorFlashMessage();
-					$this->recoverInputs($values);
+					$this->formUtils->recoverInputs($values);
 				}
 			}
 		} else {
@@ -269,10 +269,10 @@ class EditorPresenter extends SecuredPresenter {
 		$form->addSubmit("save", "Smazat");
 		$form->onSuccess[] = [$this, "deleteEditor"];
 
-		$this->manageUidToken($form, $this->deleteEditorTokenName);
+		$this->formUtils->manageUidToken($form, $this->deleteEditorTokenName);
 
-		$this->addFormProtection($form);
-		$this->makeBootstrapForm($form);
+		$this->formUtils->addFormProtection($form);
+		$this->formUtils->makeBootstrapForm($form);
 		return $form;
 	}
 

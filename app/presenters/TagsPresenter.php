@@ -85,14 +85,14 @@ class TagsPresenter extends SecuredPresenter {
 			->setRequired("Vložte prosím název pro nový štítek.")
 			->addRule(Form::MAX_LENGTH, "Vložený název je příliš dlouhý. Maximální délka je %d znaků.", 10);
 
-		$this->recoverData($form);
-		$this->manageUidToken($form, $this->addTagTokenName);
+		$this->formUtils->recoverData($form);
+		$this->formUtils->manageUidToken($form, $this->addTagTokenName);
 
 		$form->addSubmit("save", "Vytvořit štítek");
 		$form->onSuccess[] = [$this, "addTag"];
 
-		$this->addFormProtection($form);
-		$this->makeBootstrapForm($form);
+		$this->formUtils->addFormProtection($form);
+		$this->formUtils->makeBootstrapForm($form);
 		return $form;
 	}
 
@@ -116,7 +116,7 @@ class TagsPresenter extends SecuredPresenter {
 				$this->redirect("detail", $id);
 			} else {
 				$this->flashMessages->flashMessageError($this->badNameError);
-				$this->recoverInputs($values);
+				$this->formUtils->recoverInputs($values);
 			}
 		// problem with session
 		} else {
@@ -124,7 +124,7 @@ class TagsPresenter extends SecuredPresenter {
 			// action wasn't performed, session is gone
 			if (!$tag) {
 				$this->flashMessages->savingErrorFlashMessage();
-				$this->recoverInputs($values);
+				$this->formUtils->recoverInputs($values);
 			}
 			$tag = $this->tags->findLast();
 			// action was performed, session is gone, but the data fits
@@ -134,7 +134,7 @@ class TagsPresenter extends SecuredPresenter {
 			// action was performed, session is gone and something is wrong
 			} else {
 				$this->flashMessages->flashMessageError($this->badNameError);
-				$this->recoverInputs($values);
+				$this->formUtils->recoverInputs($values);
 			}
 		}
 	}
@@ -161,14 +161,14 @@ class TagsPresenter extends SecuredPresenter {
 			->addRule(Form::MAX_LENGTH, "Vložený název je příliš dlouhý. Maximální délka je %d znaků.", 10)
 			->setValue($tag->name);
 
-		$this->recoverData($form);
-		$this->manageUidToken($form, $this->editTagTokenName);
+		$this->formUtils->recoverData($form);
+		$this->formUtils->manageUidToken($form, $this->editTagTokenName);
 
 		$form->addSubmit("save", "Uložit štítek");
 		$form->onSuccess[] = [$this, "editTag"];
 
-		$this->addFormProtection($form);
-		$this->makeBootstrapForm($form);
+		$this->formUtils->addFormProtection($form);
+		$this->formUtils->makeBootstrapForm($form);
 		return $form;
 	}
 
@@ -193,7 +193,7 @@ class TagsPresenter extends SecuredPresenter {
 				$this->redirect("default");
 			} else {
 				$this->flashMessages->flashMessageError($this->badNameError);
-				$this->recoverInputs($values);
+				$this->formUtils->recoverInputs($values);
 			}
 		// problem with session
 		} else {
@@ -205,11 +205,11 @@ class TagsPresenter extends SecuredPresenter {
 			// check duplicity of url
 			} elseif ($this->tags->checkForDuplicatesWithId($name, $id) == 0) {
 				$this->flashMessages->flashMessageError($this->badNameError);
-				$this->recoverInputs($values);
+				$this->formUtils->recoverInputs($values);
 			// action was performed, session is gone and something is wrong
 			} else {
 				$this->flashMessages->savingErrorFlashMessage();
-				$this->recoverInputs($values);
+				$this->formUtils->recoverInputs($values);
 			}
 		}
 	}
@@ -228,8 +228,8 @@ class TagsPresenter extends SecuredPresenter {
 	 */
 	protected function createComponentDeleteTagForm() {
 		$form = new Form;
-		$this->createOkCancelForm($form, $this, "formCancelled", "deleteTag");
-		$this->manageUidToken($form, $this->deleteTagTokenName);
+		$this->formUtils->createOkCancelForm($form, $this, "formCancelled", "deleteTag");
+		$this->formUtils->manageUidToken($form, $this->deleteTagTokenName);
 		return $form;
 	}
 

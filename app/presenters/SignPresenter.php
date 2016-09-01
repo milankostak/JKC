@@ -46,7 +46,7 @@ class SignPresenter extends BasePresenter {
 			"login" => "M",
 		));
 		$form->onSuccess[] = [$this, "signInFormSubmitted"];
-		$this->makeBootstrapForm($form);
+		$this->formUtils->makeBootstrapForm($form);
 		return $form;
 	}
 

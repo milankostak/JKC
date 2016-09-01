@@ -225,14 +225,14 @@ class PostPresenter extends BasePresenter {
 			->addRule(Form::MAX_LENGTH, "Text je příliš dlouhý. Maximální délka je %d znaků.", 1000)
 			->setAttribute("rows", 10);
 
-		$this->recoverData($form);
-		$this->manageUidToken($form, $this->addCommentTokenName);
+		$this->formUtils->recoverData($form);
+		$this->formUtils->manageUidToken($form, $this->addCommentTokenName);
 
 		$form->addSubmit("save", "Uložit komentář");
 		$form->onSuccess[] = [$this, "saveComment"];
 
-		$this->addFormProtection($form);
-		$this->makeBootstrapForm($form);
+		$this->formUtils->addFormProtection($form);
+		$this->formUtils->makeBootstrapForm($form);
 		return $form;
 	}
 
@@ -271,7 +271,7 @@ class PostPresenter extends BasePresenter {
 				// action was performed, session is gone and something is wrong
 				} else {
 					$this->flashMessages->savingErrorFlashMessage();
-					$this->recoverInputs($values);
+					$this->formUtils->recoverInputs($values);
 				}
 			}
 		}

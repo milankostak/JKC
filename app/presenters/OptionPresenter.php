@@ -87,14 +87,14 @@ class OptionPresenter extends SecuredPresenter {
 			->setRequired("Vložte prosím novou odpověď pro anketu.")
 			->addRule(Form::MAX_LENGTH, "Vložená odpověď je příliš dlouhá. Maximální délka je %d znaků.", 20);
 
-		$this->recoverData($form);
-		$this->manageUidToken($form, $this->addOptionTokenName);
+		$this->formUtils->recoverData($form);
+		$this->formUtils->manageUidToken($form, $this->addOptionTokenName);
 
 		$form->addSubmit("save", "Vytvořit odpověď");
 		$form->onSuccess[] = [$this, "addOption"];
 
-		$this->addFormProtection($form);
-		$this->makeBootstrapForm($form);
+		$this->formUtils->addFormProtection($form);
+		$this->formUtils->makeBootstrapForm($form);
 		return $form;
 	}
 
@@ -125,7 +125,7 @@ class OptionPresenter extends SecuredPresenter {
 			// action was performed, session is gone and answer is wrong
 			} else {
 				$this->flashMessages->savingErrorFlashMessage();
-				$this->recoverInputs($values);
+				$this->formUtils->recoverInputs($values);
 			}
 		}
 	}
@@ -151,14 +151,14 @@ class OptionPresenter extends SecuredPresenter {
 			->addRule(Form::MAX_LENGTH, "Vložená odpověď je příliš dlouhá. Maximální délka je %d znaků.", 20)
 			->setValue($this->option->answer);
 
-		$this->recoverData($form);
-		$this->manageUidToken($form, $this->editOptionTokenName);
+		$this->formUtils->recoverData($form);
+		$this->formUtils->manageUidToken($form, $this->editOptionTokenName);
 
 		$form->addSubmit("save", "Uložit odpověď");
 		$form->onSuccess[] = [$this, "editOption"];
 
-		$this->addFormProtection($form);
-		$this->makeBootstrapForm($form);
+		$this->formUtils->addFormProtection($form);
+		$this->formUtils->makeBootstrapForm($form);
 		return $form;
 	}
 
@@ -190,7 +190,7 @@ class OptionPresenter extends SecuredPresenter {
 			// action was performed, session is gone and answer is wrong
 			} else {
 				$this->flashMessages->savingErrorFlashMessage();
-				$this->recoverInputs($values);
+				$this->formUtils->recoverInputs($values);
 			}
 		}
 	}
@@ -210,8 +210,8 @@ class OptionPresenter extends SecuredPresenter {
 	 */
 	protected function createComponentDeleteOptionForm() {
 		$form = new Form;
-		$this->createOkCancelForm($form, $this, "formCancelledOption", "deleteOption");
-		$this->manageUidToken($form, $this->deleteOptionTokenName);
+		$this->formUtils->createOkCancelForm($form, $this, "formCancelledOption", "deleteOption");
+		$this->formUtils->manageUidToken($form, $this->deleteOptionTokenName);
 		return $form;
 	}
 

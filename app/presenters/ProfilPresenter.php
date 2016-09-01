@@ -56,14 +56,14 @@ class ProfilPresenter extends SecuredPresenter {
 			->addRule(Form::MAX_LENGTH, "Login je příliš dlouhý. Maximální délka je %d znaků.", 20)
 			->setValue($editor->login);
 
-		$this->recoverData($form);
-		$this->manageUidToken($form, $this->editNameTokenName);
+		$this->formUtils->recoverData($form);
+		$this->formUtils->manageUidToken($form, $this->editNameTokenName);
 
 		$form->addSubmit("save", "Uložit");
 		$form->onSuccess[] = [$this, "saveName"];
 
-		$this->addFormProtection($form);
-		$this->makeBootstrapForm($form);
+		$this->formUtils->addFormProtection($form);
+		$this->formUtils->makeBootstrapForm($form);
 		return $form;
 	}
 
@@ -87,7 +87,7 @@ class ProfilPresenter extends SecuredPresenter {
 				$this->redirect("this");
 			} else {
 				$this->flashMessages->flashMessageError($this->badNameError);
-				$this->recoverInputs($values);
+				$this->formUtils->recoverInputs($values);
 			}
 		// problem with session
 		} else {
@@ -99,7 +99,7 @@ class ProfilPresenter extends SecuredPresenter {
 			// action was performed, session is gone and something is wrong
 			} else {
 				$this->flashMessages->savingErrorFlashMessage();
-				$this->recoverInputs($values);
+				$this->formUtils->recoverInputs($values);
 			}
 		}
 	}
@@ -126,13 +126,13 @@ class ProfilPresenter extends SecuredPresenter {
 			->setRequired("Zadejte nové heslo.")
 			->addRule(Form::EQUAL, "Hesla se musí shodovat.", $form["new1"]);
 
-		$this->manageUidToken($form, $this->editPassTokenName);
+		$this->formUtils->manageUidToken($form, $this->editPassTokenName);
 
 		$form->addSubmit("save", "Uložit");
 		$form->onSuccess[] = [$this, "savePassword"];
 
-		$this->addFormProtection($form);
-		$this->makeBootstrapForm($form);
+		$this->formUtils->addFormProtection($form);
+		$this->formUtils->makeBootstrapForm($form);
 		return $form;
 	}
 

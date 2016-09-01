@@ -100,14 +100,14 @@ class SettingsPresenter extends AdminPresenter {
 			->addRule(Form::PATTERN, "Neplatný Google Analytics kód.", "^(UA-\d{3,10}-\d{1,4}|)$")
 			->setValue($bl->ga);
 
-		$this->recoverData($form);
-		$this->manageUidToken($form, $this->generalSettingsTokenName);
+		$this->formUtils->recoverData($form);
+		$this->formUtils->manageUidToken($form, $this->generalSettingsTokenName);
 
 		$form->addSubmit("save", "Uložit nastavení");
 		$form->onSuccess[] = [$this, "saveSettings"];
 
-		$this->addFormProtection($form);
-		$this->makeBootstrapForm($form);
+		$this->formUtils->addFormProtection($form);
+		$this->formUtils->makeBootstrapForm($form);
 		return $form;
 	}
 
@@ -133,7 +133,7 @@ class SettingsPresenter extends AdminPresenter {
 			|| $values->number_rss_comments != $bl->number_rss_comments
 			|| $values->ga != $bl->ga) {
 				$this->flashMessages->savingErrorFlashMessage();
-				$this->recoverInputs($values);
+				$this->formUtils->recoverInputs($values);
 		}
 		$this->flashMessages->flashMessageSuccess("Změny byly uloženy.");
 		$this->redirect("this");
@@ -159,14 +159,14 @@ class SettingsPresenter extends AdminPresenter {
 			->setAttribute("class", "tinymce")
 			->setValue($this->blog->top_box);
 
-		$this->recoverData($form);
-		$this->manageUidToken($form, $this->editTopBoxTokenName);
+		$this->formUtils->recoverData($form);
+		$this->formUtils->manageUidToken($form, $this->editTopBoxTokenName);
 
 		$form->addSubmit("save", "Uložit");
 		$form->onSuccess[] = [$this, "saveTopBox"];
 
-		$this->addFormProtection($form);
-		$this->makeBootstrapFormForSettings($form);
+		$this->formUtils->addFormProtection($form);
+		$this->formUtils->makeBootstrapFormForSettings($form);
 		return $form;
 	}
 
@@ -194,7 +194,7 @@ class SettingsPresenter extends AdminPresenter {
 			// action was performed, session is gone and something is wrong
 			} else {
 				$this->flashMessages->savingErrorFlashMessage();
-				$this->recoverInputs($values);
+				$this->formUtils->recoverInputs($values);
 			}
 		}
 	}
@@ -219,14 +219,14 @@ class SettingsPresenter extends AdminPresenter {
 			->setAttribute("class", "tinymce")
 			->setValue($this->blog->bottom_box);
 
-		$this->recoverData($form);
-		$this->manageUidToken($form, $this->editBottomBoxTokenName);
+		$this->formUtils->recoverData($form);
+		$this->formUtils->manageUidToken($form, $this->editBottomBoxTokenName);
 
 		$form->addSubmit("save", "Uložit");
 		$form->onSuccess[] = [$this, "saveBottomBox"];
 
-		$this->addFormProtection($form);
-		$this->makeBootstrapFormForSettings($form);
+		$this->formUtils->addFormProtection($form);
+		$this->formUtils->makeBootstrapFormForSettings($form);
 		return $form;
 	}
 
@@ -254,7 +254,7 @@ class SettingsPresenter extends AdminPresenter {
 			// action was performed, session is gone and something is wrong
 			} else {
 				$this->flashMessages->savingErrorFlashMessage();
-				$this->recoverInputs($values);
+				$this->formUtils->recoverInputs($values);
 			}
 		}
 	}

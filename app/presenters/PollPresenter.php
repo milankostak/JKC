@@ -72,14 +72,14 @@ class PollPresenter extends SecuredPresenter {
 			->setRequired("Vložte prosím otázku pro novou anketu.")
 			->addRule(Form::MAX_LENGTH, "Vložená otázka je příliš dlouhá. Maximální délka je %d znaků.", 50);
 
-		$this->recoverData($form);
-		$this->manageUidToken($form, $this->addPollTokenName);
+		$this->formUtils->recoverData($form);
+		$this->formUtils->manageUidToken($form, $this->addPollTokenName);
 
 		$form->addSubmit("save", "Vytvořit anketu");
 		$form->onSuccess[] = [$this, "addPoll"];
 
-		$this->addFormProtection($form);
-		$this->makeBootstrapForm($form);
+		$this->formUtils->addFormProtection($form);
+		$this->formUtils->makeBootstrapForm($form);
 		return $form;
 	}
 
@@ -109,7 +109,7 @@ class PollPresenter extends SecuredPresenter {
 			// action was performed, session is gone and question is wrong
 			} else {
 				$this->flashMessages->savingErrorFlashMessage();
-				$this->recoverInputs($values);
+				$this->formUtils->recoverInputs($values);
 			}
 		}
 	}
@@ -134,14 +134,14 @@ class PollPresenter extends SecuredPresenter {
 			->addRule(Form::MAX_LENGTH, "Vložená otázka je příliš dlouhá. Maximální délka je %d znaků.", 50)
 			->setValue($this->poll->question);
 
-		$this->recoverData($form);
-		$this->manageUidToken($form, $this->editPollTokenName);
+		$this->formUtils->recoverData($form);
+		$this->formUtils->manageUidToken($form, $this->editPollTokenName);
 
 		$form->addSubmit("save", "Uložit anketu");
 		$form->onSuccess[] = [$this, "editPoll"];
 
-		$this->addFormProtection($form);
-		$this->makeBootstrapForm($form);
+		$this->formUtils->addFormProtection($form);
+		$this->formUtils->makeBootstrapForm($form);
 		return $form;
 	}
 
@@ -172,7 +172,7 @@ class PollPresenter extends SecuredPresenter {
 			// action was performed, session is gone and question is wrong
 			} else {
 				$this->flashMessages->savingErrorFlashMessage();
-				$this->recoverInputs($values);
+				$this->formUtils->recoverInputs($values);
 			}
 		}
 
@@ -192,8 +192,8 @@ class PollPresenter extends SecuredPresenter {
 	 */
 	protected function createComponentDeletePollForm() {
 		$form = new Form;
-		$this->createOkCancelForm($form, $this, "formCancelled", "deletePoll");
-		$this->manageUidToken($form, $this->deletePollTokenName);
+		$this->formUtils->createOkCancelForm($form, $this, "formCancelled", "deletePoll");
+		$this->formUtils->manageUidToken($form, $this->deletePollTokenName);
 		return $form;
 	}
 

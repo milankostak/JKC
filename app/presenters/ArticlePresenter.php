@@ -254,14 +254,14 @@ class ArticlePresenter extends SecuredPresenter {
 			->addRule(Form::PATTERN, "Neplatný formát data a času. Správný formát je 'dd.mm.rrrr hh:mm'.", "^([0-9]{2}\.[0-9]{2}\.[0-9]{4} [0-9]{2}:[0-9]{2})$")
 			->setValue(date("d.m.Y H:i", time()+60));
 		
-		$this->recoverData($form);
-		$this->manageUidToken($form, $this->publishTokenName);
+		$this->formUtils->recoverData($form);
+		$this->formUtils->manageUidToken($form, $this->publishTokenName);
 
 		$form->addSubmit("save", "Zveřejnit článek");
 		$form->onSuccess[] = [$this, "publishArticle"];
 
-		$this->addFormProtection($form);
-		$this->makeBootstrapForm($form);
+		$this->formUtils->addFormProtection($form);
+		$this->formUtils->makeBootstrapForm($form);
 		return $form;
 	}
 
@@ -283,10 +283,10 @@ class ArticlePresenter extends SecuredPresenter {
 				$time = $time->getTimestamp();
 				if ($time == 0) {
 					$this->flashMessages->flashMessageError("Zvolené datum je neplatné.");
-					$this->recoverInputs($values);
+					$this->formUtils->recoverInputs($values);
 				} elseif ($time < time()) {
 					$this->flashMessages->flashMessageError("Zvolené datum a čas jsou v minulosti.");
-					$this->recoverInputs($values);
+					$this->formUtils->recoverInputs($values);
 				} else {
 					$this->articles->publish($id, $time);
 					$this->flashMessages->flashMessageSuccess("Článek byl úspěšně zveřejněn.");
@@ -313,8 +313,8 @@ class ArticlePresenter extends SecuredPresenter {
 	 */
 	protected function createComponentDeleteArticleForm() {
 		$form = new Form;
-		$this->createOkCancelForm($form, $this, "formCancelled", "deleteArticle");
-		$this->manageUidToken($form, $this->deleteTokenName);
+		$this->formUtils->createOkCancelForm($form, $this, "formCancelled", "deleteArticle");
+		$this->formUtils->manageUidToken($form, $this->deleteTokenName);
 		return $form;
 	}
 
@@ -390,8 +390,8 @@ class ArticlePresenter extends SecuredPresenter {
 			->setAttribute("class", "tinymce")
 			->setValue($article->text);
 
-		$this->recoverData($form);
-		$this->manageUidToken($form, $this->editTokenName);
+		$this->formUtils->recoverData($form);
+		$this->formUtils->manageUidToken($form, $this->editTokenName);
 
 		if ($article->draft == 1) {
 			$form->addSubmit("publish_now", "Hned zveřejnit")
@@ -413,8 +413,8 @@ class ArticlePresenter extends SecuredPresenter {
 				->onClick[] = [$this, "saveAndContinue"];
 		}
 
-		$this->addFormProtection($form);
-		$this->makeBootstrapForm($form);
+		$this->formUtils->addFormProtection($form);
+		$this->formUtils->makeBootstrapForm($form);
 		return $form;
 	}
 
@@ -436,11 +436,11 @@ class ArticlePresenter extends SecuredPresenter {
 			// check duplicity of title
 			if ($this->articles->isOldArticleTitleDuplicate($values->title, $id)) {
 				$this->flashMessages->flashMessageError($this->badTitleError);
-				$this->recoverInputs($values);
+				$this->formUtils->recoverInputs($values);
 			// check duplicity of url
 			} elseif ($this->articles->isOldArticleUrlDuplicate($values->title, $id)) {
 				$this->flashMessages->flashMessageError($this->badUrlError);
-				$this->recoverInputs($values);
+				$this->formUtils->recoverInputs($values);
 			// success, save and redirect, custom code for every situation
 			} else {
 				$this->articles->edit($values, $id);
@@ -462,14 +462,14 @@ class ArticlePresenter extends SecuredPresenter {
 			// repeat warnings about duplicities
 			} elseif ($this->articles->isOldArticleTitleDuplicate($values->title, $id)) {
 				$this->flashMessages->flashMessageError($this->badTitleError);
-				$this->recoverInputs($values);
+				$this->formUtils->recoverInputs($values);
 			} elseif ($this->articles->isOldArticleUrlDuplicate($values->title, $id)) {
 				$this->flashMessages->flashMessageError($this->badUrlError);
-				$this->recoverInputs($values);
+				$this->formUtils->recoverInputs($values);
 			// action was performed, session is gone and something is wrong
 			} else {
 				$this->flashMessages->savingErrorFlashMessage();
-				$this->recoverInputs($values);
+				$this->formUtils->recoverInputs($values);
 			}
 		}
 	}
@@ -550,8 +550,8 @@ class ArticlePresenter extends SecuredPresenter {
 			->setAttribute("rows", self::TEXT_TEXTAREA_ROWS)
 			->setAttribute("class", "tinymce");
 
-		$this->recoverData($form);
-		$this->manageUidToken($form, $this->addTokenName);
+		$this->formUtils->recoverData($form);
+		$this->formUtils->manageUidToken($form, $this->addTokenName);
 
 		$form->addSubmit("save_n_publish", "Hned zveřejnit")
 			->onClick[] = [$this, "saveAndPublishNewArticle"];
@@ -565,8 +565,8 @@ class ArticlePresenter extends SecuredPresenter {
 		$form->addSubmit("save_n_continue", "Uložit a psát dál")
 			->onClick[] = [$this, "saveNewAndContinue"];
 
-		$this->addFormProtection($form);
-		$this->makeBootstrapForm($form);
+		$this->formUtils->addFormProtection($form);
+		$this->formUtils->makeBootstrapForm($form);
 		return $form;
 	}
 
@@ -587,11 +587,11 @@ class ArticlePresenter extends SecuredPresenter {
 			// check duplicity of title
 			if ($this->articles->isNewArticleTitleDuplicate($values->title)) {
 				$this->flashMessages->flashMessageError($this->badTitleError);
-				$this->recoverInputs($values);
+				$this->formUtils->recoverInputs($values);
 			// check duplicity of url
 			} elseif ($this->articles->isNewArticleUrlDuplicate($values->title)) {
 				$this->flashMessages->flashMessageError($this->badUrlError);
-				$this->recoverInputs($values);
+				$this->formUtils->recoverInputs($values);
 			// success, save and redirect
 			} else {
 				$id = $this->articles->insert($values, $this->getUser()->id, $draft);
@@ -611,14 +611,14 @@ class ArticlePresenter extends SecuredPresenter {
 			// repeat warnings about duplicities
 			elseif ($this->articles->isNewArticleTitleDuplicate($values->title)) {
 				$this->flashMessages->flashMessageError($this->badTitleError);
-				$this->recoverInputs($values);
+				$this->formUtils->recoverInputs($values);
 			} elseif ($this->articles->isNewArticleUrlDuplicate($values->title)) {
 				$this->flashMessages->flashMessageError($this->badUrlError);
-				$this->recoverInputs($values);
+				$this->formUtils->recoverInputs($values);
 			// action was performed, session is gone and something is wrong
 			} else {
 				$this->flashMessages->savingErrorFlashMessage();
-				$this->recoverInputs($values);
+				$this->formUtils->recoverInputs($values);
 			}
 		}
 	}
