@@ -53,7 +53,7 @@ abstract class BasePresenter extends Presenter {
 	/**
 	 * Add classes for form to make it use bootstrap
 	 * https://github.com/nette/forms/blob/a0bc775b96b30780270bdec06396ca985168f11a/examples/bootstrap3-rendering.php#L58
-	 * @param  Form $form
+	 * @param  Form $form form for applying styles
 	 */
 	protected function makeBootstrapForm($form) {
 		$renderer = $form->getRenderer();

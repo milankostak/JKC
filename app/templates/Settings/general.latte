@@ -12,40 +12,42 @@
 	<li n:foreach="$form->errors as $error">{$error}</li>
 </ul>
 
-<table id="settings">
-	<tr class="required">
-		<th>{label name /}</th>
-		<td>{input name}</td>
-	</tr>
-	<tr class="required">
-		<th>{label sub_name /}</th>
-		<td>{input sub_name}</td>
-	</tr>
-	<tr class="required">
-		<th class="help" title="Počet článků zobrazených na 1 stránce při zobrazování nových článků a článků, které mají společný štítek.">
-			{label posts_per_page /}</th>
-		<td>{input posts_per_page}</td>
-	</tr>
-	<tr class="required">
-		<th class="help" title="Počet posledních článků zobrazených v pravém boxu. Nula znamená vypnutí zobrazování posledních článků v tomto boxu.">
-			{label number_last_posts /}</th>
-		<td>{input number_last_posts}</td>
-	</tr>
-	<tr class="required">
-		<th>{label number_rss_articles /}</th>
-		<td>{input number_rss_articles}</td>
-	</tr>
-	<tr class="required">
-		<th>{label number_rss_comments /}</th>
-		<td>{input number_rss_comments}</td>
-	</tr>
-	<tr>
-		<th class="help" title="Měřicí kód pro Google Analytics ve tvaru UA-xxxxxx-xx. Nechte pole prázdné, pokud tuto službu využít nechcete.">{label ga /}</th>
-		<td>{input ga}</td>
-	</tr>
-	<tr class="required">
-		<th></th>
-		<td>{input save}</td>
-	</tr>
-</table>
+<div class="row form-group required">
+	<div class="col-sm-3 control-label">{label name /}</div>
+	<div class="col-sm-8">{input name}</div>
+</div>
+<div class="row form-group required">
+	<div class="col-sm-3 control-label">{label sub_name /}</div>
+	<div class="col-sm-8">{input sub_name}</div>
+</div>
+<div class="row form-group required">
+	<div class="col-sm-3 control-label help" title="Počet článků zobrazených na 1 stránce při zobrazování nových článků a článků, které mají společný štítek.">
+		{label posts_per_page /}
+	</div>
+	<div class="col-sm-8">{input posts_per_page}</div>
+</div>
+<div class="row form-group required">
+	<div class="col-sm-3 control-label help" title="Počet posledních článků zobrazených v pravém boxu. Nula znamená vypnutí zobrazování posledních článků v tomto boxu.">
+		{label number_last_posts /}
+	</div>
+	<div class="col-sm-8">{input number_last_posts}</div>
+</div>
+<div class="row form-group required">
+	<div class="col-sm-3 control-label">{label number_rss_articles /}</div>
+	<div class="col-sm-8">{input number_rss_articles}</div>
+</div>
+<div class="row form-group required">
+	<div class="col-sm-3 control-label">{label number_rss_comments /}</div>
+	<div class="col-sm-8">{input number_rss_comments}</div>
+</div>
+<div class="row form-group">
+	<div class="col-sm-3 control-label help" title="Měřicí kód pro Google Analytics ve tvaru UA-xxxxxx-xx. Nechte pole prázdné, pokud tuto službu využít nechcete.">
+		{label ga /}
+	</div>
+	<div class="col-sm-8">{input ga}</div>
+</div>
+<div class="row form-group">
+	<div class="col-sm-3 control-label"></div>
+	<div class="col-sm-8">{input save}</div>
+</div>
 {/form editSettingsForm}
