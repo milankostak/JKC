@@ -1,54 +1,51 @@
-
-
-th.help label {
-	border-bottom: 1px dotted black;
-	cursor: help;
-}
-table.grid {
+table.grid { // main table style
 	padding: 0;
 	margin: 0;
 	border-collapse: collapse;
 	width: 100%;
-}
-table.grid caption {
-	font-weight: bold;
-	font-size: 1.2em;
-	text-align: left;
-	margin: 0.7em 0;
-}
-/* horní a dolní odsazení inputů od sebe v Settings general */
-table#settings th {
-	padding: 0.4em 0;
-}
-table.grid td, table.grid th {
-	background: #fff;
-	border: 1px solid #add4fb;
-	padding: 6px 6px 6px 12px;
-}
-table#comment tr.even td, table.grid th {
-	color: #7a7772;
-	background: #E4F1FC;
-	text-align: left;
-	font-weight: normal;
-}
-table#comment tr.even td {
-	width: 20%;
-	color: #1B0E03;
-}
-/* special - aktivní user */
-table.grid tr.special td {
-	background: #E4E1FC;
-}
-table#comment tr.even + tr {
-	border-bottom: 2px solid #555555;
-}
-table#comment tr.deleted.even + tr {
-	color: #7A7772;
-}
-table#comment tr.deleted.even td, table#comment tr.deleted.even td a {
-	background-color: #777777;
-	color: #dddddd;
-}
-table#comment tr.deleted.even td a:hover {
-	color: #FFFFFF;
+	caption {
+		font-weight: bold;
+		font-size: 1.2em;
+		text-align: left;
+		margin: 0.7em 0;
+	}
+	td {
+		border: 1px solid #add4fb;
+		padding: 6px 6px 6px 12px;
+		background: white;
+	}
+	th {
+		border: 1px solid #add4fb;
+		padding: 6px 6px 6px 12px;
+		background-color: #E4F1FC;
+		color: #7a7772;
+		text-align: left;
+		font-weight: normal;
+	}
+	tr.special td { // Editor:default
+		background-color: #E4E1FC;
+	}
+
+	&#comment { // Article:comments
+		tr.even {
+			& + tr {
+				border-bottom: 2px solid #7db9f5;
+			}
+			&.deleted {
+				& + tr td {
+					background-color: #dddddd;
+				}
+				td {
+					background-color: #bbbbbb;
+				}
+			}
+			td {
+				width: 20%;
+				color: #7a7772;
+				background-color: #E4F1FC;
+				text-align: left;
+				font-weight: normal;
+			}
+		}
+	}
 }

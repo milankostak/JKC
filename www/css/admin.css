@@ -8,6 +8,12 @@ a:focus {
   color: #163c54;
   text-decoration: none;
 }
+a#logout {
+  float: right;
+  display: block;
+  margin: 5px;
+  font-size: 1.1em;
+}
 .form-control:focus {
   border-color: royalblue;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(65, 105, 225, 0.6);
@@ -51,6 +57,10 @@ img {
   padding: 1px 3px;
   margin: 0 2px;
 }
+.help label {
+  border-bottom: 1px dotted black;
+  cursor: help;
+}
 body {
   font-family: "Calibri", sans-serif;
   background: linear-gradient(27deg, #eaeaea 5px, transparent 5px) 0px 5px, linear-gradient(207deg, #eaeaea 5px, transparent 5px) 10px 0px, linear-gradient(27deg, #dddddd 5px, transparent 5px) 0px 10px, linear-gradient(207deg, #dddddd 5px, transparent 5px) 10px 5px, linear-gradient(90deg, #e4e4e4 10px, transparent 10px), linear-gradient(#e2e2e2 25%, #e5e5e5 25%, #e5e5e5 50%, transparent 50%, transparent 75%, #dbdbdb 75%, #dbdbdb);
@@ -73,6 +83,75 @@ body {
 #content {
   padding: 20px 10px;
   color: #111111;
+}
+.flash {
+  color: black;
+  background-color: white;
+  border: 1px solid #333333;
+  padding: 16px;
+  margin: 0 16px 5px 16px;
+  top: 16px;
+  position: relative;
+  font-weight: bold;
+}
+.flash.error,
+.flash.authentification,
+.flash.reload {
+  border-color: red;
+  background-color: pink;
+}
+.flash.error span.icons {
+  background-position: -45px 0;
+}
+.flash.authentification span.icons {
+  background-position: -87px 0;
+}
+.flash.reload span.icons {
+  background-position: -129px 0;
+}
+.flash.success {
+  border-color: green;
+  background-color: palegreen;
+}
+.flash.success span.icons {
+  background-position: 0 0;
+}
+.flash span.icons {
+  background-image: url("../img/icons.png");
+  height: 35px;
+  left: 15px;
+  position: absolute;
+  top: 8px;
+  width: 36px;
+}
+.flash span.text {
+  padding-left: 50px;
+}
+h2#header {
+  font-weight: bold;
+  text-shadow: 10px 10px 10px #666666;
+  margin: 27px 0;
+}
+h2#header a {
+  color: navy;
+  font-family: "Trebuchet MS", "Arial", "Helvetica", sans-serif;
+  font-style: italic;
+  padding: 1em;
+  margin: 0;
+  margin-left: 50px;
+  font-size: 32px;
+}
+h2#header a:hover {
+  color: #030309;
+  text-decoration: none;
+}
+h2#header + p {
+  position: relative;
+  top: -22px;
+  margin-left: 65px;
+  padding-left: 1em;
+  font-family: "Trebuchet MS", "Arial", "Helvetica", sans-serif;
+  font-style: italic;
 }
 ul.editor-menu {
   clear: both;
@@ -151,79 +230,6 @@ ul.editor-menu li a:focus {
     display: block;
   }
 }
-.flash {
-  color: black;
-  background-color: white;
-  border: 1px solid #333333;
-  padding: 16px;
-  margin: 0 16px 5px 16px;
-  top: 16px;
-  position: relative;
-  font-weight: bold;
-}
-.flash.error,
-.flash.authentification,
-.flash.reload {
-  border-color: red;
-  background-color: pink;
-}
-.flash.error span.icons {
-  background-position: -45px 0;
-}
-.flash.authentification span.icons {
-  background-position: -87px 0;
-}
-.flash.reload span.icons {
-  background-position: -129px 0;
-}
-.flash.success {
-  border-color: green;
-  background-color: palegreen;
-}
-.flash.success span.icons {
-  background-position: 0 0;
-}
-.flash span.icons {
-  background-image: url("../img/icons.png");
-  height: 35px;
-  left: 15px;
-  position: absolute;
-  top: 8px;
-  width: 36px;
-}
-.flash span.text {
-  padding-left: 50px;
-}
-h2#header {
-  font-weight: bold;
-  text-shadow: 10px 10px 10px #666666;
-  margin: 27px 0;
-}
-h2#header a {
-  color: navy;
-  font-family: "Trebuchet MS", "Arial", "Helvetica", sans-serif;
-  font-style: italic;
-  padding: 1em;
-  margin: 0;
-  margin-left: 50px;
-  font-size: 32px;
-}
-h2#header a:hover {
-  color: #030309;
-  text-decoration: none;
-}
-h2#header + p {
-  position: relative;
-  top: -22px;
-  margin-left: 65px;
-  padding-left: 1em;
-  font-family: "Trebuchet MS", "Arial", "Helvetica", sans-serif;
-  font-style: italic;
-}
-th.help label {
-  border-bottom: 1px dotted black;
-  cursor: help;
-}
 table.grid {
   padding: 0;
   margin: 0;
@@ -236,56 +242,41 @@ table.grid caption {
   text-align: left;
   margin: 0.7em 0;
 }
-/* horní a dolní odsazení inputů od sebe v Settings general */
-
-table#settings th {
-  padding: 0.4em 0;
-}
-table.grid td,
-table.grid th {
-  background: white;
+table.grid td {
   border: 1px solid #add4fb;
   padding: 6px 6px 6px 12px;
+  background: white;
 }
-table#comment tr.even td,
 table.grid th {
+  border: 1px solid #add4fb;
+  padding: 6px 6px 6px 12px;
+  background-color: #e4f1fc;
   color: #7a7772;
-  background: #e4f1fc;
   text-align: left;
   font-weight: normal;
 }
-table#comment tr.even td {
-  width: 20%;
-  color: #1b0e03;
-}
-/* special - aktivní user */
-
 table.grid tr.special td {
-  background: #e4e1fc;
+  background-color: #e4f1fc;
 }
-table#comment tr.even + tr {
-  border-bottom: 2px solid #555555;
+table.grid#comment tr.even + tr {
+  border-bottom: 2px solid #7db9f5;
 }
-table#comment tr.deleted.even + tr {
+table.grid#comment tr.even.deleted + tr td {
+  background-color: #dddddd;
+}
+table.grid#comment tr.even.deleted td {
+  background-color: #bbbbbb;
+}
+table.grid#comment tr.even td {
+  width: 20%;
   color: #7a7772;
-}
-table#comment tr.deleted.even td,
-table#comment tr.deleted.even td a {
-  background-color: #777777;
-  color: #dddddd;
-}
-table#comment tr.deleted.even td a:hover {
-  color: white;
+  background-color: #e4f1fc;
+  text-align: left;
+  font-weight: normal;
 }
 form table {
   /* top box, botttom box */
   width: 100%;
-}
-a#logout {
-  float: right;
-  display: block;
-  margin: 5px;
-  font-size: 1.1em;
 }
 /* Article/*.ltt */
 
