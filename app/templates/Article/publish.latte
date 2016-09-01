@@ -2,9 +2,12 @@
 
 {block content}
 
-{include article_menu.latte}
-<div id="article_content">
-	<h2 class="bigger">Zveřejnit článek: {$article->title}</h2>
+<div class="row admin-article">
+<div class="col-sm-3">
+	{include article_menu.latte}
+</div>
+<div class="col-sm-9">
+	<h2>Zveřejnit článek: {$article->title}</h2>
 
 	{include one_article_menu.latte}
 	{form publishForm}
@@ -12,6 +15,5 @@
 		<p>{input datetime}</p>
 		<p>{input save}</p>
 	{/form publishForm}
-
 </div>
-<div class="clearfix"></div>
+</div>

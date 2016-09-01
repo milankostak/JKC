@@ -4,8 +4,11 @@
 
 {block content}
 
-{include article_menu.latte}
-<div id="article_content">
+<div class="row admin-article">
+<div class="col-sm-3">
+	{include article_menu.latte}
+</div>
+<div class="col-sm-9">
 	<h2>{$month|numericToStringMonth} {$year}</h2>
 	{if $articles->count() > 0}
 		<table class="grid">
@@ -27,4 +30,4 @@
 		<p>Pro tento měsíc nebyly nalezeny žádné články.</p>
 	{/if}
 </div>
-<div class="clearfix"></div>
+</div>

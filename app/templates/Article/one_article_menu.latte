@@ -1,4 +1,4 @@
-<div id="item_menu">
+<div class="item_menu">
 	<a n:href="show, $article->id_article" n:class="$presenter->isLinkCurrent('Article:show') ? active">Článek</a>
 	<a n:if="$user->roles['Admin'] == '1' || $presenter->getUser()->id == $article->id_editor"
 		n:href="edit, $article->id_article" n:class="$presenter->isLinkCurrent('Article:edit') ? active">Editovat</a>
