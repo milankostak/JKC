@@ -1,4 +1,4 @@
-<a n:if="$user->isLoggedIn()" n:href="Sign:out" id="logout">Odhlásit se</a>
+<p n:if="$user->isLoggedIn()" id="logout"><span>{$user->identity->data["name"]}</span> | <a n:href="Sign:out">Odhlásit se</a></p>
 <button type="button" class="navbar-toggle" data-toggle="collapse" 
 	data-target="#menu-navbar-collapse">
 	<span class="sr-only">Toggle navigation</span>

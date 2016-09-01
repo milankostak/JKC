@@ -1,3 +1,4 @@
+<p n:if="$user->isLoggedIn()" id="logout"><span>{$user->identity->data["name"]}</span> | <a n:href="Sign:out">Odhlásit se</a></p>
 <h2 id="header"><a accesskey="2" n:href="Post:default" title="Hlavní strana webu - {$big_title}">{$big_title}</a></h2>
 <p>{$small_title}</p>
 <a id="under-header"></a>

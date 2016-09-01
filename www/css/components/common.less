@@ -6,7 +6,7 @@ a:hover, a:active, a:focus {
 	color: #163C54;
 	text-decoration: none;
 }
-a#logout {
+p#logout {
 	float: right;
 	display: block;
 	margin: 5px;
@@ -16,9 +16,6 @@ a#logout {
 	border-color: @brand-primary;
 	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(65, 105, 225, 0.6);
     box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(65, 105, 225, 0.6);
-}
-input[type=submit] {
-	margin: 12px 0;
 }
 hr.line {
 	border: 1px solid #999999;
@@ -58,4 +55,8 @@ img {
 .help label { // Settings:general
 	border-bottom: 1px dotted black;
 	cursor: help;
+}
+ul.error li {
+	color: red;
+	font-weight: bold;
 }
