@@ -61,7 +61,7 @@ class ArticlePresenter extends SecuredPresenter {
 	private function doesArticleExists($id) {
 		$article = $this->articles->findById($id);
 		if (!$article) {
-			$this->flashMessage($this->notFoundError, "error");
+			$this->flashMessages->flashMessageError($this->notFoundError);
 			$this->redirect("default");
 		} else {
 			return $article;
@@ -76,7 +76,7 @@ class ArticlePresenter extends SecuredPresenter {
 	private function doesTagExists($article, $id) {
 		$tag = $this->tags->findById($id);
 		if (!$tag) {
-			$this->flashMessage($this->tagNotFoundError, "error");
+			$this->flashMessages->flashMessageError($this->tagNotFoundError);
 			$this->redirect("tags", $article);
 		} else {
 			return $tag;
@@ -89,7 +89,7 @@ class ArticlePresenter extends SecuredPresenter {
 	 */
 	private function checkUser($id_editor) {
 		if ($this->getUser()->roles["Admin"] != "1" && $this->getUser()->id != $id_editor) {
-			$this->flashMessage("Tento článek nemůžete upravovat.", "authentification");
+			$this->flashMessages->flashMessageAuthentification("Tento článek nemůžete upravovat.");
 			$this->redirect("default");
 		}
 	}
@@ -203,9 +203,9 @@ class ArticlePresenter extends SecuredPresenter {
 
 		$num = $this->tags->deleteTagFromArticle($article, $tag);
 		if ($num == 0) {
-			$this->flashMessage("Tento štítek není přiřazen k tomuto článku.", "error");
+			$this->flashMessages->flashMessageError("Tento štítek není přiřazen k tomuto článku.");
 		} else {
-			$this->flashMessage("Štítek byl úspěšně odebrán.", "success");
+			$this->flashMessages->flashMessageSuccess("Štítek byl úspěšně odebrán.");
 		}
 		$this->redirect("tags", $article);
 	}
@@ -220,10 +220,10 @@ class ArticlePresenter extends SecuredPresenter {
 		$this->doesTagExists($article, $tag);
 
 		if ($this->tags->isArticleHavingTag($article, $tag)) {
-			$this->flashMessage("Tento článek již tento štítek má.", "error");
+			$this->flashMessages->flashMessageError("Tento článek již tento štítek má.");
 		} else {
 			$this->tags->addTagToArticle($article, $tag);
-			$this->flashMessage("Štítek byl úspěšně přidán.", "success");
+			$this->flashMessages->flashMessageSuccess("Štítek byl úspěšně přidán.");
 		}
 		$this->redirect("tags", $article);
 	}
@@ -234,7 +234,7 @@ class ArticlePresenter extends SecuredPresenter {
 	 */
 	public function renderPublish($id) {
 		if ($this->article->draft == 0) {
-			$this->flashMessage("Tento článek je již zveřejněn.", "error");
+			$this->flashMessages->flashMessageError("Tento článek je již zveřejněn.");
 			$this->redirect("show", $id);
 		} else {	
 			$this->template->article = $this->article;
@@ -282,18 +282,18 @@ class ArticlePresenter extends SecuredPresenter {
 				$time = new \DateTime($time.":00");
 				$time = $time->getTimestamp();
 				if ($time == 0) {
-					$this->flashMessage("Zvolené datum je neplatné.", "error");
+					$this->flashMessages->flashMessageError("Zvolené datum je neplatné.");
 					$this->recoverInputs($values);
 				} elseif ($time < time()) {
-					$this->flashMessage("Zvolené datum a čas jsou v minulosti.", "error");
+					$this->flashMessages->flashMessageError("Zvolené datum a čas jsou v minulosti.");
 					$this->recoverInputs($values);
 				} else {
 					$this->articles->publish($id, $time);
-					$this->flashMessage("Článek byl úspěšně zveřejněn.", "success");
+					$this->flashMessages->flashMessageSuccess("Článek byl úspěšně zveřejněn.");
 					$this->redirect("show", $id);
 				}
 			} else {
-				$this->flashMessage("Tento článek je již zveřejněn.", "error");
+				$this->flashMessages->flashMessageError("Tento článek je již zveřejněn.");
 				$this->redirect("show", $id);
 			}
 		}
@@ -331,16 +331,16 @@ class ArticlePresenter extends SecuredPresenter {
 		if ($this->getSession($t_name)[$uid] == $uid) {
 			unset($this->getSession($t_name)[$uid]);
 			$this->articles->delete($id);
-			$this->flashMessage("Článek byl úspěšně smazán.", "success");
+			$this->flashMessages->flashMessageSuccess("Článek byl úspěšně smazán.");
 			$this->redirect("default");
 		// problem with session
 		// article is still there
 		} elseif ($this->articles->findById($id) != null) {
-			$this->flashMessage("Při mazání se vyskytla chyba. Zopakujte prosím akci.", "error");
+			$this->flashMessages->flashMessageError("Při mazání se vyskytla chyba. Zopakujte prosím akci.");
 			$this->redirect("this");
 		// problem with session, but according to id, there is nothing
 		} else {
-			$this->flashMessage("Článek byl úspěšně smazán.", "success");
+			$this->flashMessages->flashMessageSuccess("Článek byl úspěšně smazán.");
 			$this->redirect("default");
 		}
 	}
@@ -435,11 +435,11 @@ class ArticlePresenter extends SecuredPresenter {
 			unset($this->getSession($t_name)[$uid]);
 			// check duplicity of title
 			if ($this->articles->isOldArticleTitleDuplicate($values->title, $id)) {
-				$this->flashMessage($this->badTitleError, "error");
+				$this->flashMessages->flashMessageError($this->badTitleError);
 				$this->recoverInputs($values);
 			// check duplicity of url
 			} elseif ($this->articles->isOldArticleUrlDuplicate($values->title, $id)) {
-				$this->flashMessage($this->badUrlError, "error");
+				$this->flashMessages->flashMessageError($this->badUrlError);
 				$this->recoverInputs($values);
 			// success, save and redirect, custom code for every situation
 			} else {
@@ -447,7 +447,7 @@ class ArticlePresenter extends SecuredPresenter {
 				if ($publish) {
 					$this->articles->publish($id, time());
 				}
-				$this->flashMessage($messageSuccess, "success");
+				$this->flashMessages->flashMessageSuccess($messageSuccess);
 				$this->redirect($target, $id);
 			}
 		// problem with session
@@ -457,18 +457,18 @@ class ArticlePresenter extends SecuredPresenter {
 			if ($art->title == $values->title      && $art->anotation == $values->anotation
 				&& $art->social == $values->social && $art->comments == $values->comments
 				&& $art->id_poll == $values->poll  && $art->text == $values->text) {
-				$this->flashMessage($messageSuccess, "success");
+				$this->flashMessages->flashMessageSuccess($messageSuccess);
 				$this->redirect($target, $id);
 			// repeat warnings about duplicities
 			} elseif ($this->articles->isOldArticleTitleDuplicate($values->title, $id)) {
-				$this->flashMessage($this->badTitleError, "error");
+				$this->flashMessages->flashMessageError($this->badTitleError);
 				$this->recoverInputs($values);
 			} elseif ($this->articles->isOldArticleUrlDuplicate($values->title, $id)) {
-				$this->flashMessage($this->badUrlError, "error");
+				$this->flashMessages->flashMessageError($this->badUrlError);
 				$this->recoverInputs($values);
 			// action was performed, session is gone and something is wrong
 			} else {
-				$this->savingErrorFlashMessage();
+				$this->flashMessages->savingErrorFlashMessage();
 				$this->recoverInputs($values);
 			}
 		}
@@ -586,16 +586,16 @@ class ArticlePresenter extends SecuredPresenter {
 			unset($this->getSession($t_name)[$uid]);
 			// check duplicity of title
 			if ($this->articles->isNewArticleTitleDuplicate($values->title)) {
-				$this->flashMessage($this->badTitleError, "error");
+				$this->flashMessages->flashMessageError($this->badTitleError);
 				$this->recoverInputs($values);
 			// check duplicity of url
 			} elseif ($this->articles->isNewArticleUrlDuplicate($values->title)) {
-				$this->flashMessage($this->badUrlError, "error");
+				$this->flashMessages->flashMessageError($this->badUrlError);
 				$this->recoverInputs($values);
 			// success, save and redirect
 			} else {
 				$id = $this->articles->insert($values, $this->getUser()->id, $draft);
-				$this->flashMessage($messageSuccess, "success");
+				$this->flashMessages->flashMessageSuccess($messageSuccess);
 				$this->redirect($target, $id);
 			}
 		// problem with session
@@ -605,19 +605,19 @@ class ArticlePresenter extends SecuredPresenter {
 			if ($art && $art->title == $values->title   && $art->anotation == $values->anotation
 					 && $art->social == $values->social && $art->comments == $values->comments
 					 && $art->id_poll == $values->poll  && $art->text == $values->text) {
-				$this->flashMessage($messageSuccess, "success");
+				$this->flashMessages->flashMessageSuccess($messageSuccess);
 				$this->redirect($target, $art->id_article);
 			}
 			// repeat warnings about duplicities
 			elseif ($this->articles->isNewArticleTitleDuplicate($values->title)) {
-				$this->flashMessage($this->badTitleError, "error");
+				$this->flashMessages->flashMessageError($this->badTitleError);
 				$this->recoverInputs($values);
 			} elseif ($this->articles->isNewArticleUrlDuplicate($values->title)) {
-				$this->flashMessage($this->badUrlError, "error");
+				$this->flashMessages->flashMessageError($this->badUrlError);
 				$this->recoverInputs($values);
 			// action was performed, session is gone and something is wrong
 			} else {
-				$this->savingErrorFlashMessage();
+				$this->flashMessages->savingErrorFlashMessage();
 				$this->recoverInputs($values);
 			}
 		}

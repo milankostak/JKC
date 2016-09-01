@@ -59,11 +59,11 @@ class SignPresenter extends BasePresenter {
 		try {
 			$user = $this->getUser();
 			$user->login($values->login, $values->password);
-			$this->flashMessage("Přihlášení bylo úspěšné.", "success");
+			$this->flashMessages->flashMessageSuccess("Přihlášení bylo úspěšné.");
 			$this->redirect("Article:default");
 		} catch (AuthenticationException $e) {
 			//$form->addError("Neplatné uživatelské jméno nebo heslo.");
-			$this->flashMessage("Neplatné uživatelské jméno nebo heslo.", "error");
+			$this->flashMessages->flashMessageError("Neplatné uživatelské jméno nebo heslo.");
 			return;
 		}
 	}
@@ -73,7 +73,7 @@ class SignPresenter extends BasePresenter {
 	 */
 	public function actionOut() {
 		$this->getUser()->logout();
-		$this->flashMessage("Odlášení proběhlo úspěšně.", "success");
+		$this->flashMessages->flashMessageSuccess("Odlášení proběhlo úspěšně.");
 		$this->redirect("in");
 	}
 

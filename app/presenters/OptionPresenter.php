@@ -46,7 +46,7 @@ class OptionPresenter extends SecuredPresenter {
 	private function doesItemExists($id) {
 		$poll = $this->polls->findById($id);
 		if (!$poll) {
-			$this->flashMessage($this->pollNotFoundError, "error");
+			$this->flashMessages->flashMessageError($this->pollNotFoundError);
 			$this->redirect("Poll:default");
 		} else {
 			return $poll;
@@ -61,7 +61,7 @@ class OptionPresenter extends SecuredPresenter {
 	private function doesOptionExists($id) {
 		$option = $this->options->findById($id);
 		if (!$option) {
-			$this->flashMessage($this->optionNotFoundError, "error");
+			$this->flashMessages->flashMessageError($this->optionNotFoundError);
 			$this->redirect("Poll:default");
 		} else {
 			return $option;
@@ -113,18 +113,18 @@ class OptionPresenter extends SecuredPresenter {
 		if ($this->getSession($t_name)[$uid] == $uid) {
 			unset($this->getSession($t_name)[$uid]);
 			$this->options->insert($answer, $poll);
-			$this->flashMessage("Odpověď byla úspěšně přidána.", "success");
+			$this->flashMessages->flashMessageSuccess("Odpověď byla úspěšně přidána.");
 			$this->redirect("Poll:detail", $poll);
 		// problem with session
 		} else {
 			$option = $this->options->findLast();
 			// action was performed, session is gone, but the answer fits
 			if ($option->answer == $answer) {
-				$this->flashMessage("Odpověď byla úspěšně přidána.", "success");
+				$this->flashMessages->flashMessageSuccess("Odpověď byla úspěšně přidána.");
 				$this->redirect("Poll:detail", $poll);
 			// action was performed, session is gone and answer is wrong
 			} else {
-				$this->savingErrorFlashMessage();
+				$this->flashMessages->savingErrorFlashMessage();
 				$this->recoverInputs($values);
 			}
 		}
@@ -179,17 +179,17 @@ class OptionPresenter extends SecuredPresenter {
 		if ($this->getSession($t_name)[$uid] == $uid) {
 			unset($this->getSession($t_name)[$uid]);
 			$this->options->update($answer, $option);
-			$this->flashMessage("Odpověď byla úspěšně upravena.", "success");
+			$this->flashMessages->flashMessageSuccess("Odpověď byla úspěšně upravena.");
 			$this->redirect("Poll:detail", $poll);
 		// problem with session
 		} else {
 			// action was performed, session is gone, but the answer fits
 			if ($this->option->answer == $answer) {
-				$this->flashMessage("Odpověď byla úspěšně upravena.", "success");
+				$this->flashMessages->flashMessageSuccess("Odpověď byla úspěšně upravena.");
 				$this->redirect("Poll:detail", $poll);
 			// action was performed, session is gone and answer is wrong
 			} else {
-				$this->savingErrorFlashMessage();
+				$this->flashMessages->savingErrorFlashMessage();
 				$this->recoverInputs($values);
 			}
 		}
@@ -230,16 +230,16 @@ class OptionPresenter extends SecuredPresenter {
 		if ($this->getSession($this->deleteOptionTokenName)[$uid] == $uid) {
 			unset($this->getSession($this->deleteOptionTokenName)[$uid]);
 			$this->options->delete($option);
-			$this->flashMessage("Odpověď '$answer' byla úspěšně smazána.", "success");
+			$this->flashMessages->flashMessageSuccess("Odpověď '$answer' byla úspěšně smazána.");
 			$this->redirect("Poll:detail", $poll);
 		// problem with session
 		// option is still there
 		} elseif ($this->option != null) {
-			$this->savingErrorFlashMessage();
+			$this->flashMessages->savingErrorFlashMessage();
 			$this->redirect("this");
 		// problem with session, but according to id, there is nothing
 		} else {
-			$this->flashMessage("Odpověď '$answer' byla úspěšně smazána.", "success");
+			$this->flashMessages->flashMessageSuccess("Odpověď '$answer' byla úspěšně smazána.");
 			$this->redirect("Poll:detail", $poll);
 		}
 	}

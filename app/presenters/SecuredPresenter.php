@@ -11,9 +11,9 @@ class SecuredPresenter extends BasePresenter {
 
 		if (!$this->user->isLoggedIn()) {
 			if ($this->user->logoutReason === UserStorage::INACTIVITY) {
-				$this->flashMessage("Byl(a) jste odhlášen(a) z důvodu nekativity. Přihlašte se prosím znovu.", "authentification");
+				$this->flashMessages->flashMessageAuthentification("Byl(a) jste odhlášen(a) z důvodu nekativity. Přihlašte se prosím znovu.");
 			} else {
-				$this->flashMessage("Pro přístup do této sekce musíte být přihlášen(a).", "authentification");
+				$this->flashMessages->flashMessageAuthentification("Pro přístup do této sekce musíte být přihlášen(a).");
 			}
 			$this->redirect("Sign:in");
 		}

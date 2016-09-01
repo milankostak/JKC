@@ -83,10 +83,10 @@ class ProfilPresenter extends SecuredPresenter {
 			// check for duplicates
 			if ($this->editors->checkForDuplicatesWithId($values->login, $id) == 0) {
 				$this->editors->updateNameLogin($values, $id);
-				$this->flashMessage("Údaje byly úspěšně změněny.", "success");
+				$this->flashMessages->flashMessageSuccess("Údaje byly úspěšně změněny.");
 				$this->redirect("this");
 			} else {
-				$this->flashMessage($this->badNameError, "error");
+				$this->flashMessages->flashMessageError($this->badNameError);
 				$this->recoverInputs($values);
 			}
 		// problem with session
@@ -94,11 +94,11 @@ class ProfilPresenter extends SecuredPresenter {
 			$editor = $this->editors->findById($id);
 			// action was performed, session is gone, but the data fits
 			if ($values->name == $editor->name && $values->login == $editor->login) {
-				$this->flashMessage("Údaje byly úspěšně změněny.", "success");
+				$this->flashMessages->flashMessageSuccess("Údaje byly úspěšně změněny.");
 				$this->redirect("this");
 			// action was performed, session is gone and something is wrong
 			} else {
-				$this->savingErrorFlashMessage();
+				$this->flashMessages->savingErrorFlashMessage();
 				$this->recoverInputs($values);
 			}
 		}
@@ -153,21 +153,21 @@ class ProfilPresenter extends SecuredPresenter {
 			// verify password is ok
 			if ($this->passwordVerify($values->old, $editor->password)) {
 				$this->editors->updatePassword($values->new1, $id);
-				$this->flashMessage("Heslo bylo úspěšně změněno.", "success");
+				$this->flashMessages->flashMessageSuccess("Heslo bylo úspěšně změněno.");
 			} else {
-				$this->flashMessage("Stávající heslo nebylo zadáno správně.", "error");
+				$this->flashMessages->flashMessageError("Stávající heslo nebylo zadáno správně.");
 			}
 		// problem with session
 		} else {
 			// action was performed, session is gone, but the data fits
 			if ($this->passwordVerify($values->new1, $editor->password)) {
-				$this->flashMessage("Heslo bylo úspěšně změněno.", "success");
+				$this->flashMessages->flashMessageSuccess("Heslo bylo úspěšně změněno.");
 			// verify password was not ok
 			} elseif ($this->passwordVerify($values->old, $editor->password)) {
-				$this->flashMessage("Stávající heslo nebylo zadáno správně.", "error");
+				$this->flashMessages->flashMessageError("Stávající heslo nebylo zadáno správně.");
 			// action was performed, session is gone and something is wrong
 			} else {
-				$this->savingErrorFlashMessage();
+				$this->flashMessages->savingErrorFlashMessage();
 			}
 		}
 		$this->redirect("this");

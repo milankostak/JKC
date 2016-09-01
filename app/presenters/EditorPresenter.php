@@ -44,7 +44,7 @@ class EditorPresenter extends SecuredPresenter {
 	private function doesEditorExists($id) {
 		$editor = $this->editors->findById($id);
 		if (!$editor) {
-			$this->flashMessage($this->notFoundError, "error");
+			$this->flashMessages->flashMessageError($this->notFoundError);
 			$this->redirect("default");
 		} else {
 			return $editor;
@@ -115,10 +115,10 @@ class EditorPresenter extends SecuredPresenter {
 			// check for duplicities
 			if ($this->editors->checkForDuplicates($login) == 0) {
 				$this->editors->insert($values);
-				$this->flashMessage("Editor byl úspěšně vytvořen.", "success");
+				$this->flashMessages->flashMessageSuccess("Editor byl úspěšně vytvořen.");
 				$this->redirect("default");
 			} else {
-				$this->flashMessage($this->badNameError, "error");
+				$this->flashMessages->flashMessageError($this->badNameError);
 				$this->recoverInputs($values);
 			}
 		// problem with session
@@ -126,18 +126,18 @@ class EditorPresenter extends SecuredPresenter {
 			$editor = $this->editors->findByLogin($login);
 			// action wasn't performed, session is gone
 			if (!$editor) {
-				$this->savingErrorFlashMessage();
+				$this->flashMessages->savingErrorFlashMessage();
 				$this->recoverInputs($values);
 			}
 			$editor = $this->editors->findLast();
 			// action was performed, session is gone, but the data fits
 			if ($editor && $editor->name == $values->name && $this->passwordVerify($values->password1, $editor->password)
 				&& $editor->login == $login && $editor->admin == $values->admin) {
-				$this->flashMessage("Editor byl úspěšně vytvořen.", "success");
+				$this->flashMessages->flashMessageSuccess("Editor byl úspěšně vytvořen.");
 				$this->redirect("default");
 			// action was performed, session is gone and something is wrong
 			} else {
-				$this->flashMessage($this->badNameError, "error");
+				$this->flashMessages->flashMessageError($this->badNameError);
 				$this->recoverInputs($values);
 			}
 		}
@@ -217,10 +217,10 @@ class EditorPresenter extends SecuredPresenter {
 					$this->editors->update($values, $id);
 					// change password only if the input was filled
 					if ($values->password1 != "") $this->editors->updatePassword($values->password1, $id);
-					$this->flashMessage("Editor byl úspěšně uložen.", "success");
+					$this->flashMessages->flashMessageSuccess("Editor byl úspěšně uložen.");
 					$this->redirect("default");
 				} else {
-					$this->flashMessage($this->badNameError, "error");
+					$this->flashMessages->flashMessageError($this->badNameError);
 					$this->recoverInputs($values);
 				}
 			// problem with session
@@ -228,16 +228,16 @@ class EditorPresenter extends SecuredPresenter {
 				$editor = $this->editor;
 				// action was performed, session is gone, but the data fits
 				if ($editor->name == $values->name && $editor->login == $values->login && $editor->admin == $values->admin) {
-					$this->flashMessage("Editor byl úspěšně uložen.", "success");
+					$this->flashMessages->flashMessageSuccess("Editor byl úspěšně uložen.");
 					$this->redirect("default");
 				// action was performed, session is gone and something is wrong
 				} else {
-					$this->savingErrorFlashMessage();
+					$this->flashMessages->savingErrorFlashMessage();
 					$this->recoverInputs($values);
 				}
 			}
 		} else {
-			$this->flashMessage("Vaše heslo nebylo zadáno správně.", "error");
+			$this->flashMessages->flashMessageError("Vaše heslo nebylo zadáno správně.");
 			$this->redirect("this");
 		}
 	}
@@ -251,7 +251,7 @@ class EditorPresenter extends SecuredPresenter {
 		if ($this->getUser()->id != $id) {
 			$this->template->editor = $this->editor;
 		} else {
-			$this->flashMessage("Nelze smazat vlastní účet.", "error");
+			$this->flashMessages->flashMessageError("Nelze smazat vlastní účet.");
 			$this->redirect("default");
 		}
 	}
@@ -297,19 +297,19 @@ class EditorPresenter extends SecuredPresenter {
 				if ($this->getSession($t_name)[$uid] == $uid) {
 					unset($this->getSession($t_name)[$uid]);
 					$this->editors->delete($id);
-					$this->flashMessage("Editor '$name' byl úspěšně smazán.", "success");
+					$this->flashMessages->flashMessageSuccess("Editor '$name' byl úspěšně smazán.");
 					$this->redirect("default");	
 				// problem with session
 				} elseif ($this->editors->findById($id) != null) {
-					$this->flashMessage("Při mazání se vyskytla chyba. Zopakujte prosím akci.", "error");
+					$this->flashMessages->flashMessageError("Při mazání se vyskytla chyba. Zopakujte prosím akci.");
 					$this->redirect("this");
 				}
 			} else {
-				$this->flashMessage("Bylo zadáno chybné heslo.", "error");
+				$this->flashMessages->flashMessageError("Bylo zadáno chybné heslo.");
 				$this->redirect("this");
 			}
 		} else {
-			$this->flashMessage("Nelze smazat vlastní účet.", "error");
+			$this->flashMessages->flashMessageError("Nelze smazat vlastní účet.");
 			$this->redirect("default");
 		}
 	}

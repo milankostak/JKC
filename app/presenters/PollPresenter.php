@@ -42,7 +42,7 @@ class PollPresenter extends SecuredPresenter {
 	private function doesItemExists($id) {
 		$poll = $this->polls->findById($id);
 		if (!$poll) {
-			$this->flashMessage($this->pollNotFoundError, "error");
+			$this->flashMessages->flashMessageError($this->pollNotFoundError);
 			$this->redirect("default");
 		} else {
 			return $poll;
@@ -97,18 +97,18 @@ class PollPresenter extends SecuredPresenter {
 		if ($this->getSession($t_name)[$uid] == $uid) {
 			unset($this->getSession($t_name)[$uid]);
 			$id = $this->polls->insert($question);
-			$this->flashMessage("Anketa byla úspěšně vytvořena.", "success");
+			$this->flashMessages->flashMessageSuccess("Anketa byla úspěšně vytvořena.");
 			$this->redirect("detail", $id);
 		// problem with session
 		} else {
 			$poll = $this->polls->findLast();
 			// action was performed, session is gone, but the question fits
 			if ($poll->question == $question) {
-				$this->flashMessage("Anketa byla úspěšně vytvořena.", "success");
+				$this->flashMessages->flashMessageSuccess("Anketa byla úspěšně vytvořena.");
 				$this->redirect("detail", $poll->id_poll);
 			// action was performed, session is gone and question is wrong
 			} else {
-				$this->savingErrorFlashMessage();
+				$this->flashMessages->savingErrorFlashMessage();
 				$this->recoverInputs($values);
 			}
 		}
@@ -160,18 +160,18 @@ class PollPresenter extends SecuredPresenter {
 		if ($this->getSession($t_name)[$uid] == $uid) {
 			unset($this->getSession($t_name)[$uid]);
 			$this->polls->update($question, $id);
-			$this->flashMessage("Anketa byla úspěšně upravena.", "success");
+			$this->flashMessages->flashMessageSuccess("Anketa byla úspěšně upravena.");
 			$this->redirect("detail", $id);
 		// problem with session
 		} else {
 			$poll = $this->poll;
 			// action was performed, session is gone, but the question fits
 			if ($poll->question == $question) {
-				$this->flashMessage("Anketa byla úspěšně upravena.", "success");
+				$this->flashMessages->flashMessageSuccess("Anketa byla úspěšně upravena.");
 				$this->redirect("detail", $id);
 			// action was performed, session is gone and question is wrong
 			} else {
-				$this->savingErrorFlashMessage();
+				$this->flashMessages->savingErrorFlashMessage();
 				$this->recoverInputs($values);
 			}
 		}
@@ -212,16 +212,16 @@ class PollPresenter extends SecuredPresenter {
 		if ($this->getSession($t_name)[$uid] == $uid) {
 			unset($this->getSession($t_name)[$uid]);
 			$this->polls->delete($id);
-			$this->flashMessage("Anketa '$question' byla úspěšně smazána.", "success");
+			$this->flashMessages->flashMessageSuccess("Anketa '$question' byla úspěšně smazána.");
 			$this->redirect("default");
 		// problem with session
 		// poll is still there
 		} elseif ($this->polls->findById($id) != null) {
-			$this->flashMessage("Při mazání se vyskytla chyba. Zopakujte prosím akci.", "error");
+			$this->flashMessages->flashMessageError("Při mazání se vyskytla chyba. Zopakujte prosím akci.");
 			$this->redirect("this");
 		// problem with session, but according to id, there is nothing
 		} else {
-			$this->flashMessage("Anketa '$question' byla úspěšně smazána.", "success");
+			$this->flashMessages->flashMessageSuccess("Anketa '$question' byla úspěšně smazána.");
 			$this->redirect("default");
 		}
 	}
@@ -259,16 +259,16 @@ class PollPresenter extends SecuredPresenter {
 	public function actionDeletePoll($article, $poll) {
 		$article = $this->articles->findById($article);
 		if (!$article) {
-			$this->flashMessage("Článek nebyl nalezen.", "error");
+			$this->flashMessages->flashMessageError("Článek nebyl nalezen.");
 			$this->redirect("default");
 		} else {
 			$this->doesItemExists($poll);
 
 			$num = $this->articles->deletePollFromArticle($article);
 			if ($num == 0) {
-				$this->flashMessage("Tato anketa není přiřazena tomuto článku.", "error");
+				$this->flashMessages->flashMessageError("Tato anketa není přiřazena tomuto článku.");
 			} else {
-				$this->flashMessage("Anketa byla článku úspěšně odebrána.", "success");
+				$this->flashMessages->flashMessageSuccess("Anketa byla článku úspěšně odebrána.");
 			}
 			$this->redirect("articles", $poll);
 		}

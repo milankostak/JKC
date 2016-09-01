@@ -38,10 +38,10 @@ class CommentPresenter extends SecuredPresenter {
 	public function actionDelete($id) {
 		$comm = $this->comments->deleteById($id);
 		if ($comm[0] == Comment::COMMENT_DELETED) {
-			$this->flashMessage("Komentář byl úspěšně smazán.", "success");
+			$this->flashMessages->flashMessageSuccess("Komentář byl úspěšně smazán.");
 			$this->redirect("Article:comments", $this->getRedirectParams($comm[1]));
 		} else {
-			$this->flashMessage($this->commentNotFoundError, "error");
+			$this->flashMessages->flashMessageError($this->commentNotFoundError);
 			$this->redirect("Article:default");
 		}
 	}
@@ -53,12 +53,12 @@ class CommentPresenter extends SecuredPresenter {
 	public function actionUnpublish($id) {
 		$comm = $this->comments->unpublishById($id);
 		if ($comm[0] == Comment::COMMENT_NOTFOUND) {
-			$this->flashMessage($this->commentNotFoundError, "error");
+			$this->flashMessages->flashMessageError($this->commentNotFoundError);
 			$this->redirect("Article:default");
 		} else if ($comm[0] == Comment::COMMENT_UNPUBLISHED) {
-			$this->flashMessage("Komentář byl úspěšně označen jako neveřejný.", "success");
+			$this->flashMessages->flashMessageSuccess("Komentář byl úspěšně označen jako neveřejný.");
 		} else if ($comm[0] == Comment::COMMENT_PUBLISH_ERROR) {
-			$this->flashMessage("Tento komentář je již označen jako neveřejný.", "error");
+			$this->flashMessages->flashMessageError("Tento komentář je již označen jako neveřejný.");
 		}
 		$this->redirect("Article:comments", $this->getRedirectParams($comm[1]));
 	}
@@ -70,12 +70,12 @@ class CommentPresenter extends SecuredPresenter {
 	public function actionPublish($id) {
 		$comm = $this->comments->publishById($id);
 		if ($comm[0] == Comment::COMMENT_NOTFOUND) {
-			$this->flashMessage($this->commentNotFoundError, "error");
+			$this->flashMessages->flashMessageError($this->commentNotFoundError);
 			$this->redirect("Article:default");
 		} else if ($comm[0] == Comment::COMMENT_PUBLISHED) {
-			$this->flashMessage("Komentář byl úspěšně označen jako veřejný.", "success");
+			$this->flashMessages->flashMessageSuccess("Komentář byl úspěšně označen jako veřejný.");
 		} else if ($comm[0] == Comment::COMMENT_PUBLISH_ERROR) {
-			$this->flashMessage("Tento komentář je již označen jako veřejný.", "error");
+			$this->flashMessages->flashMessageError("Tento komentář je již označen jako veřejný.");
 		}
 		// always keep page with deleted, because publishing is only possible on page with shown deleted comments
 		$this->redirect("Article:comments", ["id" => $comm[1], "deleted" => "1"]);

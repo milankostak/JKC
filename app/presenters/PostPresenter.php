@@ -33,7 +33,7 @@ class PostPresenter extends BasePresenter {
 	private function doesPostExists($url) {
 		$post = $this->posts->findById($url);
 		if (!$post) {
-			$this->flashMessage("Článek '$url' neexistuje.", "error");
+			$this->flashMessages->flashMessageError("Článek '$url' neexistuje.");
 			$this->redirect("default");
 		} else {
 			return $post;
@@ -128,7 +128,7 @@ class PostPresenter extends BasePresenter {
 	public function renderPost($url) {
 		$post = $this->posts->findByIdWithCommentsCountAndTags($url);
 		if (!$post) {
-			$this->flashMessage("Článek '$url' neexistuje.", "error");
+			$this->flashMessages->flashMessageError("Článek '$url' neexistuje.");
 			$this->redirect("default");
 		} else {
 			$this->redrawControl("polll");
@@ -156,7 +156,7 @@ class PostPresenter extends BasePresenter {
 		if ($voted == 1 || $this->polls->findOptionById($id)->id_poll != $poll) {
 			$ms = ($voted == 1) ? "V této anketě jste již hlasoval(a)." : "Tato odpověď nepatří k této anketě.";
 			if (!$ajax) {
-				$this->flashMessage($ms, "error");
+				$this->flashMessages->flashMessageError($ms);
 				$this->redirect("post", $url);
 			} else {
 				$this->managePoll($poll, 1);
@@ -169,7 +169,7 @@ class PostPresenter extends BasePresenter {
 			$ms = "Hlas byl úspěšně započítán.";
 
 			if (!$ajax) {
-				$this->flashMessage($ms, "success");
+				$this->flashMessages->flashMessageSuccess($ms);
 				$this->redirect("post#poll", $url);
 			} else {
 				$this->managePoll($poll, 1);
@@ -187,7 +187,7 @@ class PostPresenter extends BasePresenter {
 	public function renderComments($url) {
 		$post = $this->doesPostExists($url);
 		if ($post->comments == 0) {
-			$this->flashMessage("K tomuto článku nejsou komentáře dostupné.", "error");
+			$this->flashMessages->flashMessageError("K tomuto článku nejsou komentáře dostupné.");
 			$this->redirect("post", $url);
 		} else {
 			$this->template->post = $post;
@@ -249,7 +249,7 @@ class PostPresenter extends BasePresenter {
 
 		// comments are not allowed
 		if ($post->comments == 0) {
-			$this->flashMessage("K tomuto článku nelze vkládat komentáře.", "error");
+			$this->flashMessages->flashMessageError("K tomuto článku nelze vkládat komentáře.");
 			$this->redirect("post", $url);
 		} else {
 			// session is ok
@@ -257,7 +257,7 @@ class PostPresenter extends BasePresenter {
 				unset($this->getSession($t_name)[$uid]);
 				$editor = ($this->user->isLoggedIn()) ? 1 : 0;
 				$this->comments->insert($values, $editor, $post->id_article);
-				$this->flashMessage("Komentář byl úspěšně uložen.", "success");
+				$this->flashMessages->flashMessageSuccess("Komentář byl úspěšně uložen.");
 				$this->redirect("comments", $url);
 			// problem with session
 			} else {
@@ -266,11 +266,11 @@ class PostPresenter extends BasePresenter {
 				if ($comment && $comment->text == $values->text && $comment->date > time()-15
 					&& $comment->author == $values->author && $comment->mail == $values->mail
 					&& $comment->subject == $values->subject && $comment->deleted == 0) {
-					$this->flashMessage("Komentář byl úspěšně uložen.", "success");
+					$this->flashMessages->flashMessageSuccess("Komentář byl úspěšně uložen.");
 					$this->redirect("comments", $url);
 				// action was performed, session is gone and something is wrong
 				} else {
-					$this->savingErrorFlashMessage();
+					$this->flashMessages->savingErrorFlashMessage();
 					$this->recoverInputs($values);
 				}
 			}
@@ -285,7 +285,7 @@ class PostPresenter extends BasePresenter {
 	public function renderTag($url, $page) {
 		$tag = $this->tags->findByUrl($url);
 		if (!$tag) {
-			$this->flashMessage("Štítek s názvem '$url' neexistuje.", "error");
+			$this->flashMessages->flashMessageError("Štítek s názvem '$url' neexistuje.");
 			$this->redirect("default");
 		} else {
 			$paginator = new Paginator;

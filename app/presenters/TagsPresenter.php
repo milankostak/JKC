@@ -46,7 +46,7 @@ class TagsPresenter extends SecuredPresenter {
 	private function doesTagExists($id) {
 		$tag = $this->tags->findById($id);
 		if (!$tag) {
-			$this->flashMessage($this->notFoundError, "error");
+			$this->flashMessages->flashMessageError($this->notFoundError);
 			$this->redirect("default");
 		} else {
 			return $tag;
@@ -112,10 +112,10 @@ class TagsPresenter extends SecuredPresenter {
 			// check for duplicates
 			if ($this->tags->checkForDuplicates($name) == 0) {
 				$id = $this->tags->insert($name);
-				$this->flashMessage("Štítek byl úspěšně vytvořen.", "success");
+				$this->flashMessages->flashMessageSuccess("Štítek byl úspěšně vytvořen.");
 				$this->redirect("detail", $id);
 			} else {
-				$this->flashMessage($this->badNameError, "error");
+				$this->flashMessages->flashMessageError($this->badNameError);
 				$this->recoverInputs($values);
 			}
 		// problem with session
@@ -123,17 +123,17 @@ class TagsPresenter extends SecuredPresenter {
 			$tag = $this->tags->findByUrl(Strings::webalize($name));
 			// action wasn't performed, session is gone
 			if (!$tag) {
-				$this->savingErrorFlashMessage();
+				$this->flashMessages->savingErrorFlashMessage();
 				$this->recoverInputs($values);
 			}
 			$tag = $this->tags->findLast();
 			// action was performed, session is gone, but the data fits
 			if ($tag && $tag->url == Strings::webalize($name) && $tag->name == $name) {
-				$this->flashMessage("Štítek byl úspěšně vytvořen.", "success");
+				$this->flashMessages->flashMessageSuccess("Štítek byl úspěšně vytvořen.");
 				$this->redirect("detail", $tag->id_tag);
 			// action was performed, session is gone and something is wrong
 			} else {
-				$this->flashMessage($this->badNameError, "error");
+				$this->flashMessages->flashMessageError($this->badNameError);
 				$this->recoverInputs($values);
 			}
 		}
@@ -189,10 +189,10 @@ class TagsPresenter extends SecuredPresenter {
 			// check duplicity of url
 			if ($this->tags->checkForDuplicatesWithId($name, $id) == 0) {
 				$this->tags->update($name, $id);
-				$this->flashMessage("Štítek byl úspěšně upraven.", "success");
+				$this->flashMessages->flashMessageSuccess("Štítek byl úspěšně upraven.");
 				$this->redirect("default");
 			} else {
-				$this->flashMessage($this->badNameError, "error");
+				$this->flashMessages->flashMessageError($this->badNameError);
 				$this->recoverInputs($values);
 			}
 		// problem with session
@@ -200,15 +200,15 @@ class TagsPresenter extends SecuredPresenter {
 			$tag = $this->tag;
 			// action was performed, session is gone, but the data fits
 			if ($tag->id_tag == $id && $tag->url == Strings::webalize($name) && $tag->name == $name) {
-				$this->flashMessage("Štítek byl úspěšně upraven.", "success");
+				$this->flashMessages->flashMessageSuccess("Štítek byl úspěšně upraven.");
 				$this->redirect("default");
 			// check duplicity of url
 			} elseif ($this->tags->checkForDuplicatesWithId($name, $id) == 0) {
-				$this->flashMessage($this->badNameError, "error");
+				$this->flashMessages->flashMessageError($this->badNameError);
 				$this->recoverInputs($values);
 			// action was performed, session is gone and something is wrong
 			} else {
-				$this->savingErrorFlashMessage();
+				$this->flashMessages->savingErrorFlashMessage();
 				$this->recoverInputs($values);
 			}
 		}
@@ -249,10 +249,10 @@ class TagsPresenter extends SecuredPresenter {
 			unset($this->getSession($t_name)[$uid]);
 			$this->tags->delete($id);
 		} elseif ($this->tag != null) {
-			$this->savingErrorFlashMessage();
+			$this->flashMessages->savingErrorFlashMessage();
 			$this->redirect("this");
 		}
-		$this->flashMessage("Štítek '$name' byl úspěšně smazán.", "success");
+		$this->flashMessages->flashMessageSuccess("Štítek '$name' byl úspěšně smazán.");
 		$this->redirect("default");
 	}
 
@@ -272,14 +272,14 @@ class TagsPresenter extends SecuredPresenter {
 	public function actionDeleteTag($article, $tag) {
 		$article = $this->articles->findById($article);
 		if ($article == null) {
-			$this->flashMessage("Článek nebyl nalezen.", "error");
+			$this->flashMessages->flashMessageError("Článek nebyl nalezen.");
 			$this->redirect("default");
 		} else {
 			$num = $this->tags->deleteTagFromArticle($article, $tag);
 			if ($num == 0) {
-				$this->flashMessage("Tento štítek není přiřazen k tomuto článku.", "error");
+				$this->flashMessages->flashMessageError("Tento štítek není přiřazen k tomuto článku.");
 			} else {
-				$this->flashMessage("Štítek byl úspěšně odebrán.", "success");
+				$this->flashMessages->flashMessageSuccess("Štítek byl úspěšně odebrán.");
 			}
 			$this->redirect("detail", $tag);
 		}

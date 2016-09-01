@@ -132,10 +132,10 @@ class SettingsPresenter extends AdminPresenter {
 			|| $values->number_rss_articles != $bl->number_rss_articles
 			|| $values->number_rss_comments != $bl->number_rss_comments
 			|| $values->ga != $bl->ga) {
-				$this->savingErrorFlashMessage();
+				$this->flashMessages->savingErrorFlashMessage();
 				$this->recoverInputs($values);
 		}
-		$this->flashMessage("Změny byly uloženy.", "success");
+		$this->flashMessages->flashMessageSuccess("Změny byly uloženy.");
 		$this->redirect("this");
 	}
 
@@ -184,16 +184,16 @@ class SettingsPresenter extends AdminPresenter {
 		if ($this->getSession($t_name)[$uid] == $uid) {
 			unset($this->getSession($t_name)[$uid]);
 			$this->blogs->editTopBox($top_box);
-			$this->flashMessage("Volitelný horní box byl úspěšně uložen.", "success");
+			$this->flashMessages->flashMessageSuccess("Volitelný horní box byl úspěšně uložen.");
 			$this->redirect("this");
 		} else {
 			// action was performed, session is gone, but the data fits
 			if ($this->blog->top_box == $top_box) {
-				$this->flashMessage("Volitelný horní box byl úspěšně uložen.", "success");
+				$this->flashMessages->flashMessageSuccess("Volitelný horní box byl úspěšně uložen.");
 				$this->redirect("this");
 			// action was performed, session is gone and something is wrong
 			} else {
-				$this->savingErrorFlashMessage();
+				$this->flashMessages->savingErrorFlashMessage();
 				$this->recoverInputs($values);
 			}
 		}
@@ -244,16 +244,16 @@ class SettingsPresenter extends AdminPresenter {
 		if ($this->getSession($t_name)[$uid] == $uid) {
 			unset($this->getSession($t_name)[$uid]);
 			$this->blogs->editBottomBox($bottom_box);
-			$this->flashMessage("Volitelný dolní box byl úspěšně uložen.", "success");
+			$this->flashMessages->flashMessageSuccess("Volitelný dolní box byl úspěšně uložen.");
 			$this->redirect("this");
 		} else {
 			// action was performed, session is gone, but the data fits
 			if ($this->blog->bottom_box == $bottom_box) {
-				$this->flashMessage("Volitelný dolní box byl úspěšně uložen.", "success");
+				$this->flashMessages->flashMessageSuccess("Volitelný dolní box byl úspěšně uložen.");
 				$this->redirect("this");
 			// action was performed, session is gone and something is wrong
 			} else {
-				$this->savingErrorFlashMessage();
+				$this->flashMessages->savingErrorFlashMessage();
 				$this->recoverInputs($values);
 			}
 		}

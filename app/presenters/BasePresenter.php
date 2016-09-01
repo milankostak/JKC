@@ -4,10 +4,19 @@ namespace App\Presenters;
 
 use Nette\Application\UI\Presenter;
 use Nette\Forms\Controls;
+use App\Presenters\Utils\FlashMessages;
 
 abstract class BasePresenter extends Presenter {
 
 	const RECOVER_DATA_SESSION = "recover_data";
+
+	/** @var App\Presenters\Utils\IFlashMessages */
+	protected $flashMessages;
+
+	protected function startup() {
+		parent::startup();
+		$this->flashMessages = new FlashMessages($this);
+	}
 
 	protected function manageUidToken($form, $tokenName) {
 		$uid = md5(uniqid(rand(), true));
@@ -41,13 +50,6 @@ abstract class BasePresenter extends Presenter {
 		}
 		$this->getSession(self::RECOVER_DATA_SESSION)->data = $data;
 		$this->redirect("this");
-	}
-
-	/**
-	 * Show saving error flash message
-	 */
-	protected function savingErrorFlashMessage() {
-		$this->flashMessage("Při zpracování se vyskytla chyba. Odešlete prosím formulář znovu.", "reload");
 	}
 
 	/**

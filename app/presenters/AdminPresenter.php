@@ -8,7 +8,7 @@ class AdminPresenter extends SecuredPresenter {
 		parent::startup();
 
 		if ($this->user->roles["Admin"] != "1") {
-			$this->flashMessage("Pro přístup do této sekce nemáte dostatečné oprávnění.", "authentification");
+			$this->flashMessages->flashMessageAuthentification("Pro přístup do této sekce nemáte dostatečné oprávnění.");
 			$this->redirect("Article:default");
 		}
 	}
