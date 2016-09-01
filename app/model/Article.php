@@ -11,7 +11,7 @@ class Article extends Nette\Object {
 	const TITLE_COLUMN = "title";
 	const DATE_COLUMN = "date";
 	const TEXT_COLUMN = "text";
-	const PEREX_COLUMN = "anotation";
+	const PEREX_COLUMN = "perex";
 	const DRAFT_COLUMN = "draft";
 	const ID_EDITOR_COLUMN = "id_editor";
 	const COMMENTS_COLUMN = "comments";
@@ -142,7 +142,7 @@ class Article extends Nette\Object {
 
 		return $this->database->table("article")->insert(array(
 			self::TITLE_COLUMN => $values->title, self::DATE_COLUMN => time(), self::TEXT_COLUMN => $values->text,
-			self::PEREX_COLUMN => $values->anotation, self::DRAFT_COLUMN => $draft, self::ID_EDITOR_COLUMN => $editor,
+			self::PEREX_COLUMN => $values->perex, self::DRAFT_COLUMN => $draft, self::ID_EDITOR_COLUMN => $editor,
 			self::SOCIAL_COLUMN => $social, self::COMMENTS_COLUMN => $comments, self::ID_POLL_COLUMN => $values->poll,
 			self::URL_COLUMN => Strings::webalize($values->title)
 		));
@@ -159,7 +159,7 @@ class Article extends Nette\Object {
 
 		$this->database->table("article")->where(self::ID_COLUMN, $id)->update(array(
 			self::TITLE_COLUMN => $values->title, self::TEXT_COLUMN => $values->text,
-			self::PEREX_COLUMN => $values->anotation, self::SOCIAL_COLUMN => $social,
+			self::PEREX_COLUMN => $values->perex, self::SOCIAL_COLUMN => $social,
 			self::COMMENTS_COLUMN => $comments, self::ID_POLL_COLUMN => $values->poll
 		));
 	}

@@ -100,7 +100,7 @@ class Post extends Nette\Object {
 	 */
 	public function findAllByLimitAndOffset($length, $offset) {
 		return $this->database->query("
-			SELECT a.title, a.anotation, a.date, a.url, a.comments, e.name,
+			SELECT a.title, a.perex, a.date, a.url, a.comments, e.name,
 				(SELECT count(*) FROM comment
 					WHERE (id_article = a.id_article) AND (deleted = 0)
 				) AS comment_count,
@@ -128,7 +128,7 @@ class Post extends Nette\Object {
 	 */
 	public function findAllPostsByTagName($url, $length, $offset) {
 		return $this->database->query("
-			SELECT a.title, a.anotation, a.date, a.url, a.comments, e.name,
+			SELECT a.title, a.perex, a.date, a.url, a.comments, e.name,
 				(SELECT count(*) FROM comment
 					WHERE (id_article = a.id_article) AND (deleted = 0)
 				) AS comment_count,

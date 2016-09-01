@@ -12,7 +12,7 @@
 		<atom:link href="{$url}rss/articles" rel="self" type="application/rss+xml" />
 			<item n:foreach="$posts as $post">
 				<title>{$post->title}</title>
-				<description>{$post->anotation}</description>
+				<description>{$post->perex}</description>
 				<link>{$url}post/{$post->url}</link>
 				<guid>{$url}post/{$post->url}</guid>
 				<pubDate>{date("D, j M Y G:i:s", $post->date)}</pubDate>

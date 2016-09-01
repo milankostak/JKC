@@ -17,7 +17,7 @@
 				<p>Datum: {date("d.m.Y", $post->date)}</p>
 				<p n:if="$post->comments == 1"><a n:href="comments, $post->url">Komentáře: {$post->comment_count}</a></p>
 			</div>
-			<div class="content">{$post->anotation|noescape|breaklines}</div>
+			<div class="content">{$post->perex|noescape|breaklines}</div>
 			<p class="more"><a n:href="post, $post->url">Celý článek</a></p>
 			{var $tags = explode("=", $post->tags)}
 			<p class="tags">Štítky: 

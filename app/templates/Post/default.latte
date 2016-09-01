@@ -12,7 +12,7 @@
 			<p n:if="$post->comments == 1"><a n:href="comments, $post->url">Komentáře: {$post->comment_count}</a></p>
 			{* - nějaký problém se session, musíš časem vyřešit*}
 		</div>
-		<div class="content">{$post->anotation|noescape|breaklines}</div>
+		<div class="content">{$post->perex|noescape|breaklines}</div>
 		<p class="more"><a n:href="post, $post->url">Celý článek</a></p>
 		<p class="tags">Štítky: 
 			{if strlen($post->tags) == 0}
