@@ -37,7 +37,7 @@ class Blog extends Nette\Object {
 
 	/**
 	 * Edit top box
-	 * @param  string $value new value of top box
+	 * @param  string $value new value of the top box
 	 */
 	public function editTopBox($value) {
 		$this->getRow()->update(array("top_box" => $value));
@@ -45,7 +45,7 @@ class Blog extends Nette\Object {
 
 	/**
 	 * Edit bottom box
-	 * @param  string $value new value of bottom box
+	 * @param  string $value new value of the bottom box
 	 */
 	public function editBottomBox($value) {
 		$this->getRow()->update(array("bottom_box" => $value));

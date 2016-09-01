@@ -86,7 +86,7 @@ class EditorPresenter extends SecuredPresenter {
 			->setRequired("Zadejte nové heslo.")
 			->addRule(Form::EQUAL, "Hesla se musí shodovat.", $form["password1"]);
 
-		$form->addCheckBox("admin", "Přiřadit editorovi administrátorská práva.");
+		$form->addCheckBox("admin", "Přiřadit editorovi administrátorská práva");
 
 		$this->recoverData($form);
 		$this->manageUidToken($form, $this->addEditorTokenName);
@@ -181,7 +181,7 @@ class EditorPresenter extends SecuredPresenter {
 			->setRequired(false)
 			->addRule(Form::EQUAL, "Hesla se musí shodovat.", $form["password1"]);
 
-		$form->addCheckBox("admin", "Přiřadit editorovi administrátorská práva.")
+		$form->addCheckBox("admin", "Přiřadit editorovi administrátorská práva")
 			->setValue($editor->admin);
 
 		$this->recoverData($form);
