@@ -169,6 +169,7 @@ body {
   margin: 0 20px;
   position: relative;
   font-weight: bold;
+  border-radius: 0;
 }
 .flash.error,
 .flash.authentification,
@@ -208,8 +209,8 @@ body {
   position: fixed;
   top: 0;
   left: 50%;
-  width: 600px;
-  margin-left: -300px;
+  width: 700px;
+  margin-left: -350px;
   z-index: 5;
 }
 .footer {

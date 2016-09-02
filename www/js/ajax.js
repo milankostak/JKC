@@ -1,5 +1,5 @@
 //https://github.com/vojtech-dobes/nette.ajax.js
-$(function() {
+$(document).ready(function() {
 	$.nette.init();
 	$.nette.ext("name", {
 		before: function () {
@@ -7,13 +7,9 @@ $(function() {
 			$(".flash.ajax").remove();
 		},
 		complete: function () {
-			$(".flash.ajax").slideDown().click(function() {
-				$(this).hide();
-			});
+			$(".flash.ajax").slideDown();
 			$("#ajax_loader").hide();
-			var timeout = setTimeout(function(){
-				$(".flash.ajax.success").slideUp();
-			}, 3000);
+			initFlashes();
 		}
 	});
 	$(".ajax").click(function() {
