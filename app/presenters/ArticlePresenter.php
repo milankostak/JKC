@@ -412,6 +412,7 @@ class ArticlePresenter extends SecuredPresenter {
 				->onClick[] = [$this, "saveArticle"];
 
 			$form->addSubmit("save_n_continue", "Uložit a psát dál")
+				->setAttribute("class", "ajax")
 				->onClick[] = [$this, "saveAndContinue"];
 		}
 
