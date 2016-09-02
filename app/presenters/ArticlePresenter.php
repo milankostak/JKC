@@ -450,7 +450,7 @@ class ArticlePresenter extends SecuredPresenter {
 			// check duplicity of url
 			} elseif ($this->articles->isOldArticleUrlDuplicate($values->title, $id)) {
 				if ($ajax) {
-					$this->template->ajaxMessage = ["status" => "error ajax", "message" => $this->badTitleError];
+					$this->template->ajaxMessage = ["status" => "error ajax", "message" => $this->badUrlError];
 					$this->redrawControl("ajaxSaveArticle");
 				} else {
 					$this->flashMessages->flashMessageError($this->badUrlError);
