@@ -24,7 +24,7 @@ hr.line {
   margin: 10px 0;
 }
 h1 {
-  margin-top: 0;
+  margin-top: 10px;
   font-variant: small-caps;
   font-family: "Calibri", sans-serif;
   color: navy;
@@ -75,15 +75,42 @@ body {
   padding: 0;
   width: 100%;
 }
-#page,
-#errorpage {
+#page {
   box-shadow: 0 0 60px 10px #a8a8a8;
   border-radius: 5px;
   background-color: white;
+  margin-bottom: 20px;
+  padding: 20px 0;
 }
 #content {
-  padding: 20px 10px;
+  padding: 0 15px;
   color: #111111;
+}
+@media (max-width: 767px) {
+  #content {
+    padding-bottom: 20px;
+  }
+}
+.ajaxsuccess {
+  color: green;
+  font-weight: bold;
+}
+.ajaxerror {
+  color: maroon;
+  font-weight: bold;
+}
+#ajax_loader {
+  background-image: url('../img/ajax-load.gif');
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  float: left;
+  display: none;
+}
+#ajax_loader.articles {
+  left: 49%;
+  top: -10px;
 }
 .admin-article h2 {
   margin-top: 10px;
@@ -100,8 +127,7 @@ body {
   background-color: white;
   border: 1px solid #333333;
   padding: 16px;
-  margin: 0 16px 5px 16px;
-  top: 16px;
+  margin: 0 20px;
   position: relative;
   font-weight: bold;
 }
@@ -137,6 +163,15 @@ body {
 }
 .flash span.text {
   padding-left: 50px;
+}
+.flash.ajax {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  width: 600px;
+  margin-left: -300px;
+  z-index: 5;
 }
 h2#header {
   font-weight: bold;

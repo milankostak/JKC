@@ -3,8 +3,7 @@
 	background-color: white;
 	border: 1px solid #333333;
 	padding: 16px;
-	margin: 0 16px 5px 16px;
-	top: 16px;
+	margin: 0 20px;
 	position: relative;
 	font-weight: bold;
 	&.error, &.authentification, &.reload {
@@ -37,5 +36,14 @@
 	}
 	span.text {
 		padding-left: 50px;
+	}
+	&.ajax {
+		display: none; // prepared for slideDown
+		position: fixed;
+		top: 0;
+		left: 50%;
+		width: 600px;
+		margin-left: -300px;
+		z-index: 5;
 	}
 }

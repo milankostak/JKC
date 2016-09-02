@@ -17,12 +17,20 @@ body {
 	padding: 0;
 	width: 100%;
 }
-#page, #errorpage {
+#page {
 	box-shadow: 0 0 60px 10px #A8A8A8;
 	border-radius: 5px;
 	background-color: #FFFFFF;
+	margin-bottom: 20px;
+	padding: 20px 0;
 }
 #content {
-	padding: 20px 10px;
+	padding: 0 15px;
 	color: #111111;
+}
+
+@media (max-width: @xs-max-width) {
+	#content {
+		padding-bottom: 20px;
+	}
 }
