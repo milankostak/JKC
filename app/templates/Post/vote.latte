@@ -1,5 +1,7 @@
 {snippet polll}
-	<p n:ifset="$ajaxMessage" class="{$ajaxMessage['status']}">{$ajaxMessage['message']}</p>
+	<div n:ifset="$ajaxMessage" class="flash {$ajaxMessage['status']}">
+		<span class="icons"></span><span class="text">{$ajaxMessage['message']}</span>
+	</div>
 	<div id="ajax_loader"></div>
 	<table id="table_poll">
 	<tbody>

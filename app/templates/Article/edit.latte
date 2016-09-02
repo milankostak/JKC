@@ -7,3 +7,10 @@
 {include one_article_menu.latte}
 
 {control editArticleForm}
+
+<div id="ajax_loader" class="articles"></div>
+{snippet ajaxSaveArticle}
+<div n:ifset="$ajaxMessage" class="flash {$ajaxMessage['status']}">
+	<span class="icons"></span><span class="text">{$ajaxMessage['message']}</span>
+</div>
+{/snippet}

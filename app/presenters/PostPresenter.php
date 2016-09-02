@@ -160,7 +160,7 @@ class PostPresenter extends BasePresenter {
 				$this->redirect("post", $url);
 			} else {
 				$this->managePoll($poll, 1);
-				$this->template->ajaxMessage = ["status" => "ajaxerror", "message" => $ms];
+				$this->template->ajaxMessage = ["status" => "flash ajax error", "message" => $ms];
 				$this->redrawControl("polll");
 			}
 		} else {
@@ -173,7 +173,7 @@ class PostPresenter extends BasePresenter {
 				$this->redirect("post#poll", $url);
 			} else {
 				$this->managePoll($poll, 1);
-				$this->template->ajaxMessage = ["status" => "ajaxsuccess", "message" => $ms];
+				$this->template->ajaxMessage = ["status" => "flash ajax success", "message" => $ms];
 				$this->redrawControl("polll");
 			}
 		}

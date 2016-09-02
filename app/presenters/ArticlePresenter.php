@@ -20,7 +20,7 @@ class ArticlePresenter extends SecuredPresenter {
 
 	private $notFoundError = "Článek nebyl nalezen.";
 	private $tagNotFoundError = "Štítek nebyl nalezen.";
-	private $badTitleError = "Článek s tímto názvem již existuje.";
+	private $badTitleError = "Článek s tímto názvem již existuje. Upravte název a zopakujte akci.";
 	private $badUrlError = "Článek s touto URL již existuje. Změňte název tak, aby vygenerovaná URL byla jedinečná.";
 
 	private $addTokenName = "add_article";
@@ -366,12 +366,12 @@ class ArticlePresenter extends SecuredPresenter {
 			->addRule(Form::MAX_LENGTH, "Název článku je příliš dlouhý. Maximální délka je %d znaků.", 50)
 			->setValue($article->title);
 
-		$form->addTextArea("anotation", "Perex")
+		$form->addTextArea("perex", "Perex")
 			->setRequired("Vložte prosím perex.")
 			->addRule(Form::MAX_LENGTH, "Perex je příliš dlouhý. Maximální délka je %d znaků.", 500)
 			->setAttribute("cols", self::PEREX_TEXTAREA_COLS)
 			->setAttribute("rows", self::PEREX_TEXTAREA_ROWS)
-			->setValue($article->anotation);
+			->setValue($article->perex);
 
 		$form->addCheckBox("social", "Zobrazit u tohoto článku tlačítka sociálních sítí")
 			->setValue($article->social);
@@ -405,6 +405,7 @@ class ArticlePresenter extends SecuredPresenter {
 				->onClick[] = [$this, "saveDraft"];
 
 			$form->addSubmit("save_n_continue", "Uložit a psát dál")
+				->setAttribute("class", "ajax")
 				->onClick[] = [$this, "saveAndContinue"];
 		} else {
 			$form->addSubmit("save", "Uložit")
@@ -430,32 +431,49 @@ class ArticlePresenter extends SecuredPresenter {
 		$id = $this->getParameter("id");
 		$uid = $values->uid;
 		$t_name = $this->editTokenName;
+		$ajax = ($this->isAjax() && $target == "edit#tinymce");
 
 		// session is ok
 		if ($this->getSession($t_name)[$uid] == $uid) {
-			unset($this->getSession($t_name)[$uid]);
+			// not setting new uid for ajax, old is enough
+			if (!$ajax) unset($this->getSession($t_name)[$uid]);
 			// check duplicity of title
 			if ($this->articles->isOldArticleTitleDuplicate($values->title, $id)) {
-				$this->flashMessages->flashMessageError($this->badTitleError);
-				$this->formUtils->recoverInputs($values);
+				if ($ajax) {
+					$this->template->ajaxMessage = ["status" => "error ajax", "message" => $this->badTitleError];
+					$this->redrawControl("ajaxSaveArticle");
+				} else {
+					$this->flashMessages->flashMessageError($this->badTitleError);
+					$this->formUtils->recoverInputs($values);
+				}
 			// check duplicity of url
 			} elseif ($this->articles->isOldArticleUrlDuplicate($values->title, $id)) {
-				$this->flashMessages->flashMessageError($this->badUrlError);
-				$this->formUtils->recoverInputs($values);
+				if ($ajax) {
+					$this->template->ajaxMessage = ["status" => "error ajax", "message" => $this->badTitleError];
+					$this->redrawControl("ajaxSaveArticle");
+				} else {
+					$this->flashMessages->flashMessageError($this->badUrlError);
+					$this->formUtils->recoverInputs($values);
+				}
 			// success, save and redirect, custom code for every situation
 			} else {
 				$this->articles->edit($values, $id);
 				if ($publish) {
 					$this->articles->publish($id, time());
 				}
-				$this->flashMessages->flashMessageSuccess($messageSuccess);
-				$this->redirect($target, $id);
+				if ($ajax) {
+					$this->template->ajaxMessage = ["status" => "success ajax", "message" => $messageSuccess];
+					$this->redrawControl("ajaxSaveArticle");
+				} else {
+					$this->flashMessages->flashMessageSuccess($messageSuccess);
+					$this->redirect($target, $id);
+				}
 			}
 		// problem with session
 		} else {
 			$art = $this->article;
 			// action was performed, session is gone, but the data fits
-			if ($art->title == $values->title      && $art->anotation == $values->anotation
+			if ($art->title == $values->title      && $art->perex == $values->perex
 				&& $art->social == $values->social && $art->comments == $values->comments
 				&& $art->id_poll == $values->poll  && $art->text == $values->text) {
 				$this->flashMessages->flashMessageSuccess($messageSuccess);
@@ -474,6 +492,7 @@ class ArticlePresenter extends SecuredPresenter {
 			}
 		}
 	}
+
 
 	/**
 	 * Save and publish
@@ -508,7 +527,7 @@ class ArticlePresenter extends SecuredPresenter {
 	 */
 	public function saveAndContinue($button) {
 		$values = $button->getForm()->getValues();
-		$this->manageSavingOld($values, "Článek byl úspěšně uložen.", "edit", 0);
+		$this->manageSavingOld($values, "Článek byl úspěšně uložen.", "edit#tinymce", 0);
 	}
 
 	/**
@@ -530,7 +549,7 @@ class ArticlePresenter extends SecuredPresenter {
 			->setRequired("Vložte prosím název článku.")
 			->addRule(Form::MAX_LENGTH, "Název článku je příliš dlouhý. Maximální délka je %d znaků.", 50);
 
-		$form->addTextArea("anotation", "Perex")
+		$form->addTextArea("perex", "Perex")
 			->setRequired("Vložte prosím perex.")
 			->addRule(Form::MAX_LENGTH, "Perex je příliš dlouhý. Maximální délka je %d znaků.", 500)
 			->setAttribute("cols", self::PEREX_TEXTAREA_COLS)
@@ -603,7 +622,7 @@ class ArticlePresenter extends SecuredPresenter {
 		} else {
 			$art = $this->articles->findLast();
 			// action was performed, session is gone, but the data fits
-			if ($art && $art->title == $values->title   && $art->anotation == $values->anotation
+			if ($art && $art->title == $values->title   && $art->perex == $values->perex
 					 && $art->social == $values->social && $art->comments == $values->comments
 					 && $art->id_poll == $values->poll  && $art->text == $values->text) {
 				$this->flashMessages->flashMessageSuccess($messageSuccess);
@@ -657,7 +676,7 @@ class ArticlePresenter extends SecuredPresenter {
 	 */
 	public function saveNewAndContinue($button) {
 		$values = $button->getForm()->getValues();
-		$this->manageSavingNew($values, 1, "Článek byl úspěšně uložen jako rozepsaný.", "edit");
+		$this->manageSavingNew($values, 1, "Článek byl úspěšně uložen jako rozepsaný.", "edit#tinymce");
 	}
 
 }

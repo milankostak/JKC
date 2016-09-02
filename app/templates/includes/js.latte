@@ -1,11 +1,11 @@
 <script type="text/javascript" src="{$basePath}/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="{$basePath}/js/bootstrap.min.js"></script>
-
 {if !$presenter->isLinkCurrent("Post:*") || $presenter->isLinkCurrent("Post:comments")}
 	<script type="text/javascript" src="{$basePath}/js/netteForms.js"></script>
-{elseif $presenter->isLinkCurrent("Post:post") && (!isset($voted) || $voted != "1")}
+{/if}
+{if $presenter->isLinkCurrent("Post:post") || $presenter->isLinkCurrent("Article:edit")}
 	<script type="text/javascript" src="{$basePath}/js/nette.ajax.js"></script>
-	<script type="text/javascript" src="{$basePath}/js/pollAjax.js"></script>
+	<script type="text/javascript" src="{$basePath}/js/ajax.js"></script>
 {/if}
 {if $presenter->isLinkCurrent("Article:*") && !$presenter->isLinkCurrent("Article:add") && !$presenter->isLinkCurrent("Article:edit")}
 	<script type="text/javascript" src="{$basePath}/js/article_menu.js"></script>
