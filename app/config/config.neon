@@ -8,7 +8,7 @@ php:
 	date.timezone: Europe/Prague
 
 database:
-	dsn: "mysql:host=localhost;dbname=d82010_taiwan"
+	dsn: "mysql:host=localhost;dbname=d82010_cesty"
 	user: "root"
 	password: ""
 	options:
