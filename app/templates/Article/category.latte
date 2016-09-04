@@ -19,7 +19,7 @@
 				{foreach $articles as $article}
 					<tr>
 						<td><a n:href="show, $article->id_article">{$article->title}</a></td>
-						<td>{date("d.m.Y \v H:i", $article->date)}</td>
+						<td>{date("d.m.Y H:i", $article->date)}</td>
 						<td>{if $article->editor == NULL}<em>smazaný editor</em> {else} {$article->editor->name} {/if}</td>
 						<td>{$article->views}</td>
 					</tr>
