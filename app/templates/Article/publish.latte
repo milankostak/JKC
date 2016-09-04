@@ -10,6 +10,8 @@
 	<h2>Zveřejnit článek: {$article->title}</h2>
 
 	{include one_article_menu.latte}
+	{control immediatePublishForm}
+	<br>
 	{form publishForm}
 		<p><strong>{label datetime /}</strong></p>
 		<p>{input datetime}</p>

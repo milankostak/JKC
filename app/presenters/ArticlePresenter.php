@@ -244,6 +244,38 @@ class ArticlePresenter extends SecuredPresenter {
 	}
 
 	/**
+	 * Form for immediate publish
+	 * @return Nette\Application\UI\Form
+	 */
+	protected function createComponentImmediatePublishForm() {
+		$form = new Form;
+
+		$form->addSubmit("save", "Zveřejnit článek ihned");
+		$form->onSuccess[] = [$this, "publishArticleNow"];
+
+		$this->formUtils->addFormProtection($form);
+		$form->getRenderer()->wrappers['control']['.submit'] = 'btn btn-primary';
+		return $form;
+	}
+
+
+	/**
+	 * Manage publish article now
+	 * @param  Form   $form
+	 * @param  array $values array of values from the form
+	 */
+	public function publishArticleNow(Form $form, $values) {
+		$id = $this->getParameter("id");
+		if ($this->article->draft == 1) {
+			$this->articles->publish($id, time());
+			$this->flashMessages->flashMessageSuccess("Článek byl úspěšně zveřejněn.");
+		} else {
+			$this->flashMessages->flashMessageError("Tento článek je již zveřejněn.");
+		}
+		$this->redirect("show", $id);
+	}
+
+	/**
 	 * Form for filling publish date
 	 * @return Nette\Application\UI\Form
 	 */
@@ -253,12 +285,12 @@ class ArticlePresenter extends SecuredPresenter {
 		$form->addText("datetime", "Datum a čas ve formátu 'dd.mm.rrrr hh:mm'")
 			->setRequired(false)
 			->addRule(Form::PATTERN, "Neplatný formát data a času. Správný formát je 'dd.mm.rrrr hh:mm'.", "^([0-9]{2}\.[0-9]{2}\.[0-9]{4} [0-9]{2}:[0-9]{2})$")
-			->setValue(date("d.m.Y H:i", time()+60));
+			->setValue(date("d.m.Y H:i", time()));
 		
 		$this->formUtils->recoverData($form);
 		$this->formUtils->manageUidToken($form, $this->publishTokenName);
 
-		$form->addSubmit("save", "Zveřejnit článek");
+		$form->addSubmit("save", "Zveřejnit článek v zadaný čas");
 		$form->onSuccess[] = [$this, "publishArticle"];
 
 		$this->formUtils->addFormProtection($form);
@@ -290,7 +322,7 @@ class ArticlePresenter extends SecuredPresenter {
 					$this->formUtils->recoverInputs($values);
 				} else {
 					$this->articles->publish($id, $time);
-					$this->flashMessages->flashMessageSuccess("Článek byl úspěšně zveřejněn.");
+					$this->flashMessages->flashMessageSuccess("Uloženo. Článek bude přístupný v zadaný čas.");
 					$this->redirect("show", $id);
 				}
 			} else {
