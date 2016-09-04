@@ -10,11 +10,6 @@
 {/if}
 {if $presenter->isLinkCurrent("Article:*") && !$presenter->isLinkCurrent("Article:add") && !$presenter->isLinkCurrent("Article:edit")}
 	<script type="text/javascript" src="{$basePath}/js/article_menu.js"></script>
-	<script n:if="$presenter->isLinkCurrent('Article:category')" type="text/javascript">
-		$(document).ready(function() {
-			setActive();
-		});
-	</script>
 {/if}
 {if $presenter->isLinkCurrent("Article:add") || $presenter->isLinkCurrent("Article:edit")
 || $presenter->isLinkCurrent("Settings:bottomBox") || $presenter->isLinkCurrent("Settings:topBox") }

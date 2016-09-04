@@ -5,8 +5,23 @@
 	ul.article_menu {
 		margin-top: 10px;
 		font-size: 1.2em;
-		a.active{
+		ul {
+			display: none;
+		}
+		a.active + ul {
+			display: block;
+		}
+		a.active {
 			color: green;
+		}
+	}
+}
+body.no-js {
+	.admin-article {
+		ul.article_menu {
+			ul {
+				display: block;
+			}
 		}
 	}
 }

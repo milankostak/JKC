@@ -15,7 +15,6 @@ class ArticlePresenter extends SecuredPresenter {
 
 	private $articles, $comments, $polls, $tags, $blog;
 
-	// used for "edit", "delete", "show" and "publish" actions
 	private $article;
 
 	private $notFoundError = "Článek nebyl nalezen.";
@@ -43,7 +42,7 @@ class ArticlePresenter extends SecuredPresenter {
 		$this->template->big_title = $this->blog->name;
 
 		$action = $this->getAction();
-		if ($action == "edit" || $action == "show" || $action == "publish" || $action == "delete") {
+		if ($action == "edit" || $action == "show" || $action == "comments" || $action == "tags" || $action == "publish" || $action == "delete") {
 			$this->article = $this->doesArticleExists($this->getParameter("id"));
 		}
 		if ($action == "edit" || $action == "delete") {
@@ -51,6 +50,16 @@ class ArticlePresenter extends SecuredPresenter {
 		}
 		if ($action != "add" && $action != "edit" && $action != "addTag" && $action != "deleteTag") {
 			 $this->prepareArticlesMenu();
+		}
+
+		if (isset($this->article) && $this->article->draft) {
+			$this->template->pdraft = 1;
+		} elseif ($action == "show" || $action == "comments" || $action == "tags" || $action == "delete") {
+			$this->template->pyear = date("Y", $this->article->date);
+			$this->template->pmonth = date("m", $this->article->date);
+		} elseif ($action == "category") {
+			$this->template->pyear = $this->getParameter("year");
+			$this->template->pmonth = $this->getParameter("month");
 		}
 	}
 
@@ -174,13 +183,12 @@ class ArticlePresenter extends SecuredPresenter {
 	 * @param  number $id id of an article
 	 */
 	public function renderComments($id) {
-		$article = $this->doesArticleExists($id);
 		if ($this->getParameter("deleted") == "1") {
 			$this->template->comments = $this->comments->findAllCommentsByArticleId($id);
 		} else {
 			$this->template->comments = $this->comments->findNonDeletedCommentsByArticleId($id);
 		}
-		$this->template->article = $article;
+		$this->template->article = $this->article;
 	}
 
 	/**
@@ -188,7 +196,7 @@ class ArticlePresenter extends SecuredPresenter {
 	 * @param  number $id id of an article
 	 */
 	public function renderTags($id) {
-		$this->template->article = $this->doesArticleExists($id);
+		$this->template->article = $this->article;
 		$this->template->article_tags = $this->tags->findAllArticleTags($id);
 		$this->template->nontags = $this->tags->findAllArticleNonTags($id);
 	}

@@ -54,6 +54,7 @@ img {
   padding: 1px 3px;
   margin: 0 2px;
 }
+.help,
 .help label {
   border-bottom: 1px dotted black;
   cursor: help;

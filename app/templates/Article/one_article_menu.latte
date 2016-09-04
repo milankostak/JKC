@@ -5,8 +5,10 @@
 	<a n:if="$article->draft == 0"
 		n:href="comments, $article->id_article" n:class="$presenter->isLinkCurrent('Article:comments') ? active">Komentáře</a>
 	<a n:href="tags, $article->id_article" n:class="$presenter->isLinkCurrent('Article:tags') ? active">Štítky</a>
-	<a n:if="$article->draft == 0"
+	<a n:if="$article->draft == 0 and $article->date < time()"
 		n:href="Post:post, $article->url" onclick="window.open(this.href); return false;">Náhled</a>
+	<span n:if="$article->draft == 0 and $article->date > time()"
+		class="help" title="Tento článek má naplánované zveřejnení v budoucnosti.">Náhled</span>
 	<a n:if="$article->draft == 1"
 		n:href="publish, $article->id_article" n:class="$presenter->isLinkCurrent('Article:publish') ? active">Zveřejnit</a>
 	<a n:if="$user->roles['Admin'] == '1' || $presenter->getUser()->id == $article->id_editor"

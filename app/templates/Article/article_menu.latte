@@ -1,13 +1,13 @@
 <ul class="article_menu">
 	<li><a n:href="add">Nový článek</a></li>
-	<li><a n:href="drafts" n:class="$presenter->isLinkCurrent('Article:drafts') ? 'active'">Rozepsané články</a></li>
-	{var $cat = $presenter->isLinkCurrent("Article:category")}
+	<li><a n:href="drafts" n:class="($presenter->isLinkCurrent('Article:drafts') || isset($pdraft)) ? 'active'">Rozepsané články</a></li>
+	{var $pyear2 = isset($pyear) ? $pyear : 0}
+	{var $pmonth2 = isset($pmonth) ? $pmonth : 0}
 	{foreach $years as $year=>$months}
-		{var $pyear = $presenter->getParameter("year")}
-		<li><a href="#" n:class="($cat and $pyear == $year) ? 'active year' : 'year'">{$year}</a><ul>
+		<li><a href="#" n:class="($pyear2 == $year) ? 'active year' : 'year'">{$year}</a><ul>
 		{foreach $months as $month=>$articlesCount}
 			<li><a n:href="category, $year, $month"
-					n:class="($cat and $pyear == $year and $presenter->getParameter('month') == $month) ? 'active'">
+					n:class="($pyear2 == $year and $pmonth2 == $month) ? 'active'">
 					{$month|numericToStringMonth} ({$articlesCount})</a></li>
 		{/foreach}
 		</ul></li>
