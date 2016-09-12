@@ -1,6 +1,7 @@
 <script type="text/javascript" src="{$basePath}/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="{$basePath}/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="{$basePath}/js/flash.js"></script>
+<script type="text/javascript" src="{$basePath}/js/input.js"></script>
 {if !$presenter->isLinkCurrent("Post:*") || $presenter->isLinkCurrent("Post:comments")}
 	<script type="text/javascript" src="{$basePath}/js/netteForms.min.js"></script>
 {/if}
@@ -23,6 +24,7 @@
 		language: "cs",
 		language_url: "/js/langs/cs.js"
 	});</script>
+	<script type="text/javascript" src="{$basePath}/js/exit.js"></script>
 {/if}
 {if $presenter->isLinkCurrent("Article:publish")}
 	<link rel="stylesheet" type="text/css" href="{$basePath}/css/jquery.datetimepicker.css">

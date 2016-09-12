@@ -10,6 +10,7 @@ $(document).ready(function() {
 			$(".flash.ajax").slideDown();
 			$("#ajax_loader").hide();
 			initFlashes();
+			if (typeof updateFormValues === "function") updateFormValues();
 		}
 	});
 	$(".ajax").click(function() {
