@@ -27,19 +27,6 @@ class SettingsPresenter extends AdminPresenter {
 	}
 
 	/**
-	 * Custom bootstrap styles for editing top and bottom boxes
-	 * @param  Form $form form for applying styles
-	 */
-	private function makeBootstrapFormForSettings($form) {
-		$renderer = $form->getRenderer();
-		$renderer->wrappers['controls']['container'] = null;
-		$renderer->wrappers['pair']['container'] = 'div class="row form-group"';
-		$renderer->wrappers['label']['container'] = null;
-		$renderer->wrappers['control']['container'] = 'div class="col-xs-12"';
-		$renderer->wrappers['control']['.submit'] = 'btn btn-primary';
-	}
-
-	/**
 	 * Render default page, show only menu
 	 */
 	public function renderDefault() { }

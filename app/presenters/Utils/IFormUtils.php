@@ -12,6 +12,8 @@ interface IFormUtils {
 
 	function makeBootstrapForm($form);
 
+	function makeBootstrapFormForSettings($form);
+
 	function createOkCancelForm($form, $_this, $cancelAction, $okAction);
 
 	function addFormProtection($form);
