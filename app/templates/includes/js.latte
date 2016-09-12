@@ -16,20 +16,20 @@
 	<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 	<script>tinymce.init({
 		selector: "textarea.tinymce",
-		plugins: "code fullscreen hr charmap image imagetools insertdatetime media preview textcolor visualblocks wordcount",
+		plugins: "code fullscreen hr charmap image imagetools insertdatetime link media preview textcolor visualblocks wordcount",
 		// https://www.tinymce.com/docs/advanced/editor-control-identifiers/#toolbarcontrols
-  		toolbar: "undo redo bold italic alignleft aligncenter alignjustify alignnone image fontsizeselect bullist removeformat code fullscreen",
+  		toolbar: "undo redo bold italic alignleft aligncenter alignjustify alignnone image link fontsizeselect bullist removeformat code fullscreen",
 		browser_spellcheck: true,
 		language: "cs",
 		language_url: "/js/langs/cs.js"
 	});</script>
 {/if}
 {if $presenter->isLinkCurrent("Article:publish")}
-<link rel="stylesheet" type="text/css" href="{$basePath}/css/jquery.datetimepicker.css">
-<script type="text/javascript" src="{$basePath}/js/jquery.datetimepicker.full.min.js"></script>
-<script>
-$(function() {
-	$("input[name=datetime]").datetimepicker();
-});
-</script>
+	<link rel="stylesheet" type="text/css" href="{$basePath}/css/jquery.datetimepicker.css">
+	<script type="text/javascript" src="{$basePath}/js/jquery.datetimepicker.full.min.js"></script>
+	<script>
+	$(function() {
+		$("input[name=datetime]").datetimepicker();
+	});
+	</script>
 {/if}
