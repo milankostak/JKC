@@ -27,6 +27,7 @@ class RouterFactory {
 
 		// admin part of the application
 		$router[] = new Route("article/category/<year (19[789][0-9]{1}|20[0123][0-9]{1})>/<month (0[1-9]|1[012])>", "Article:category");
+		$router[] = new Route("sign/<action (in|out)>", "Sign:<action>");
 		$router[] = new Route("comment/<action (publish|unpublish|delete)>/<id>", "Comment:<action>");
 		$router[] = new Route("poll/delete-poll/<article>/<poll>", "Poll:deletePoll");// deleting polls by link
 		$router[] = new Route("tags/delete-tag/<article>/<tag>", "Tags:deleteTag");// deleting tags by link
