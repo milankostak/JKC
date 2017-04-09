@@ -27,7 +27,6 @@ abstract class BasePresenter extends Presenter {
 	 * @return boolen       true if passwords match, false otherwise
 	 */
 	protected function passwordVerify($pass, $hash) {
-		require __DIR__."/../model/password.php";
 		return password_verify($pass, $hash);
 	}
 

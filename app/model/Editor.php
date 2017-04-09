@@ -25,7 +25,6 @@ class Editor extends Nette\Object {
 	 * @return string           hashed password
 	 */
 	private function hash($password) {
-		require "password.php";
 		return password_hash($password, PASSWORD_BCRYPT, array("cost" => 11));
 	}
 

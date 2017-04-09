@@ -20,7 +20,6 @@ class Authenticator extends Nette\Object implements NS\IAuthenticator {
 	 * @throws Nette\Security\AuthenticationException
 	 */
 	function authenticate(array $credentials) {
-		require "password.php";
 		list($username, $password) = $credentials;
 		$row = $this->database->table("editor")->where(Editor::LOGIN_COLUMN, $username)->fetch();
 
@@ -33,6 +32,3 @@ class Authenticator extends Nette\Object implements NS\IAuthenticator {
 		return new NS\Identity($row->id_editor, array("Admin" => $row->admin), $arr);
 	}
 }
-/*
-echo password_hash("rasmuslerdorf", PASSWORD_BCRYPT, array("cost" => 11))
-*/
