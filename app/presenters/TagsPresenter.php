@@ -33,7 +33,7 @@ class TagsPresenter extends SecuredPresenter {
 		$act = $this->getAction();
 		if ($act != "add" && $act != "default") {
 			$param = ($act == "deleteTag") ? "tag" : "id";
-			$this->tag = $this->doesTagExists($this->getParameter($param));
+			$this->tag = $this->doesTagExist($this->getParameter($param));
 		}
 	}
 
@@ -43,7 +43,7 @@ class TagsPresenter extends SecuredPresenter {
 	 * @param  number $id id of a tag
 	 * @return Nette\Database\Table\ActiveRow object with tag data if tag is found, redirect otherwise
 	 */
-	private function doesTagExists($id) {
+	private function doesTagExist($id) {
 		$tag = $this->tags->findById($id);
 		if (!$tag) {
 			$this->flashMessages->flashMessageError($this->notFoundError);

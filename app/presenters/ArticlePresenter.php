@@ -43,7 +43,7 @@ class ArticlePresenter extends SecuredPresenter {
 
 		$action = $this->getAction();
 		if ($action == "edit" || $action == "show" || $action == "comments" || $action == "tags" || $action == "publish" || $action == "delete") {
-			$this->article = $this->doesArticleExists($this->getParameter("id"));
+			$this->article = $this->doesArticleExist($this->getParameter("id"));
 		}
 		if ($action == "edit" || $action == "delete") {
 			$this->checkUser($this->article->id_editor);
@@ -68,7 +68,7 @@ class ArticlePresenter extends SecuredPresenter {
 	 * @param  number $id id of an article
 	 * @return Nette\Database\Table\ActiveRow object with article data if article is found, redirect otherwise
 	 */
-	private function doesArticleExists($id) {
+	private function doesArticleExist($id) {
 		$article = $this->articles->findById($id);
 		if (!$article) {
 			$this->flashMessages->flashMessageError($this->notFoundError);
@@ -83,7 +83,7 @@ class ArticlePresenter extends SecuredPresenter {
 	 * @param  number $id id of a tag
 	 * @return Nette\Database\Table\ActiveRow object with tag data if tag is found, redirect otherwise
 	 */
-	private function doesTagExists($article, $id) {
+	private function doesTagExist($article, $id) {
 		$tag = $this->tags->findById($id);
 		if (!$tag) {
 			$this->flashMessages->flashMessageError($this->tagNotFoundError);
@@ -207,8 +207,8 @@ class ArticlePresenter extends SecuredPresenter {
 	 * @param  number $tag     id of a tag
 	 */
 	public function actionDeleteTag($article, $tag) {
-		$this->doesArticleExists($article);
-		$this->doesTagExists($article, $tag);
+		$this->doesArticleExist($article);
+		$this->doesTagExist($article, $tag);
 
 		$num = $this->tags->deleteTagFromArticle($article, $tag);
 		if ($num == 0) {
@@ -225,8 +225,8 @@ class ArticlePresenter extends SecuredPresenter {
 	 * @param  number $tag     id of a tag
 	 */
 	public function actionAddTag($article, $tag) {
-		$this->doesArticleExists($article);
-		$this->doesTagExists($article, $tag);
+		$this->doesArticleExist($article);
+		$this->doesTagExist($article, $tag);
 
 		if ($this->tags->isArticleHavingTag($article, $tag)) {
 			$this->flashMessages->flashMessageError("Tento článek již tento štítek má.");

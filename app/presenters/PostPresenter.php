@@ -30,7 +30,7 @@ class PostPresenter extends BasePresenter {
 	 * @param  string $url url of a post
 	 * @return Nette\Database\Table\ActiveRow object with post data if post is found, redirect otherwise
 	 */
-	private function doesPostExists($url) {
+	private function doesPostExist($url) {
 		$post = $this->posts->findById($url);
 		if (!$post) {
 			$this->flashMessages->flashMessageError("Článek '$url' neexistuje.");
@@ -185,7 +185,7 @@ class PostPresenter extends BasePresenter {
 	 * @param  string $url url of a post
 	 */
 	public function renderComments($url) {
-		$post = $this->doesPostExists($url);
+		$post = $this->doesPostExist($url);
 		if ($post->comments == 0) {
 			$this->flashMessages->flashMessageError("K tomuto článku nejsou komentáře dostupné.");
 			$this->redirect("post", $url);
@@ -243,7 +243,7 @@ class PostPresenter extends BasePresenter {
 	 */
 	public function saveComment(Form $form, $values) {
 		$url = $this->getParameter("url");
-		$post = $this->doesPostExists($url);
+		$post = $this->doesPostExist($url);
 		$uid = $values->uid;
 		$t_name = $this->addCommentTokenName;
 

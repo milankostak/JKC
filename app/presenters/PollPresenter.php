@@ -30,7 +30,7 @@ class PollPresenter extends SecuredPresenter {
 
 		$act = $this->getAction();
 		if ($act == "edit" || $act == "detail" || $act == "articles" || $act == "delete" || $act == "addOption") {
-			$this->poll = $this->doesItemExists($this->getParameter("id"));
+			$this->poll = $this->doesItemExist($this->getParameter("id"));
 		}
 	}
 
@@ -39,7 +39,7 @@ class PollPresenter extends SecuredPresenter {
 	 * @param  number $id id of poll
 	 * @return Nette\Database\Table\ActiveRow object with poll data if poll is found, redirect otherwise
 	 */
-	private function doesItemExists($id) {
+	private function doesItemExist($id) {
 		$poll = $this->polls->findById($id);
 		if (!$poll) {
 			$this->flashMessages->flashMessageError($this->pollNotFoundError);
@@ -262,7 +262,7 @@ class PollPresenter extends SecuredPresenter {
 			$this->flashMessages->flashMessageError("Článek nebyl nalezen.");
 			$this->redirect("default");
 		} else {
-			$this->doesItemExists($poll);
+			$this->doesItemExist($poll);
 
 			$num = $this->articles->deletePollFromArticle($article);
 			if ($num == 0) {

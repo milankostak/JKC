@@ -31,9 +31,9 @@ class OptionPresenter extends SecuredPresenter {
 
 		$act = $this->getAction();
 		if ($act == "add") {
-			$this->poll = $this->doesItemExists($this->getParameter("id"));
+			$this->poll = $this->doesItemExist($this->getParameter("id"));
 		} elseif ($act == "edit" || $act == "delete") {
-			$this->option = $this->doesOptionExists($this->getParameter("id"));
+			$this->option = $this->doesOptionExist($this->getParameter("id"));
 			$this->poll = $this->option->poll;
  		}
 	}
@@ -43,7 +43,7 @@ class OptionPresenter extends SecuredPresenter {
 	 * @param  number $id id of poll
 	 * @return Nette\Database\Table\ActiveRow object with poll data if poll is found, redirect otherwise
 	 */
-	private function doesItemExists($id) {
+	private function doesItemExist($id) {
 		$poll = $this->polls->findById($id);
 		if (!$poll) {
 			$this->flashMessages->flashMessageError($this->pollNotFoundError);
@@ -58,7 +58,7 @@ class OptionPresenter extends SecuredPresenter {
 	 * @param  number $id id of option
 	 * @return Nette\Database\Table\ActiveRow object with option data if option is found, redirect otherwise
 	 */
-	private function doesOptionExists($id) {
+	private function doesOptionExist($id) {
 		$option = $this->options->findById($id);
 		if (!$option) {
 			$this->flashMessages->flashMessageError($this->optionNotFoundError);

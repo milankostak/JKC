@@ -32,7 +32,7 @@ class EditorPresenter extends SecuredPresenter {
 
 		$act = $this->getAction();
 		if ($act == "edit" || $act == "delete") {
-			$this->editor = $this->doesEditorExists($this->getParameter("id"));
+			$this->editor = $this->doesEditorExist($this->getParameter("id"));
 		}
 	}
 
@@ -41,7 +41,7 @@ class EditorPresenter extends SecuredPresenter {
 	 * @param  number $id if of editor
 	 * @return Nette\Database\Table\ActiveRow object with editor data if editor is found, redirect otherwise
 	 */
-	private function doesEditorExists($id) {
+	private function doesEditorExist($id) {
 		$editor = $this->editors->findById($id);
 		if (!$editor) {
 			$this->flashMessages->flashMessageError($this->notFoundError);
