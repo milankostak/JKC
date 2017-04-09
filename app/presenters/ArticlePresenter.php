@@ -293,7 +293,7 @@ class ArticlePresenter extends SecuredPresenter {
 		$form->addText("datetime", "Datum a čas ve formátu 'dd.mm.rrrr hh:mm'")
 			->setRequired(false)
 			->addRule(Form::PATTERN, "Neplatný formát data a času. Správný formát je 'dd.mm.rrrr hh:mm'.", "^([0-9]{2}\.[0-9]{2}\.[0-9]{4} [0-9]{2}:[0-9]{2})$")
-			->setValue(date("d.m.Y H:i", time()));
+			->setValue(date("d.m.Y H:i", time() + 86400));// + 1 day
 		
 		$this->formUtils->recoverData($form);
 		$this->formUtils->manageUidToken($form, $this->publishTokenName);
