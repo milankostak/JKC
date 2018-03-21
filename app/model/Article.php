@@ -141,9 +141,15 @@ class Article extends Nette\Object {
 		$comments = ($values->comments) ? 1 : 0;
 
 		return $this->database->table("article")->insert(array(
-			self::TITLE_COLUMN => $values->title, self::DATE_COLUMN => time(), self::TEXT_COLUMN => $values->text,
-			self::PEREX_COLUMN => $values->perex, self::DRAFT_COLUMN => $draft, self::ID_EDITOR_COLUMN => $editor,
-			self::SOCIAL_COLUMN => $social, self::COMMENTS_COLUMN => $comments, self::ID_POLL_COLUMN => $values->poll,
+			self::TITLE_COLUMN => $values->title,
+			self::DATE_COLUMN => time(),
+			self::TEXT_COLUMN => $values->text,
+			self::PEREX_COLUMN => $values->perex,
+			self::DRAFT_COLUMN => $draft,
+			self::ID_EDITOR_COLUMN => $editor,
+			self::SOCIAL_COLUMN => $social,
+			self::COMMENTS_COLUMN => $comments,
+			self::ID_POLL_COLUMN => $values->poll,
 			self::URL_COLUMN => Strings::webalize($values->title)
 		));
 	}
@@ -158,9 +164,12 @@ class Article extends Nette\Object {
 		$comments = ($values->comments) ? 1 : 0;
 
 		$this->database->table("article")->where(self::ID_COLUMN, $id)->update(array(
-			self::TITLE_COLUMN => $values->title, self::TEXT_COLUMN => $values->text,
-			self::PEREX_COLUMN => $values->perex, self::SOCIAL_COLUMN => $social,
-			self::COMMENTS_COLUMN => $comments, self::ID_POLL_COLUMN => $values->poll
+			self::TITLE_COLUMN => $values->title,
+			self::TEXT_COLUMN => $values->text,
+			self::PEREX_COLUMN => $values->perex,
+			self::SOCIAL_COLUMN => $social,
+			self::COMMENTS_COLUMN => $comments,
+			self::ID_POLL_COLUMN => $values->poll
 		));
 	}
 
@@ -195,7 +204,8 @@ class Article extends Nette\Object {
 
 		$this->database->table("article")->where(self::ID_COLUMN, $id)->update(array(
 			self::URL_COLUMN => Strings::webalize($title),
-			self::DRAFT_COLUMN => 0, self::DATE_COLUMN => $time
+			self::DRAFT_COLUMN => 0,
+			self::DATE_COLUMN => $time
 		));
 	}
 }
