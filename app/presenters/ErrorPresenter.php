@@ -3,8 +3,8 @@
 namespace App\Presenters;
 
 use App\Model\Post, \App\Model\Tag, \App\Model\Blog;
-use Nette\Application\BadRequestException,
-	Nette\Diagnostics\Debugger;
+use Nette\Application\BadRequestException;
+use Nette\Diagnostics\Debugger;
 use Nette\Mail\Message;
 use Nette\Mail\SendmailMailer;
 use Nette\Application\UI\Form;
@@ -31,26 +31,28 @@ class ErrorPresenter extends BasePresenter {
 	}
 
 	public function renderDefault($exception) {
+		$file;
 		if ($exception instanceof BadRequestException) {
 			$code = $exception->getCode();
 			$this->setView(in_array($code, [403, 404, 500]) ? $code : "4xx");
 			$this->template->code = $code;
-			Debugger::log($exception, Debugger::ERROR);
+			$file = Debugger::log($exception, Debugger::ERROR);
 		} else {
 			$this->setView("500");
-			Debugger::log($exception, Debugger::ERROR);
+			$file = Debugger::log($exception, Debugger::ERROR);
 		}
-		$this->sendEmail();
+		$this->sendEmail($exception, $file);
 	}
 
-	private function sendEmail() {
-		$mail = new Message;
+	private function sendEmail($exception, $file) {
+		$mail = new Message();
 		$mail->setFrom("error@milan-kostak.cz")
 		    ->addTo("milankostak@gmail.com")
 			->setSubject("Cestopisy: Server error")
-			->setBody("Server error occured on web 'Cestopisy'. Check log as soon as possible.");
+			->setBody("Server error occured on web 'Cestopisy'. Check log as soon as possible.\n\n\n".$exception)
+			->addAttachment($file);
 
-		$mailer = new SendmailMailer;
+		$mailer = new SendmailMailer();
 		$mailer->send($mail);
 	}
 }
