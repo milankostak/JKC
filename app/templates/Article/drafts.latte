@@ -11,12 +11,19 @@
 	{if $drafts->count() > 0}
 	<table class="grid">
 		<thead>
-			<tr><th>Článek</th><th>Datum vytvoření</th><th>Autor</th></tr>
+			<tr><th>Článek</th><th>Editovat</th><th>Datum vytvoření</th><th>Autor</th></tr>
 		</thead>
 		<tbody>
 			{foreach $drafts as $draft}
 				<tr>
 					<td><a n:href="show, $draft->id_article">{$draft->title}</a></td>
+					<td>
+						{if $user->roles['Admin'] == '1' || $presenter->getUser()->id == $article->id_editor}
+							<a n:href="edit, $draft->id_article">Editovat</a>
+						{else}
+							&nbsp;—&nbsp;
+						{/if}
+					</td>
 					<td>{date("d.m.Y H:i", $draft->date)}</td>
 					<td>{if $draft->editor->name == NULL}<em>smazaný editor</em> {else} {$draft->editor->name} {/if}</td>
 				</tr>
