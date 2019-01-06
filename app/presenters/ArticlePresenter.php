@@ -40,6 +40,7 @@ class ArticlePresenter extends SecuredPresenter {
 
 		$this->blog = $this->blog->getBlogInfo();
 		$this->template->big_title = $this->blog->name;
+		$this->template->small_title = $this->blog->sub_name;
 
 		$action = $this->getAction();
 		if ($action == "edit" || $action == "show" || $action == "comments" || $action == "tags" || $action == "publish" || $action == "delete") {

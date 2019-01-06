@@ -17,6 +17,7 @@ class RankPresenter extends SecuredPresenter {
 		parent::startup();
 		$this->blog = $this->blog->getBlogInfo();
 		$this->template->big_title = $this->blog->name;
+		$this->template->small_title = $this->blog->sub_name;
 	}
 
 	/**

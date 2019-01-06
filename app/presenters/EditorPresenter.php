@@ -29,6 +29,7 @@ class EditorPresenter extends SecuredPresenter {
 
 		$this->blog = $this->blog->getBlogInfo();
 		$this->template->big_title = $this->blog->name;
+		$this->template->small_title = $this->blog->sub_name;
 
 		$act = $this->getAction();
 		if ($act == "edit" || $act == "delete") {

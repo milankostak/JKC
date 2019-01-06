@@ -28,7 +28,9 @@ class SignPresenter extends BasePresenter {
 		if ($this->user->isLoggedIn()) {
 			$this->redirect("Article:default");
 		}
-		$this->template->big_title = $this->blog->getBlogInfo()->name;
+		$this->blog = $this->blog->getBlogInfo();
+		$this->template->big_title = $this->blog->name;
+		$this->template->small_title = $this->blog->sub_name;
 	}
 
 	/**
