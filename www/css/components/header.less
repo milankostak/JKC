@@ -1,26 +1,35 @@
-h2#header {
-	font-weight: bold;
-	text-shadow: 10px 10px 10px #666;
-	margin: 27px 0;
-	a {
-		color: @brand-secondary;
-		font-family: "Trebuchet MS", "Arial", "Helvetica", sans-serif;
-		font-style: italic;
-		padding: 1em;
+#header {
+	background-color: white;
+	margin-bottom: 50px;
+	padding-left: 13px;
+	.header-image {
+		background: url("/img/header.jpg");
+		width: 100px;
+		height: 100px;
+		display: block;
+		position: absolute;
+		border-radius: 50%;
+		margin-top: 8px;
+	}
+	h2 {
 		margin: 0;
-		margin-left: 50px;
+		margin-left: 115px;
+	}
+	h2 > a {
+		color: @brand-secondary;
 		font-size: 32px;
+		text-decoration: none;
+		margin-top: 26px;
+		display: inline-block;
+		margin-bottom: 35px;
 		&:hover {
 			color: #030309;
 			text-decoration: none;
 		}
 	}
-	& + p {
+	h2 + p {
 		position: relative;
-		top: -22px;
-		margin-left: 65px;
-		padding-left: 1em;
-		font-family: "Trebuchet MS", "Arial", "Helvetica", sans-serif;
-		font-style: italic;
+		top: -33px;
+		margin-left: 117px;
 	}
 }
