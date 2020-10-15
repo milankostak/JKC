@@ -93,7 +93,7 @@ class Post extends Nette\LegacyObject {
 	 */
 
 	/**
-	 * Find all posts for pagionation wihtin given limit and offset
+	 * Find all posts for pagination within given limit and offset
 	 * @param  number $length limit
 	 * @param  number $offset offset
 	 * @return Nette\Database\Table\ResultSet
@@ -120,7 +120,7 @@ class Post extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Find all posts in a tag for pagionation within giver limit and offset
+	 * Find all posts in a tag for pagination within giver limit and offset
 	 * @param  string $url   url of tag
 	 * @param  number $length limit
 	 * @param  number $offset offset
