@@ -4,7 +4,7 @@ namespace App\Model;
 
 use Nette;
 
-class Option extends Nette\Object {
+class Option extends Nette\LegacyObject {
 
 	const ID_COLUMN = "id_option";
 	const ANSWER_COLUMN = "answer";

@@ -4,7 +4,7 @@ namespace App\Model;
 
 use Nette;
 
-class Poll extends Nette\Object {
+class Poll extends Nette\LegacyObject {
 
 	const ID_COLUMN = "id_poll";
 	const QUESTION_COLUMN = "question";

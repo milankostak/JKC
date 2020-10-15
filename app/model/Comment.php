@@ -4,7 +4,7 @@ namespace App\Model;
 
 use Nette;
 
-class Comment extends Nette\Object {
+class Comment extends Nette\LegacyObject {
 
 	const COMMENT_NOTFOUND = 0;
 	const COMMENT_DELETED = 1;

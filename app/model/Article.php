@@ -5,7 +5,7 @@ namespace App\Model;
 use Nette;
 use Nette\Utils\Strings;
 
-class Article extends Nette\Object {
+class Article extends Nette\LegacyObject {
 
 	const ID_COLUMN = "id_article"; 
 	const TITLE_COLUMN = "title";

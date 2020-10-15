@@ -4,7 +4,7 @@ namespace App\Model;
 
 use Nette;
 
-class Blog extends Nette\Object {
+class Blog extends Nette\LegacyObject {
 
 	/** @var Nette\Database\Context */
 	private $database;

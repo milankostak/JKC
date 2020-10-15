@@ -4,7 +4,7 @@ namespace App\Model;
 
 use Nette;
 
-class Editor extends Nette\Object {
+class Editor extends Nette\LegacyObject {
 
 	const ID_COLUMN = "id_editor";
 	const LOGIN_COLUMN = "login";

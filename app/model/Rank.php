@@ -4,7 +4,7 @@ namespace App\Model;
 
 use Nette;
 
-class Rank extends Nette\Object {
+class Rank extends Nette\LegacyObject {
 
 	/** @var Nette\Database\Context */
 	private $database;

@@ -5,7 +5,7 @@ namespace App\Model;
 use Nette;
 use Nette\Security as NS;
 
-class Authenticator extends Nette\Object implements NS\IAuthenticator {
+class Authenticator extends Nette\LegacyObject implements NS\IAuthenticator {
 
 	/** @var Nette\Database\Context */
 	private $database;
