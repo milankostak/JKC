@@ -25,6 +25,7 @@ class ErrorPresenter extends BasePresenter {
 		$this->template->lastPosts = $this->posts->findLastPosts($this->blog->number_last_posts);
 		$this->template->tags = $this->tags->findAll();
 		$this->template->big_title = $this->blog->name;
+		$this->template->small_title = $this->blog->sub_name;
 		$this->template->ga = $this->blog->ga;
 		$this->template->top_box = $this->blog->top_box;
 		$this->template->bottom_box = $this->blog->bottom_box;
