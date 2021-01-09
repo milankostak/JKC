@@ -46,8 +46,8 @@ class Article extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Find all articles for poll
-	 * @param  number $id id of poll
+	 * Find all articles for the poll
+	 * @param  number $id id of the poll
 	 * @return Nette\Database\Table\Selection
 	 */
 	public function findAllArticlesByPollId($id) {
@@ -55,7 +55,7 @@ class Article extends Nette\LegacyObject {
 	}
 
 	/**
-	 * FInd all draft articles
+	 * Find all draft articles
 	 * @return Nette\Database\Table\Selection
 	 */
 	public function findAllDrafts() {
@@ -63,7 +63,7 @@ class Article extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Find last article, the one with the highest id
+	 * Find the last article, the one with the highest id
 	 * @return Nette\Database\Table\ActiveRow
 	 */
 	public function findLast() {
@@ -90,7 +90,7 @@ class Article extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Check if there is any article having duplicate title
+	 * Check if there is any article having a duplicate title
 	 * @param  string  $title new title for an article
 	 * @param  number  $id    id of an article
 	 * @return boolean        true if there is a duplicate title, false otherwise
@@ -101,7 +101,7 @@ class Article extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Check if there is any article having duplicate url
+	 * Check if there is any article having a duplicate url
 	 * @param  string  $title new title for an article
 	 * @param  number  $id    id of an article
 	 * @return boolean        true if there is a duplicate url, false otherwise
@@ -112,7 +112,7 @@ class Article extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Check if there is any article having duplicate title
+	 * Check if there is any article having a duplicate title
 	 * @param  string  $title title for a new article
 	 * @return boolean        true if there is a duplicate title, false otherwise
 	 */
@@ -130,9 +130,9 @@ class Article extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Create new article and possible publish it
+	 * Create a new article and possibly publish it
 	 * @param  array $values  array of values
-	 * @param  number $editor id of logged user, saved as author of article
+	 * @param  number $editor id of the logged user, saved as author of the article
 	 * @param  number $draft  0 if publish, 1 if save as draft
 	 * @return number         id of newly created article
 	 */
@@ -157,7 +157,7 @@ class Article extends Nette\LegacyObject {
 	/**
 	 * Edit article
 	 * @param  array $values array of new values
-	 * @param  number $id    id of article
+	 * @param  number $id    id of the article
 	 */
 	public function edit($values, $id) {
 		$social = ($values->social) ? 1 : 0;
@@ -174,7 +174,7 @@ class Article extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Delete article, its comments and assignment of tags
+	 * Delete article, its comments, and assigned tags
 	 * @param  number $id id of article
 	 */
 	public function delete($id) {
@@ -184,8 +184,8 @@ class Article extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Delete poll from article
-	 * @param  number $article id of article
+	 * Delete poll from an article
+	 * @param  number $article id of an article
 	 * @return number          number of updated rows, idealy 1, when there is an error then 0
 	 */
 	public function deletePollFromArticle($article) {
@@ -195,8 +195,8 @@ class Article extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Publish draft article
-	 * @param  number $id   id of article
+	 * Publish a draft article
+	 * @param  number $id   id of an article
 	 * @param  number $time time of publishing, possible to set into the future
 	 */
 	public function publish($id, $time) {

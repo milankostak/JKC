@@ -37,7 +37,7 @@ class Editor extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Return last created editor, the one with the highest id
+	 * Return the last created editor, the one with the highest id
 	 * @return Nette\Database\Table\ActiveRow
 	 */
 	public function findLast() {
@@ -45,7 +45,7 @@ class Editor extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Find editor by id
+	 * Find the editor by id
 	 * @param  number $id id of editor
 	 * @return Nette\Database\Table\ActiveRow
 	 */
@@ -54,7 +54,7 @@ class Editor extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Find editor by login
+	 * Find the editor by login
 	 * @param  string $login login of editor
 	 * @return Nette\Database\Table\ActiveRow
 	 */
@@ -63,26 +63,26 @@ class Editor extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Check duplicity of login
+	 * Check duplicity of a login
 	 * @param  string $login new login for editor
 	 * @param  number $id   id of editor
-	 * @return number       number of other occurences, idealy 0 if there is no duplicity
+	 * @return number       number of other occurences, ideally 0 if there is no duplicity
 	 */
 	public function checkForDuplicatesWithId($login, $id) {
 		return $this->database->table("editor")->where(self::LOGIN_COLUMN, $login)->where(self::ID_COLUMN." != ?", $id)->count(self::ID_COLUMN);
 	}
 
 	/**
-	 * Check duplicity of new editor
+	 * Check duplicity of a new editor
 	 * @param  string $login new login for editor
-	 * @return number        number of other occurences, idealy 0 if there is no duplicity
+	 * @return number        number of other occurences, ideally 0 if there is no duplicity
 	 */
 	public function checkForDuplicates($login) {
 		return $this->database->table("editor")->where(self::LOGIN_COLUMN, $login)->count(self::ID_COLUMN);
 	}
 
 	/**
-	 * Return password of editor by id
+	 * Return editor's password by his id
 	 * @param  number $id id of editor
 	 * @return string     password
 	 */
@@ -91,7 +91,7 @@ class Editor extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Change password
+	 * Change the epassword
 	 * @param  string $password new password
 	 * @param  number $id       id of editor
 	 */
@@ -101,7 +101,7 @@ class Editor extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Change login and name
+	 * Change the login and name
 	 * @param  array $values array of values
 	 * @param  number $id    id of editor
 	 */
@@ -112,7 +112,7 @@ class Editor extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Create new editor
+	 * Create a new editor
 	 * @param  array $values array of values
 	 */
 	public function insert($values) {
@@ -124,9 +124,9 @@ class Editor extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Update editor
+	 * Update the eeditor
 	 * @param  array $values array of values
-	 * @param  number $id    id of editor
+	 * @param  number $id    id of the editor
 	 */
 	public function update($values, $id) {
 		$this->database->table("editor")->where(self::ID_COLUMN, $id)->update(
@@ -135,8 +135,8 @@ class Editor extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Delete editor
-	 * @param  number $id id of editor
+	 * Delete the editor
+	 * @param  number $id id of the editor
 	 */
 	public function delete($id) {
 		$this->database->table("article")->where(self::ID_COLUMN, $id)->update(array(self::ID_COLUMN => NULL));

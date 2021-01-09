@@ -36,7 +36,7 @@ class Blog extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Edit top box
+	 * Edit the top box
 	 * @param  string $value new value of the top box
 	 */
 	public function editTopBox($value) {
@@ -44,7 +44,7 @@ class Blog extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Edit bottom box
+	 * Edit the bottom box
 	 * @param  string $value new value of the bottom box
 	 */
 	public function editBottomBox($value) {

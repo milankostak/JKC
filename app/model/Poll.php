@@ -18,8 +18,8 @@ class Poll extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Find poll by id
-	 * @param  number $id id of poll
+	 * Find the poll by id
+	 * @param  number $id id of the poll
 	 * @return Nette\Database\Table\ActiveRow
 	 */
 	public function findById($id) {
@@ -27,8 +27,8 @@ class Poll extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Find option by id
-	 * @param  number $id id of option
+	 * Find the option by id
+	 * @param  number $id id of the eoption
 	 * @return Nette\Database\Table\ActiveRow
 	 */
 	public function findOptionById($id) {
@@ -36,7 +36,7 @@ class Poll extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Find last poll, the one with the highest id
+	 * Find the last poll, the one with the highest id
 	 * @return Nette\Database\Table\ActiveRow
 	 */
 	public function findLast() {
@@ -57,7 +57,7 @@ class Poll extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Find all poll options
+	 * Find all poll's options
 	 * @param  number $id id of poll
 	 * @return Nette\Database\Table\Selection
 	 */
@@ -66,8 +66,8 @@ class Poll extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Find all poll options with sum votes by poll id
-	 * @param  number $id id of poll
+	 * Find all poll's options with sum of votes by poll id
+	 * @param  number $id id of the poll
 	 * @return Nette\Database\Table\Selection
 	 */
 	public function findPollSumVotes($id) {
@@ -103,8 +103,8 @@ class Poll extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Insert new poll
-	 * @param  string $question name of question
+	 * Insert a new poll
+	 * @param  string $question name of the question
 	 * @return number           id of newly created poll
 	 */
 	public function insert($question) {
@@ -114,9 +114,9 @@ class Poll extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Update question of poll
-	 * @param  string $question new text of question
-	 * @param  number $id       if of poll
+	 * Update the question of the poll
+	 * @param  string $question new text of the question
+	 * @param  number $id       if of the poll
 	 */
 	public function update($question, $id) {
 		$this->database->table("poll")->where(self::ID_COLUMN, $id)->update(array(
@@ -125,8 +125,8 @@ class Poll extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Delete poll, its options and assignments in articles
-	 * @param  number $id id of poll
+	 * Delete the poll, its options, and assignments in articles
+	 * @param  number $id id of the poll
 	 */
 	public function delete($id) {
 		$this->database->table("article")->where(self::ID_COLUMN, $id)->update(array(

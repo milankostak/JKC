@@ -30,8 +30,8 @@ class Tag extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Find tag by id
-	 * @param  number $id id of tag
+	 * Find the tag by id
+	 * @param  number $id id of the tag
 	 * @return Nette\Database\Table\ActiveRow
 	 */
 	public function findById($id) {
@@ -39,7 +39,7 @@ class Tag extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Find all tags with number of assigned articles
+	 * Find all tags with the number of assigned articles
 	 * @return Nette\Database\Table\Selection
 	 */
 	public function findAllWithCount() {
@@ -48,8 +48,8 @@ class Tag extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Find tag by url
-	 * @param  string $url url
+	 * Find the tag by url
+	 * @param  string $url url of the tag
 	 * @return Nette\Database\Table\ActiveRow
 	 */
 	public function findByUrl($url) {
@@ -58,8 +58,8 @@ class Tag extends Nette\LegacyObject {
 
 	/**
 	 * Check duplicity of existing tag
-	 * @param  string $name new name for tag
-	 * @param  number $id   id of tag
+	 * @param  string $name new name for a tag
+	 * @param  number $id   id of the tag
 	 * @return number       number of other occurences, idealy 0 if there is no duplicity
 	 */
 	public function checkForDuplicatesWithId($name, $id) {
@@ -68,8 +68,8 @@ class Tag extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Check duplicity of new tag
-	 * @param  string $name new name for tag
+	 * Check duplicity of a new tag
+	 * @param  string $name new name for a tag
 	 * @return number       number of other occurences, idealy 0 if there is no duplicity
 	 */
 	public function checkForDuplicates($name) {
@@ -78,7 +78,7 @@ class Tag extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Find last tag, the one with the highest id
+	 * Find the last tag, the one with the highest id
 	 * @return Nette\Database\Table\ActiveRow
 	 */
 	public function findLast() {
@@ -86,8 +86,8 @@ class Tag extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Find all tags for article
-	 * @param  number $article id of article
+	 * Find all tags for the article
+	 * @param  number $article id of the article
 	 * @return Nette\Database\Table\Selection
 	 */
 	public function findAllArticleTags($article) {
@@ -95,8 +95,8 @@ class Tag extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Find all tags that are not assigned to article
-	 * @param  number $article id of article
+	 * Find all tags that are not assigned to the article
+	 * @param  number $article id of the article
 	 * @return Nette\Database\Table\Selection
 	 */
 	public function findAllArticleNonTags($article) {
@@ -106,8 +106,8 @@ class Tag extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Find all articles assigned to a tag
-	 * @param  number $tag if of tag
+	 * Find all articles assigned to the tag
+	 * @param  number $tag if of the etag
 	 * @return Nette\Database\Table\Selection
 	 */
 	public function findAllTagArticles($tag) {
@@ -115,19 +115,19 @@ class Tag extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Check if given article already has assigned given tag
-	 * @param  number  $article id of an article
-	 * @param  number  $tag     id of a tag
-	 * @return boolean          true if article is having the tag, false otherwise
+	 * Check if given article is already assigned tp the given tag
+	 * @param  number  $article id of the article
+	 * @param  number  $tag     id of the tag
+	 * @return boolean          true if the article is having the tag, false otherwise
 	 */
 	public function isArticleHavingTag($article, $tag) {
 		return $this->database->table("article_tag")->where(self::AT_TAG_COLUMN, $tag)->where(self::AT_ARTICLE_COLUMN, $article)->count() > 0;
 	}
 
 	/**
-	 * Add article to a tag
-	 * @param number $article id of article
-	 * @param number $tag     id of tag
+	 * Add the article to the tag
+	 * @param number $article id of the article
+	 * @param number $tag     id of the tag
 	 */
 	public function addTagToArticle($article, $tag) {
 		$this->database->table("article_tag")->insert(array(
@@ -136,9 +136,9 @@ class Tag extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Delete tag from article
-	 * @param  number $article id of article
-	 * @param  number $tag     id of tag
+	 * Delete the tag from the article
+	 * @param  number $article id of the article
+	 * @param  number $tag     id of the tag
 	 * @return number          number of deleted rows, idealy 1, when there is an error then 0
 	 */
 	public function deleteTagFromArticle($article, $tag) {
@@ -148,9 +148,9 @@ class Tag extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Insert new tag
-	 * @param  string $name name of tag
-	 * @return number       id of newly inserted row
+	 * Insert a new tag
+	 * @param  string $name name of the tag
+	 * @return number       id of the newly inserted row
 	 */
 	public function insert($name) {
 		return $this->database->table("tag")->insert(array(
@@ -159,9 +159,9 @@ class Tag extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Update tag
-	 * @param  string $name new name for tag
-	 * @param  number $id   id of tag
+	 * Update the tag
+	 * @param  string $name new name for the tag
+	 * @param  number $id   id of the tag
 	 */
 	public function update($name, $id) {
 		$this->database->table("tag")->where(self::ID_COLUMN, $id)->update(array(
@@ -170,8 +170,8 @@ class Tag extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Delete tag and also delete tag from articles
-	 * @param  number $id id of tag
+	 * Delete the tag and also delete it from the articles
+	 * @param  number $id id of the tag
 	 */
 	public function delete($id) {
 		$this->database->table("article_tag")->where(self::AT_TAG_COLUMN, $id)->delete();

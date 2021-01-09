@@ -14,7 +14,7 @@ class Post extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Find all basic articles - means all published, shown on the web - is not draft and publish date is not in future
+	 * Find all basic articles - all published, shown on the web -> it is not a draft and the publish date is in the past
 	 * @return Nette\Database\Table\Selection
 	 */
 	public function findBasicAll() {
@@ -23,7 +23,7 @@ class Post extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Find only one basic post
+	 * Find only one basic post by url
 	 * @param  string $url url of a post
 	 * @return Nette\Database\Table\ActiveRow
 	 */
@@ -93,7 +93,7 @@ class Post extends Nette\LegacyObject {
 	 */
 
 	/**
-	 * Find all posts for pagination within given limit and offset
+	 * Find all posts for pagination within the given limit and offset
 	 * @param  number $length limit
 	 * @param  number $offset offset
 	 * @return Nette\Database\Table\ResultSet
@@ -120,7 +120,7 @@ class Post extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Find all posts in a tag for pagination within giver limit and offset
+	 * Find all posts in a tag for pagination within the given limit and offset
 	 * @param  string $url   url of tag
 	 * @param  number $length limit
 	 * @param  number $offset offset
@@ -148,8 +148,8 @@ class Post extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Find all info of a post
-	 * @param  string $url url of post
+	 * Find all info about the post
+	 * @param  string $url url of the post
 	 * @return Nette\Database\Table\ResultSet
 	 */
 	public function findByIdWithCommentsCountAndTags($url) {

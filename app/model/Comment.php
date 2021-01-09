@@ -30,7 +30,7 @@ class Comment extends Nette\LegacyObject {
 	}
 
 	/**
-	 * FInd all comments for a post
+	 * Find all comments for a post
 	 * @param  string $url url of a post
 	 * @return Nette\Database\Table\Selection
 	 */
@@ -40,7 +40,7 @@ class Comment extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Find last comment, the one with the highest id
+	 * Find the last comment, the one with the highest id
 	 * @return Nette\Database\Table\ActiveRow
 	 */
 	public function findLast() {
@@ -48,7 +48,8 @@ class Comment extends Nette\LegacyObject {
 	}
 
 	/** 
-	 * Find all comments for article, including deleted
+	 * Find all comments for the article, including deleted
+	 * @param  number $id id of the article
 	 * @return Nette\Database\Table\Selection
 	 */
 	public function findAllCommentsByArticleId($id) {
@@ -56,7 +57,7 @@ class Comment extends Nette\LegacyObject {
 	}
 
 	/** 
-	 * Find all comments for article, exclude deleted
+	 * Find all comments of an article, exclude deleted articles
 	 * @return Nette\Database\Table\Selection
 	 */
 	public function findNonDeletedCommentsByArticleId($id) {
@@ -64,10 +65,10 @@ class Comment extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Insert new comment
+	 * Insert a new comment
 	 * @param  array $values  array of values
-	 * @param  number $editor 0 if comment is nto created by any editor, 1 otherwise
-	 * @param  number $id     id of article
+	 * @param  number $editor 0 if comment is not created by any editor, 1 otherwise
+	 * @param  number $id     id of the article
 	 */
 	public function insert($values, $editor, $id) {
 		$mail = ($values->mail == "") ? null : $values->mail;
@@ -81,8 +82,8 @@ class Comment extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Delete comment
-	 * @param  number $id id of a comment
+	 * Delete the comment
+	 * @param  number $id id of the comment
 	 * @return array      array with information for later redirection
 	 */
 	public function deleteById($id) {
@@ -97,8 +98,8 @@ class Comment extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Unpublish comment, make it not visible
-	 * @param  number $id id of a comment
+	 * Unpublish the comment, make it not visible
+	 * @param  number $id id of the comment
 	 * @return array      array with information for later redirection
 	 */
 	public function unpublishById($id) {
@@ -116,7 +117,7 @@ class Comment extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Publish comment, make it visible again
+	 * Publish the comment, make it visible again
 	 * @param  number $id id of a comment
 	 * @return array      array with information for later redirection
 	 */

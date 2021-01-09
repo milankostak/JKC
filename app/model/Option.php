@@ -19,7 +19,7 @@ class Option extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Find option by id
+	 * Find the option by id
 	 * @param  number $id id of option
 	 * @return Nette\Database\Table\ActiveRow
 	 */
@@ -28,7 +28,7 @@ class Option extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Find last option, the one with the highest id
+	 * Find the last option, the one with the highest id
 	 * @return Nette\Database\Table\ActiveRow
 	 */
 	public function findLast() {
@@ -36,8 +36,8 @@ class Option extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Insert new option
-	 * @param  string $answer text of answer for question of poll
+	 * Insert a new option
+	 * @param  string $answer text of an answer for the question of the poll
 	 * @param  number $poll   id of poll
 	 * @return number         id of newly created option
 	 */
@@ -48,9 +48,9 @@ class Option extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Update answer of option
+	 * Update the answer of the option
 	 * @param  string $answer new text of answer
-	 * @param  number $id     id of option
+	 * @param  number $id     id of the option
 	 */
 	public function update($answer, $id) {
 		$this->database->table("poll_option")->where(self::ID_COLUMN, $id)->update(array(
@@ -59,8 +59,8 @@ class Option extends Nette\LegacyObject {
 	}
 
 	/**
-	 * Delete option
-	 * @param  number $id id of option
+	 * Delete the option
+	 * @param  number $id id of the option
 	 */
 	public function delete($id) {
 		$this->database->table("poll_option")->where(self::ID_COLUMN, $id)->delete();
